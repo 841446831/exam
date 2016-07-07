@@ -10,7 +10,7 @@ import com.exam.entity.Type;
 public interface TypeDao {
 	
 	
-	@Insert("insert into type(type,superType) values(#{type},#{superType})")
+	@Insert("insert into type(id,type,superType) values(#{id},#{type},#{superType})")
     public int insertType(Type type);
 
 	@Select("select * from type")

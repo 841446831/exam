@@ -14,10 +14,11 @@ public class Test {
 		ApplicationContext applicationContext = new ClassPathXmlApplicationContext("spring/applicationContext.xml");
 		TypeService typeService = (TypeService) applicationContext.getBean("typeService");
 		Type type = new Type(){{
+			setId(13);
 			setSuperType("编程语言");
 			setType("C++");
 		}};
-		typeService.insertType(type);
+//		typeService.insertType(type);
 		System.out.println(typeService.SelectAll());
 	}
 }
