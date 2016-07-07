@@ -1,5 +1,6 @@
 package com.exam.entity;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Question {
@@ -9,6 +10,10 @@ public class Question {
     private Integer level;
     private int tid;
     private List<Option> options;
+    
+    public Question(){
+    	options = new ArrayList<Option>();
+    }
     
 	public Integer getId() {
 		return id;

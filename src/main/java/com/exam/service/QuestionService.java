@@ -18,22 +18,14 @@ public class QuestionService {
     @Resource
     private OptionDao optionDao;
     
-    public int insertQuestion(Question question,List<Option> list)
+    public int insertQuestion(Question question)
     {
-        if(questionDao.insertQuestion(question) == 1)
-        {
-        	for(Option o : list)
-        	{
-        		int i = optionDao.insertOption(o);
-        		if(0 == i)
-        		{
-        		    return 0;
-        		}
-        	}
-        	return 1;
-        }
-        
-        return 0;
+    	questionDao.insertQuestion(question);
+    	for (Option option:question.getOptions()){
+    		option.setQid(question.getId());
+    		optionDao.insertOption(option);
+    	}
+        return 1;
         
     }
     
@@ -43,6 +35,18 @@ public class QuestionService {
     	
     	return list;
     }
+
+
+	public int countQuestionByFace(String face) {
+		// TODO Auto-generated method stub
+		
+		return questionDao.selectQuestionsByFace(face).size();
+	}
+
+	public Question selectById(int i) {
+		// TODO Auto-generated method stub
+		return questionDao.selectById(i);
+	}
     
     
 }

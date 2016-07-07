@@ -2,13 +2,11 @@ package com.exam.spider;
 
 import java.net.URI;
 import java.net.URISyntaxException;
-import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Random;
-import java.util.Set;
+import java.util.Map;
 
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
@@ -31,16 +29,18 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
+import com.exam.entity.Option;
+import com.exam.entity.Question;
 import com.exam.entity.Type;
+import com.exam.service.QuestionService;
 import com.exam.service.TypeService;
-import com.sun.javafx.collections.MappingChange.Map;
-import com.sun.org.apache.xml.internal.security.keys.content.RetrievalMethod;
 
 import static java.lang.System.out;
 
 public class Main {
 	private static ApplicationContext applicationContext;
 	private static TypeService typeService; 
+	private static QuestionService	questionService; 
 	private static CloseableHttpClient httpClient;
 	private static String cookie[] = {"t=0A359ADC4FA2E646A64EF0DBE8A5264B;  ",
 							"NOWCODERUID=B6BD906295CD912B7E390FCE6C588687; _cnzz_CV1253353781=%E6%98%AF%E5%90%A6%E7%99%BB%E5%BD%95%7C%E5%B7%B2%E7%99%BB%E5%BD%95%7C1467874191489; CNZZDATA1253353781=9734587-1467618196-null%7C1467867022; t=AA23270DBE4ED53730C39A7433304E08; NOWCODERCLINETID=61517148B9829D6B7B7716D0E5878E25; SERVERID=8b30bcebacc57c03f5f188b29f8635ad|1467867023|1467855327",
@@ -48,7 +48,6 @@ public class Main {
 	private static HttpGet httpGet;
 	private static HttpPost httpPost;
 	private static HttpEntity httpEntity;
-	private static HttpResponse httpResponse;
 	
 	static{
 		httpClient=HttpClients.createDefault();
@@ -57,7 +56,8 @@ public class Main {
 		httpGet.setHeader("Cookie", cookie[0]);
 		httpPost.setHeader("Cookie",cookie[0]);
 		applicationContext = new ClassPathXmlApplicationContext("spring/applicationContext.xml");
-		typeService = (TypeService) applicationContext.getBean("typeService");
+		questionService = (QuestionService) applicationContext.getBean("questionService");
+		typeService = (TypeService)applicationContext.getBean("typeService");
 	}
 	
 	public static void insertTags() {
@@ -106,7 +106,6 @@ public class Main {
 	@SuppressWarnings("resource")
 	private static String getQuestions(int source,int tag,int difficulty) {
 	  try {
-		  Random random = new Random();
 		  httpPost.setURI(new URI("http://www.nowcoder.com//makePaper"));
 		  List<NameValuePair> nvps = new ArrayList<NameValuePair>();
 	      nvps.add(new BasicNameValuePair("source",""+source));
@@ -237,18 +236,49 @@ public class Main {
 	  return null;
 	}
 	
-	public static void main(String[] args) {
-//		insertTags();
-		insertQuestions();
-	}
+	public static void main(String[] args) throws InterruptedException {
+		while(true){
+			insertQuestions();
+			Thread.sleep(1000*60);
+		}
+}
 
 
 	private static void insertQuestions() {
 		// TODO Auto-generated method stub
 		List<Type> types = typeService.SelectAll();
 		Random random = new Random();
-		String s = getQuestions(3, types.get(random.nextInt(types.size())).getId(), random.nextInt(5)+1);
-		out.println(s);
+		int tid = types.get(random.nextInt(types.size())).getId();
+		int level =  random.nextInt(5)+1;
+		String s;
+		try{
+			s = getQuestions(3, tid, level);
+			JSONObject jsonObject = JSON.parseObject(s);
+			for (int i=1;i<6;++i){
+				JSONObject questionJsonObject = jsonObject.getJSONObject(""+i);
+				if (questionJsonObject!=null){
+					Question question = new Question();
+					question.setFace(questionJsonObject.getString("face"));
+					question.setLevel(level);
+					question.setTid(tid);
+					JSONArray optionsArray = questionJsonObject.getJSONArray("options");
+					for (int j=0;j<optionsArray.size();++j){
+						JSONObject optionJsonObject = optionsArray.getJSONObject(j);
+						Option option = new Option();
+						option.setIsTrue(optionJsonObject.containsKey("isTrue"));
+						option.setTitle(optionJsonObject.getString("option"));
+						option.setTutorial(" ");
+						question.getOptions().add(option);
+					}
+					if (questionService.countQuestionByFace(question.getFace())==0){
+						questionService.insertQuestion(question);
+					}
+				}	
+			}
+		}catch (Exception e){
+			e.printStackTrace();
+			return;
+		}
 	}
 	
 	 /**  
