@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+ 	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.exam.dao.QuestionDao">
+	<!-- 配置实体类与数据库表的映射关系 -->
+	<resultMap type="com.exam.entity.Question" id="QuestionResult">
+		<id column="id" property="id"/>
+		<result column="face" property="face"/>
+		<result column="answer" property="answer"/>
+		<result column="level" property="level"/>
+		<result column="tid" property="tid"/>
+		
+		 <collection property="options" ofType="com.exam.entity.Option" >  
+            <id column="o_id" property="id"/>  
+            <result column="title" property="title"/>  
+            <result column="isTrue" property="isTrue"/>  
+            <result column="tutorial" property="tutorial"/>  
+        </collection>  
+		
+	</resultMap>
+	
+	<!-- 查询全部     id(接口方法名) -->
+	<select id="selectQuestionByTypeAndLevel" parameterType="int" resultMap="QuestionResult">
+		select q.*,
+		          o.id as o_id,
+		          o.title,
+		          o.isTrue,
+		          o.tutorial
+	    from question q,`option` o where o.qid = q.id and q.level = #{level}
+	</select>
+	
+
+</mapper>
