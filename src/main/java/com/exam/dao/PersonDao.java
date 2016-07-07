@@ -10,4 +10,6 @@ import com.exam.entity.Person;
 public interface PersonDao {
 	@Select("select * from person")
 	List<Person> selectAll();
+	
+	
 }

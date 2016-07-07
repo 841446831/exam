@@ -17,4 +17,5 @@ public class PersonService {
 	public List<Person> selectAll(){
 		return personDao.selectAll();
 	}
+	
 }
