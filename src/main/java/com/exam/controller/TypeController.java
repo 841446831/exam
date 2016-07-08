@@ -23,7 +23,7 @@ public class TypeController {
 	@Resource
  	private TypeService typeService;
  	
-	@RequestMapping("types")
+	@RequestMapping(value="types", produces="application/json;charset=utf-8")
 	@ResponseBody
 	public String types()
 	{
@@ -35,7 +35,6 @@ public class TypeController {
 	    
 	    listType = typeService.SelectAll();
 	    
-	    System.out.println(listType.size());
 	    
 	    //mapListType.put("编程语言",list);
 	    for (Type type:listType){
@@ -48,7 +47,6 @@ public class TypeController {
 	    }
 	    
 	    Set set = mapListType.keySet();
-	    System.out.println(set.size());
 	    
 	    List<Map<String, Object>> list = new ArrayList<>();
 	    
@@ -61,13 +59,13 @@ public class TypeController {
 	    	 list.add(map);
 	    }
 	    
-	    System.out.println(list);
+//	    System.out.println(list);
 	    
 	    String json = JSON.toJSONString(list);
 	    
-	    System.out.println(json);
+//	    System.out.println(json);
 		
-	    return json;
+	    return "callback("+json+")";
 	}
 	
 }

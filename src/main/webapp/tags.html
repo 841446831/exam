@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>练习系统</title>
+    <link  rel="stylesheet" href="css/style.css">
+</head>
+<body id="app">
+<!--头部-->
+<div  id="header">
+    <p class="practice">专项练习</p>
+</div>
+
+
+<section class="flex-wrap">
+    <section class="super-type"  v-for="superType in superTypeList">
+        <div class="tag-top">
+            <h2>
+                {{superType.title}}
+            </h2>
+            <label> <input type="checkbox" class="checkbox-all">全选</label>
+        </div>
+        <ul class="question-type">
+            <li v-for="type in superType.list">
+                <label> <input type="checkbox" name="tag" >
+                    <p> {{type.type}}</p>
+                </label>
+                <div class="progress"></div>
+                <span class="number-text">0/66</span>
+            </li>
+        </ul>
+    </section>
+
+    <!--主体尾部：选择难易程度和题数-->
+    <div id="bottom-select">
+        <div class="second">
+            <label class="adjustment">调整难度系数：</label>
+            <select id="num">
+                <option value ="1">1</option>
+                <option value ="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+            </select>
+        </div>
+        <div class="second">
+            <label class="stem-from">出题来源：</label>
+            <label class="radio1-all">
+                <input type="radio" class="radio1" value="错题+新题" name="radio-stem">
+                错题+新题
+                <input type="radio" class="radio1" value="只出新题" name="radio-stem">
+                只出新题
+                <input type="radio" class="radio1" value="只出错题" name="radio-stem">
+                只出错题
+                <input type="radio" class="radio1" value="不限题源" name="radio-stem">
+                不限题源
+            </label>
+        </div>
+        <div class="second">
+            <label class="stem-from">选择单次题目数量：</label>
+            <label class="radio1-all">
+                <input type="radio" class="radio1" value="5题" name="selectnum">
+                5题
+                <input type="radio" class="radio1" name="selectnum"  value="10题">
+                10题
+            </label>
+        </div>
+        <!--提交按钮设计-->
+        <div class="button btn-position">
+
+            <a href="#" class="reselect default">重选</a>
+            <input type="submit" class="submit reselect" value="确定">
+
+        </div>
+        <!--提交按钮设计-->
+    </div>
+    <!--主体尾部：选择难易程度和题数-->
+</section>
+
+<script src="js/jquery-3.0.0.min.js"></script>
+<script src="js/vue.js"></script>
+<script src="js/tags.js"></script>
+</body>
+</html>

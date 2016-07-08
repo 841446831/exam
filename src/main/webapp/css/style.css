@@ -1,0 +1,125 @@
+*{
+    box-sizing: border-box;
+}
+#header{
+    display: block;
+    height: 70px;
+    width: 100%;
+    background: darkgray;
+    margin-bottom: 10px;
+}
+body{
+    background: #eee;
+}
+ul,li{
+    list-style: none;
+    padding: 0;
+}
+.flex-wrap{
+    max-width: 65%;
+    margin: auto;
+    background-color: white;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+}
+.super-type{
+    margin: 20px;
+    width:30%;
+    background-color: ghostwhite;
+    padding: 15px;
+}
+.tag-top{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.question-type li{
+    margin: 20px 0;
+}
+.question-type label p{
+    display: inline;
+}
+.progress{
+    width: 100px;
+    height: 6px;
+    display: inline-block;
+    border-radius: 2px;
+    background: gainsboro;
+    margin-right: 10px;
+    margin-left: 8px;
+    margin-bottom: 15px;
+    vertical-align: middle;
+}
+.Mathematics-top .number-text{
+    font-size: 14px;
+    margin-bottom: 15px;
+    display: inline-block;
+    vertical-align: middle;
+}
+
+/***************主体尾部*********/
+/**************主体尾部**********/
+#bottom-select{
+    display: block;
+    width: 600px;
+    height: 150px;
+    margin-bottom: 50px;
+    margin-top: 40px;
+
+}
+.adjustment{
+
+    font-size: 16px;
+}
+
+.second{
+
+    padding-top: 15px;
+    padding-right: 4px;
+}
+/****按钮设计****/
+.button{
+    display: block;
+    height: 60px;
+    width: 64%;
+    background: #f6f6f6;
+    margin-top: 30px;
+    position: absolute;
+    left: 340px;
+
+}
+.btn-position{
+    text-align: center;
+    padding-top: 15px;
+}
+a{
+    text-decoration: none;
+}
+.btn-position .reselect{
+    display: inline-block;
+    padding: 10px 0;
+    margin-right: 15px;
+    margin-top: -3px;
+    width: 110px;
+    color: #FFF;
+    font-size: 14px;
+    border-radius: 3px;
+    border: none 0;
+    cursor: pointer;
+    line-height: normal;
+    outline: 0;
+    white-space: nowrap;
+    background: #BCBCBC;
+}
+.btn-position .default:hover{
+    background: gray;
+}
+.btn-position .submit{
+    background: #00BC9B;
+}
+
+.btn-position .submit:hover{
+    background: green;
+}
+/****按钮设计****/

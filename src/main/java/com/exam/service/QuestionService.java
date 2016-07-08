@@ -48,12 +48,24 @@ public class QuestionService {
 	}
 
 	
-	public List<Question> selectQuestions(int tag_id, int diffculty, int count) {
+	public List<Question> selectQuestions(List<Integer> tags, int diffculty, int count) {
 		// TODO Auto-generated method stub
-		List<Question> questions = questionDao.selectQuestions(tag_id,diffculty,count);
+		if (tags!=null && tags.size()==0) tags = null;
+		List<Question> questions = questionDao.selectQuestions(tags,diffculty,count);
 		for (Question question:questions){
 			question.setOptions(optionDao.selectByTid(question.getId()));
+			int cnt = 0;
+			for (Option option:question.getOptions()){
+				if (option.getIsTrue()){
+					cnt++;
+					option.setIsTrue(false);
+				}
+			}
+			if (cnt==1){
+				question.setRadio(true);
+			}
 		}
+		System.out.println(questions);
 		return questions;
 	}
     

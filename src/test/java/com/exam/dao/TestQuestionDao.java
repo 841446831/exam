@@ -1,5 +1,6 @@
 package com.exam.dao;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.junit.Test;
@@ -16,7 +17,9 @@ public class TestQuestionDao {
 		ApplicationContext applicationContext = new ClassPathXmlApplicationContext("spring/applicationContext.xml");
 		QuestionDao questionDao = (QuestionDao)applicationContext.getBean("questionDao");
 		QuestionService questionService=(QuestionService)applicationContext.getBean("questionService");
-		List<Question> list = questionService.selectQuestions(607, 2,3);
+		List<Integer> tags = new ArrayList<Integer>();
+//		tags.add(583);
+		List<Question> list = questionService.selectQuestions(tags, 2,3);
 		System.out.println(list);
 	}
 }

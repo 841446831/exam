@@ -35,17 +35,21 @@
 				*
 		from
 				question
-		where 
-				1=1
-		 <if test="arg0 != null">
-  			  AND tid = #{arg0}
-  		 </if> 
-  		 <if test="arg1 != null">
-  			  AND level = #{arg1}
-  		 </if> 
-  		 <if test="arg2 != null">
-  			  limit #{arg2}
-  		 </if> 
+		<where> 
+			 <if test="arg0 != null">
+	  			  AND tid in 
+	  			  <foreach item="item" index="index" collection="arg0"
+     				 open="(" separator="," close=")">
+     				 #{item}
+  				</foreach>
+	  		 </if> 
+	  		 <if test="arg1 != null">
+	  			  AND level = #{arg1}
+	  		 </if> 
+	  		 <if test="arg2 != null">
+	  			  limit #{arg2}
+	  		 </if> 
+  		 </where>
 	</select>
 
 </mapper>

@@ -23,6 +23,6 @@ public interface QuestionDao {
 	@Select("select * from question where id = #{id}")
 	public Question selectById(int id);
 
-	public List<Question> selectQuestions(int tag_id, int diffculty, int count);
+	public List<Question> selectQuestions(List<Integer> tags, int diffculty, int count);
 
 }

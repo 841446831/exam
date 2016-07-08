@@ -9,7 +9,13 @@ public class Question {
     private String answer;
     private Integer level;
     private int tid;
-    private List<Option> options;
+    private boolean radio;
+
+	public void setRadio(boolean radio) {
+		this.radio = radio;
+	}
+	
+	private List<Option> options;
     
     public Question(){
     	options = new ArrayList<Option>();
@@ -54,11 +60,13 @@ public class Question {
 	public void setTid(int tid) {
 		this.tid = tid;
 	}
+
 	@Override
 	public String toString() {
 		return "Question [id=" + id + ", face=" + face + ", answer=" + answer
-				+ ", level=" + level + ", tid=" + tid + ", options=" + options
-				+ "]";
+				+ ", level=" + level + ", tid=" + tid + ", radio=" + radio
+				+ ", options=" + options + "]";
 	}
+
 	
 }

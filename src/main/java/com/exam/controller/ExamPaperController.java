@@ -20,8 +20,8 @@ public class ExamPaperController {
 	
 	@RequestMapping("/api/exampaper")
 	@ResponseBody
-	public String getExamPaper(@RequestParam(defaultValue="598")int tag_id,@RequestParam(defaultValue="3")int diffculty,@RequestParam(defaultValue="3") int count){
-		List<Question> questions = questionService.selectQuestions(tag_id,diffculty,count);
+	public String getExamPaper(List<Integer> tags,@RequestParam(defaultValue="3")int diffculty,@RequestParam(defaultValue="3") int count){
+		List<Question> questions = questionService.selectQuestions(tags,diffculty,count);
 		return JSON.toJSONString(questions);
 	}
 }
