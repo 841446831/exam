@@ -53,8 +53,8 @@ public class Main {
 		httpClient=HttpClients.createDefault();
 		httpGet = new HttpGet();
 		httpPost =new HttpPost();
-		httpGet.setHeader("Cookie", cookie[0]);
-		httpPost.setHeader("Cookie",cookie[0]);
+		httpGet.setHeader("Cookie", cookie[1]);
+		httpPost.setHeader("Cookie",cookie[1]);
 		applicationContext = new ClassPathXmlApplicationContext("spring/applicationContext.xml");
 		questionService = (QuestionService) applicationContext.getBean("questionService");
 		typeService = (TypeService)applicationContext.getBean("typeService");
