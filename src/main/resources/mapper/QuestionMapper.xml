@@ -30,5 +30,22 @@
 	    from question q,`option` o where o.qid = q.id and q.level = #{level}
 	</select>
 	
+	<select id="selectQuestions" resultMap="QuestionResult" >
+		select 
+				*
+		from
+				question
+		where 
+				1=1
+		 <if test="arg0 != null">
+  			  AND tid = #{arg0}
+  		 </if> 
+  		 <if test="arg1 != null">
+  			  AND level = #{arg1}
+  		 </if> 
+  		 <if test="arg2 != null">
+  			  limit #{arg2}
+  		 </if> 
+	</select>
 
 </mapper>

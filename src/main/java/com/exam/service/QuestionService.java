@@ -26,7 +26,6 @@ public class QuestionService {
     		optionDao.insertOption(option);
     	}
         return 1;
-        
     }
     
     public List<Question> selectQuestionByTypeAndLevel(int level)
@@ -47,6 +46,15 @@ public class QuestionService {
 		// TODO Auto-generated method stub
 		return questionDao.selectById(i);
 	}
-    
+
+	
+	public List<Question> selectQuestions(int tag_id, int diffculty, int count) {
+		// TODO Auto-generated method stub
+		List<Question> questions = questionDao.selectQuestions(tag_id,diffculty,count);
+		for (Question question:questions){
+			question.setOptions(optionDao.selectByTid(question.getId()));
+		}
+		return questions;
+	}
     
 }
