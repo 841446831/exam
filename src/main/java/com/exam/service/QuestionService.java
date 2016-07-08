@@ -64,9 +64,14 @@ public class QuestionService {
 			if (cnt==1){
 				question.setRadio(true);
 			}
+			question.setOptions(optionDao.selectByTid(question.getId())); 
 		}
-		System.out.println(questions);
 		return questions;
+	}
+	
+	public int typeOfQuestionCount(int tid)
+	{
+		return questionDao.typeOfQuestionCount(tid);
 	}
     
 }

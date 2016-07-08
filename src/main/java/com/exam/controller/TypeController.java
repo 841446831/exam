@@ -14,7 +14,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONObject;
+import com.exam.entity.Question;
 import com.exam.entity.Type;
+import com.exam.service.QuestionService;
 import com.exam.service.TypeService;
 
 @Controller
@@ -22,8 +25,11 @@ public class TypeController {
 
 	@Resource
  	private TypeService typeService;
+	@Resource
+	private QuestionService questionService;
  	
 	@RequestMapping(value="types", produces="application/json;charset=utf-8")
+	@SuppressWarnings("unchecked")
 	@ResponseBody
 	public String types()
 	{
@@ -31,7 +37,7 @@ public class TypeController {
 	    
 	    List<Type> listType = new ArrayList<Type>();
 	    
-	    Map<String,List<Type>> mapListType = new HashMap<>();
+	    Map<String,Object> mapListType = new HashMap<>();
 	    
 	    listType = typeService.SelectAll();
 	    
@@ -40,10 +46,12 @@ public class TypeController {
 	    for (Type type:listType){
 	    	if  (!mapListType.containsKey(type.getSuperType())){
 	    		//System.out.println(type.getSuperType());
-	    		mapListType.put(type.getSuperType(),new ArrayList<Type>());
+	    		mapListType.put(type.getSuperType(),new ArrayList<Object>());
 	    	}
 	    	//System.out.println(type);
-	    	mapListType.get(type.getSuperType()).add(type);
+	    	JSONObject jsonObject = JSON.parseObject(JSON.toJSONString(type));
+	    	jsonObject.put("count", questionService.typeOfQuestionCount(type.getId()));
+	    	((List<Object>) mapListType.get(type.getSuperType())).add(jsonObject);
 	    }
 	    
 	    Set set = mapListType.keySet();
@@ -54,7 +62,7 @@ public class TypeController {
 	    {
 	    	 map = new HashMap<>();
 	    	 map.put("title",key);
-	    	 //System.out.println(key);
+	    
 	    	 map.put("list", mapListType.get(key));
 	    	 list.add(map);
 	    }
