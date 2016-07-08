@@ -113,4 +113,13 @@ public class Test1 {
 		
 	}
 	
+    @Test
+	public void testGetTypeCount()
+	{
+		ApplicationContext applicationContext = new ClassPathXmlApplicationContext("spring/applicationContext.xml");
+		QuestionService questionService = (QuestionService) applicationContext.getBean("questionService");
+		int count = questionService.typeOfQuestionCount(569);
+		System.out.println(count);
+	}
+	
 }

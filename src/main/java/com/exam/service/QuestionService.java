@@ -52,9 +52,14 @@ public class QuestionService {
 		// TODO Auto-generated method stub
 		List<Question> questions = questionDao.selectQuestions(tag_id,diffculty,count);
 		for (Question question:questions){
-			question.setOptions(optionDao.selectByTid(question.getId()));
+			question.setOptions(optionDao.selectByTid(question.getId())); 
 		}
 		return questions;
+	}
+	
+	public int typeOfQuestionCount(int tid)
+	{
+		return questionDao.typeOfQuestionCount(tid);
 	}
     
 }

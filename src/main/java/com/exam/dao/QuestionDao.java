@@ -24,5 +24,7 @@ public interface QuestionDao {
 	public Question selectById(int id);
 
 	public List<Question> selectQuestions(int tag_id, int diffculty, int count);
+	
+	public int typeOfQuestionCount(int tid);
 
 }
