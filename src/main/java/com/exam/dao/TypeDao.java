@@ -16,4 +16,6 @@ public interface TypeDao {
 	@Select("select * from type")
 	public List<Type> selectAll();
 	
+	
+	
 }

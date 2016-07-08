@@ -1,14 +1,20 @@
 package com.exam.test;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 import org.junit.Test;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONObject;
 import com.exam.entity.Option;
 import com.exam.entity.Question;
+import com.exam.entity.Type;
 import com.exam.service.QuestionService;
 public class Test1 {
 
@@ -66,4 +72,45 @@ public class Test1 {
 		Question question = questionService.selectById(18);
 		System.out.println(questionService.countQuestionByFace(question.getFace()));
 	}
+	
+	@Test
+	public void testList()
+	{
+        Map<String, Object> map = new HashMap<>();
+	    
+	    List<Type> listType = new ArrayList<Type>();
+	    
+	    Map<String,List<Type>> mapListType = new HashMap<>();
+	    
+	    Type type1 = new Type();
+	    type1.setId(1);
+	    type1.setType("C++");
+	    type1.setSuperType("编程语言");
+	    listType.add(type1);
+	    
+	    Type type2 = new Type();
+	    type2.setId(2);
+	    type2.setType("java");
+	    type2.setSuperType("编程语言");
+	    listType.add(type2);
+	    
+	    mapListType.put("编程语言",listType);
+	    
+	    System.out.println(mapListType.get("编程语言").get(0));
+	    
+	    Set set = mapListType.keySet();
+	    
+	    for(Object key : set)
+	    {
+	    	 map.put("title",key);
+	    	 map.put("list", mapListType.get(key));
+	    }
+	    
+	    String json = JSON.toJSONString(map);
+	    System.out.println(json);
+	    
+	    //List< Map<String,Object> > list;
+		
+	}
+	
 }

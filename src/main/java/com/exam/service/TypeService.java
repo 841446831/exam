@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.annotation.Resource;
 
+import org.apache.ibatis.annotations.Select;
 import org.springframework.stereotype.Service;
 
 import com.exam.dao.TypeDao;
