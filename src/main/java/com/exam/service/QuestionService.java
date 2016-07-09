@@ -74,4 +74,10 @@ public class QuestionService {
 		return questionDao.typeOfQuestionCount(tid);
 	}
     
+	public List<Question> selectQuestionByEid(int eid)
+	{
+		return questionDao.selectQuestionByEid(eid);
+	}
+	
+
 }

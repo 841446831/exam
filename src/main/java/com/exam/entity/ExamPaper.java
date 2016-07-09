@@ -58,5 +58,14 @@ public class ExamPaper {
 	public void setQuestions(List<ExamQuestion> questions) {
 		this.questions = questions;
 	}
+
+	@Override
+	public String toString() {
+		return "ExamPaper [id=" + id + ", title=" + title + ", startTime="
+				+ startTime + ", endTime=" + endTime + ", password=" + password
+				+ ", practice=" + practice + ", questions=" + questions + "]";
+	}
+	
+	
 	
 }

@@ -12,7 +12,7 @@
 		<result column="tid" property="tid"/>
 		
 		
-		 <collection property="options" ofType="com.exam.entity.Option" >  
+		<collection property="options" ofType="com.exam.entity.Option" >  
             <id column="o_id" property="id"/>  
             <result column="title" property="title"/>  
             <result column="isTrue" property="isTrue"/>  
@@ -53,8 +53,17 @@
   		 </where>
 	</select>
 	
-	<select id="typeOfQuestionCount" parameterType="int" resultType="int">
-	    SELECT count(tid) as questionNum FROM question where tid = #{tid};
+	<select id="typeOfQuestionCount"  resultType="java.lang.Integer">
+	    SELECT count(*)  as questionNum FROM question where tid = #{tid};
+	</select>
+	
+	<select id="selectQuestionByEid" parameterType="int" resultMap="QuestionResult">
+	    select q.*, o.id as o_id,
+		          o.title,
+		          o.isTrue,
+		          o.tutorial
+		           from question q,`option` o,examQuestion e where  
+		                 o.qid = q.id and e.qid = q.id AND e.eid = #{eid}
 	</select>
 
 </mapper>

@@ -15,4 +15,8 @@ public interface OptionDao {
 	@Select("select id,title,isTrue from `option` where qid = #{id}")
 	public List<Option> selectByTid(Integer id);
 	
+	@Select("SELECT count(*) from `option` where isTrue = 1 AND qid = #{qid}")
+	public int selectTrueAnswer(int qid);
+	
+    
 }

@@ -26,5 +26,10 @@ public interface QuestionDao {
 	public List<Question> selectQuestions(List<Integer> tags, int diffculty, int count);
 	
 	public int typeOfQuestionCount(int tid);
-
+	
+	public List<Question> selectQuestionByEid(int eid);
+	
+	@Select("select id from question")
+	public List<Integer> selectQuesionId();
+	
 }
