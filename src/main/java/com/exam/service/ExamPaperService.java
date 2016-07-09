@@ -8,6 +8,7 @@ import com.exam.dao.ExamPaperDao;
 import com.exam.dao.ExamQuestionDao;
 import com.exam.entity.ExamPaper;
 import com.exam.entity.ExamQuestion;
+import com.exam.entity.Question;
 
 @Service
 public class ExamPaperService {
@@ -17,9 +18,11 @@ public class ExamPaperService {
 	private ExamQuestionDao examQuestionDao;
 	
 	public int insert(ExamPaper examPaper){
-		int id = examPaperDao.insert(examPaper);
-		for (ExamQuestion examQuestion:examPaper.getQuestions()){
-			examQuestion.setEid(id);
+		examPaperDao.insert(examPaper);
+		for (Question question:examPaper.getQuestions()){
+			ExamQuestion examQuestion = new ExamQuestion();
+			examQuestion.setEid(examPaper.getId());
+			examQuestion.setQid(question.getId());
 			examQuestionDao.insert(examQuestion);
 		}
 		return 0;

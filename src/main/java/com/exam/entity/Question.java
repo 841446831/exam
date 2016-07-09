@@ -9,18 +9,40 @@ public class Question {
     private String answer;
     private Integer level;
     private int tid;
-    private boolean radio;
+    private int isRadio;
+    private int isPublic;
+    private User user;
 
-	public void setRadio(boolean radio) {
-		this.radio = radio;
+	public int getIsPublic() {
+		return isPublic;
 	}
-	
+
+	public void setIsPublic(int isPublic) {
+		this.isPublic = isPublic;
+	}
+
+	public User getUser() {
+		return user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
+	}
+
 	private List<Option> options;
     
     public Question(){
     	options = new ArrayList<Option>();
     }
     
+	public int getIsRadio() {
+		return isRadio;
+	}
+
+	public void setIsRadio(int isRadio) {
+		this.isRadio = isRadio;
+	}
+
 	public Integer getId() {
 		return id;
 	}
@@ -63,10 +85,10 @@ public class Question {
 
 	@Override
 	public String toString() {
-		return "Question [id=" + id + ", face=" + face + ", answer=" + answer
-				+ ", level=" + level + ", tid=" + tid + ", radio=" + radio
-				+ ", options=" + options + "]";
+		return "Question [id=" + id + ", face=" + face + ", answer=" + answer + ", level=" + level + ", tid=" + tid
+				+ ", isRadio=" + isRadio + ", isPublic=" + isPublic + ", user=" + user + ", options=" + options + "]";
 	}
+
 
 	
 }

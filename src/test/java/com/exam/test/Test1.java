@@ -12,6 +12,7 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
+import com.exam.dao.QuestionDao;
 import com.exam.entity.Option;
 import com.exam.entity.Question;
 import com.exam.entity.Type;
@@ -38,13 +39,13 @@ public class Test1 {
 			option = new Option();
 			option.setId(i + 4);
 			option.setQid(1);
-			option.setIsTrue(true);
+			option.setIsTrue(1);
 			option.setTitle("选项内容" + i);
 			option.setTutorial("题目解析" + i);
 			question.getOptions().add(option);
 		}
 		
-		questionService.insertQuestion(question);
+//		questionService.insertQuestion(question);
 		
 	}
 
@@ -117,9 +118,11 @@ public class Test1 {
 	public void testGetTypeCount()
 	{
 		ApplicationContext applicationContext = new ClassPathXmlApplicationContext("spring/applicationContext.xml");
-		QuestionService questionService = (QuestionService) applicationContext.getBean("questionService");
-		int count = questionService.typeOfQuestionCount(569);
-		System.out.println(count);
+		//QuestionService questionService = (QuestionService) applicationContext.getBean("questionService");
+		QuestionDao questionDao = (QuestionDao)applicationContext.getBean("questionDao");
+		int count = questionDao.typeOfQuestionCount(123);
+//		System.out.println(count);
+		
 	}
 	
 }

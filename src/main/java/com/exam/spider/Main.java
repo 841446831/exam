@@ -265,7 +265,7 @@ public class Main {
 					for (int j=0;j<optionsArray.size();++j){
 						JSONObject optionJsonObject = optionsArray.getJSONObject(j);
 						Option option = new Option();
-						option.setIsTrue(optionJsonObject.containsKey("isTrue"));
+						option.setIsTrue(optionJsonObject.containsKey("isTrue")?1:0);
 						option.setTitle(optionJsonObject.getString("option"));
 						option.setTutorial(" ");
 						question.getOptions().add(option);

@@ -14,5 +14,8 @@ public interface OptionDao {
 
 	@Select("select id,title,isTrue from `option` where qid = #{id}")
 	public List<Option> selectByTid(Integer id);
+
+	@Select("select * from `option`")
+	public List<Option> selectAll();
 	
 }

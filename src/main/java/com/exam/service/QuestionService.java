@@ -56,15 +56,15 @@ public class QuestionService {
 			question.setOptions(optionDao.selectByTid(question.getId()));
 			int cnt = 0;
 			for (Option option:question.getOptions()){
-				if (option.getIsTrue()){
+				if (option.getIsTrue()==1){
 					cnt++;
-					option.setIsTrue(false);
+					option.setIsTrue(0);
 				}
 			}
 			if (cnt==1){
-				question.setRadio(true);
+				question.setIsRadio(1);
 			}
-			question.setOptions(optionDao.selectByTid(question.getId())); 
+//			question.setOptions(optionDao.selectByTid(question.getId())); 
 		}
 		return questions;
 	}
@@ -72,6 +72,15 @@ public class QuestionService {
 	public int typeOfQuestionCount(int tid)
 	{
 		return questionDao.typeOfQuestionCount(tid);
+	}
+
+	public List<Question> selectAll() {
+		return questionDao.selectAll();
+	}
+
+	public int update(Question question) {
+		// TODO Auto-generated method stub
+		return questionDao.update(question);
 	}
     
 }

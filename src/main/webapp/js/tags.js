@@ -1,4 +1,6 @@
-var url = "http://192.168.3.37:8080/exam/types";
+//var url = "http://192.168.3.37:8080/exam/types";
+var url = "http://localhost:8080/exam/types";
+
 
 var app = new Vue({
     el: '#app',

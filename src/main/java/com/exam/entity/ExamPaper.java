@@ -3,6 +3,7 @@ package com.exam.entity;
 import java.util.ArrayList;
 import java.util.List;
 
+
 public class ExamPaper {
 	private int id;
 	private String title;
@@ -10,12 +11,41 @@ public class ExamPaper {
 	private long endTime;
 	private String password;
 	private int practice;
-	private List<ExamQuestion> questions;
+	private List<ExamQuestion> examQuestions;
+	private List<Question> questions;
+	
 	public ExamPaper() {
 		super();
-		questions = new ArrayList<ExamQuestion>();
+		examQuestions = new ArrayList<ExamQuestion>();
+		questions = new ArrayList<>();
 	}
 	
+	
+
+	public List<ExamQuestion> getExamQuestions() {
+		return examQuestions;
+	}
+
+
+
+	public void setExamQuestions(List<ExamQuestion> examQuestions) {
+		this.examQuestions = examQuestions;
+	}
+
+
+
+	public List<Question> getQuestions() {
+		return questions;
+	}
+
+
+
+	public void setQuestions(List<Question> questions) {
+		this.questions = questions;
+	}
+
+
+
 	public int getId() {
 		return id;
 	}
@@ -52,11 +82,13 @@ public class ExamPaper {
 	public void setPractice(int i) {
 		this.practice = i;
 	}
-	public List<ExamQuestion> getQuestions() {
-		return questions;
+
+
+
+	@Override
+	public String toString() {
+		return "ExamPaper [id=" + id + ", title=" + title + ", startTime=" + startTime + ", endTime=" + endTime
+				+ ", password=" + password + ", practice=" + practice + ", questions=" + questions + "]";
 	}
-	public void setQuestions(List<ExamQuestion> questions) {
-		this.questions = questions;
-	}
-	
+
 }

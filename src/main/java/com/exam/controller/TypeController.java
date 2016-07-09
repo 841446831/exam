@@ -9,13 +9,11 @@ import java.util.Set;
 import javax.annotation.Resource;
 
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
-import com.exam.entity.Question;
 import com.exam.entity.Type;
 import com.exam.service.QuestionService;
 import com.exam.service.TypeService;
@@ -54,7 +52,7 @@ public class TypeController {
 	    	((List<Object>) mapListType.get(type.getSuperType())).add(jsonObject);
 	    }
 	    
-	    Set set = mapListType.keySet();
+	    Set<String> set = mapListType.keySet();
 	    
 	    List<Map<String, Object>> list = new ArrayList<>();
 	    

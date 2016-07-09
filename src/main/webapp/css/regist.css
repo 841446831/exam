@@ -1,0 +1,180 @@
+#header{
+    height: 70px;
+    background: #fafafa;
+    border-bottom: 1px solid #dddddd;
+}
+.conf{
+    width: 1000px;
+    margin: 0 auto;
+    height: 70px;
+}
+.head-1{
+   float: left;
+}
+.head-1 .logo{
+    float: left;
+    margin-top: 30px;
+}
+.head-1 .logo-t{
+    float: left;
+    margin: 25px 0 0 15px;
+    padding-left: 15px;
+    font: 18px/20px "Microsoft YaHei";
+    color: #666;
+    border-left: 1px #aaa solid;
+}
+.head-2{
+    float: right;
+    color: #aaaaaa;
+    margin-top: 25px;
+}
+.head-2 a{
+    padding: 8px;
+    color: #0099FF;
+
+}
+
+
+
+/*注册主体*/
+#registerbg{
+    width: 100%;
+    overflow: hidden;
+    background: #f2f2f2;
+}
+
+.register-box{
+    background: #fff;
+    height: 500px;
+    width: 1000px;
+    margin: 80px auto;
+    box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.1);
+}
+.guide{
+    float: left;
+    width: 199px;
+    height: 500px;
+    background: #fafafa;
+    border-right: 1px #ddd solid;
+}
+.register-box .guide .current{
+    position: relative;
+    width: 198px;
+    background: #fff;
+    border: 1px #379be7 solid;
+    font-weight: bold;
+    color: #379be7;
+}
+
+.guide a{
+    display: block;
+    width: 199px;
+    padding: 40px 0;
+    margin-bottom: -1px;
+    border-bottom: 1px #ddd solid;
+    border-right: none;
+    color: #333;
+    text-align: center;
+    cursor: pointer;
+}
+.guide a h3{
+    font-weight:bold;
+    font: 18px/30px "Microsoft YaHei";
+    height: 30px;
+}
+.guide a h3 i.custom{
+    background-position: -284px -255px;
+}
+.guide a h3 i{
+    display: inline-block;
+    vertical-align: middle;
+    width: 30px;
+    height: 30px;
+    background: url("../images/user.png")no-repeat;
+}
+
+.guide a p {
+    margin-top: 10px;
+    font: 12px/20px "Microsoft YaHei";
+}
+
+/*.guide a.current::before {
+    position: absolute;
+    z-index: 15;
+    right: -15px;
+    top: 50%;
+    margin-top: -8px;
+    width: 0;
+    height: 0;
+    content: "";
+    border:8px #fff solid;
+    border-color: transparent transparent transparent #fff;}*/
+
+.register{
+    margin-left: 200px;
+    height: 500px;
+    width: 800px;
+}
+.register ul{
+    margin:auto;
+    padding-top: 55px;
+}
+.register ul li{
+    height: 40px;
+    margin-bottom: 25px;
+    margin-left: 50px;
+}
+.register ul li label{
+    font: 18px/40px "Microsoft YaHei";
+    color: #333;
+}
+.register ul li .txt{
+    margin-left: 20px;
+    padding-left: 18px;
+    height: 38px;
+    line-height: 48px;
+    width: 380px;
+    border: 1px #e5e5e5 solid;
+    border-radius: 5px;
+    font: 18px/40px "Microsoft YaHei"
+}
+.register ul li .errorTips{
+    position: absolute;
+    bottom: -20px;
+    padding-left: 200px;
+    color: #f00;
+    font-size: 12px;
+}
+.register ul .label{
+    margin-left: 102px;
+}
+
+.register ul .reg-btn{
+    width: 400px;
+    height:50px;
+    background: #379be7;
+    color: #ffffff;
+    right:360px;
+    margin-top: 50px;
+    font-size: 18px;
+    font-weight: bold;
+    border-radius: 5px;
+}
+.register ul .reg-btn:hover{
+    background: blue;
+    color: whitesmoke;
+}
+/*注册主体*/
+
+/*公共样式*/
+a{
+    text-decoration: none;
+}
+a:hover{
+    color: blue;
+    font-weight: bolder;
+}
+ul li{
+    list-style: none;
+}
+/*公共样式*/

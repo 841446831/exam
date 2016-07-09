@@ -4,7 +4,7 @@ public class Option {
     private Integer id;
     private Integer qid;
     private String title;
-    private boolean isTrue;
+    private int isTrue;
     private String tutorial;
     
     private Question question;
@@ -35,10 +35,10 @@ public class Option {
 	public void setTitle(String title) {
 		this.title = title;
 	}
-	public boolean getIsTrue() {
+	public int getIsTrue() {
 		return isTrue;
 	}
-	public void setIsTrue(boolean isTrue) {
+	public void setIsTrue(int isTrue) {
 		this.isTrue = isTrue;
 	}
 	public String getTutorial() {

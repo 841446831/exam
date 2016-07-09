@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <link href="css/regist.css" rel="stylesheet">
+</head>
+<body>
+
+  <!--注册主体-->
+   <div id="registerbg">
+        <div class="register-box">
+           <div class="guide">
+              <a href="" class="current">
+                  <h3>
+                      <i class="custom"></i>
+                       用户注册
+                  </h3>
+                  <p>自定义用户名,更加方便</p>
+              </a>
+           </div>
+           <div class="register">
+              <form action="regist" method="post" style="display: block">
+                   <ul class="form">
+                       <li>
+                           <label>自定义账号:</label>
+                           <input type="text" class="txt" name="username" placeholder="请输入用户名（6-14位字符，英文,数字组合）">
+                           <p class="errorTips"></p>
+                       </li>
+                       <li class="label">
+                           <label>邮箱:</label>
+                           <input type="text" class="txt" name="email" placeholder="请输入邮箱账号">
+                           <p class="errorTips"></p>
+                       </li>
+                       <li  class="label">
+                           <label>密码:</label>
+                           <input type="text" class="txt" name="password" placeholder="请输入密码（长度为6-20字符）">
+                           <p class="errorTips"></p>
+                       </li>
+                       <li>
+                           <label>请确认密码:</label>
+                           <input type="text" class="txt" name="repeatPassword" placeholder="请输入密码（长度为6-20字符）">
+                           <p class="errorTips"></p>
+                       </li>
+                       <li >
+                           <input class="reg-btn" type="submit" value="注册">
+                       </li>
+                   </ul>
+
+              </form>
+           </div>
+        </div>
+   </div>
+  <!--注册主体-->
+   <!--尾部-->
+  <!--尾部-->
+</body>
+</html>

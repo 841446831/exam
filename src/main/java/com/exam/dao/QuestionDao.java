@@ -5,6 +5,7 @@ import java.util.List;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Options;
 import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.Update;
 
 import com.exam.entity.Question;
 
@@ -26,5 +27,12 @@ public interface QuestionDao {
 	public List<Question> selectQuestions(List<Integer> tags, int diffculty, int count);
 	
 	public int typeOfQuestionCount(int tid);
+	public List<Question> selectByTypeId(int typeId);
 
+	@Select("select * from question")
+	public List<Question> selectAll();
+	
+	@Update("update question set isRadio = #{isRadio} , isPublic = #{isPublic},"
+			+ " face = #{face},answer=#{answer},tid=#{tid},level=#{level},uid=#{user.id} where id = #{id}")
+	int update(Question question);
 }
