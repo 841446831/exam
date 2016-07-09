@@ -6,8 +6,14 @@ public class Option {
     private String title;
     private int isTrue;
     private String tutorial;
-    
-    private Question question;
+    private String symbol;
+    public String getSymbol() {
+		return symbol;
+	}
+	public void setSymbol(String symbol) {
+		this.symbol = symbol;
+	}
+	private Question question;
    
     
 	public Question getQuestion() {
@@ -49,9 +55,10 @@ public class Option {
 	}
 	@Override
 	public String toString() {
-		return "Option [id=" + id + ", qid=" + qid + ", title=" + title
-				+ ", isTrue=" + isTrue + ", tutorial=" + tutorial + "]";
+		return "Option [id=" + id + ", qid=" + qid + ", title=" + title + ", isTrue=" + isTrue + ", tutorial="
+				+ tutorial + ", symbol=" + symbol + ", question=" + question + "]";
 	}
+
     
     
     
