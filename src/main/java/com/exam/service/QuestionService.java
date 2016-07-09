@@ -83,4 +83,10 @@ public class QuestionService {
 		return questionDao.update(question);
 	}
     
+	public List<Question> selectQuestionByEid(int eid)
+	{
+		return questionDao.selectQuestionByEid(eid);
+	}
+	
+
 }

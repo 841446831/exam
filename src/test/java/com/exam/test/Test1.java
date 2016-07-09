@@ -16,6 +16,8 @@ import com.exam.dao.QuestionDao;
 import com.exam.entity.Option;
 import com.exam.entity.Question;
 import com.exam.entity.Type;
+import com.exam.service.ExamQuestionService;
+import com.exam.service.OptionService;
 import com.exam.service.QuestionService;
 public class Test1 {
 
@@ -45,7 +47,6 @@ public class Test1 {
 			question.getOptions().add(option);
 		}
 		
-//		questionService.insertQuestion(question);
 		
 	}
 
@@ -124,5 +125,53 @@ public class Test1 {
 //		System.out.println(count);
 		
 	}
-	
+    
+    @Test
+    public void testGetQid()
+    {
+    	ApplicationContext applicationContext = new ClassPathXmlApplicationContext("spring/applicationContext.xml");
+		ExamQuestionService examQuestionService = (ExamQuestionService) applicationContext.getBean("examQuestionService");
+		
+		System.out.println(examQuestionService.selectQidByEid(134));
+		
+    }
+    
+    @Test
+    public void testTrueAnswerCount()
+    {
+    	ApplicationContext applicationContext = new ClassPathXmlApplicationContext("spring/applicationContext.xml");
+		OptionService optionService = (OptionService) applicationContext.getBean("optionService");
+		
+		System.out.println(optionService.selectTrueAnswer(79));
+		
+    }
+    
+    @Test
+    public void testSelectNum()
+    {
+    	ApplicationContext applicationContext = new ClassPathXmlApplicationContext("spring/applicationContext.xml");
+		QuestionDao questionDao = (QuestionDao) applicationContext.getBean("questionDao");
+		
+		OptionService optionService = (OptionService) applicationContext.getBean("optionService");
+		
+		List<Integer> list = questionDao.selectQuesionId();
+		//System.out.println(list);
+		
+		int checkbox = 0;
+		int radio = 0;
+		for(Integer qid : list)
+		{
+			if(optionService.selectTrueAnswer(qid) > 1)
+			{
+				checkbox++;
+			}
+			else
+			{
+				radio++;
+			}
+		}
+		System.out.println(radio + "," +checkbox);
+    }
+    
+    
 }
