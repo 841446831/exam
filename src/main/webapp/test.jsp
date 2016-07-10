@@ -8,11 +8,11 @@
 </head>
 <body>
    <form action="getQuestionsAnswer" method="post">
-       <input type="hidden" name="eid" value="134">
-       <input type="radio" name="75" value="A">
-       <input type="checkbox" name="76" value="A" checked="checked">
-       <input type="checkbox" name="76" value="B" checked="checked">
-       <input type="checkbox" name="76" value="C" checked="checked">
+       <input type="hidden" name="eid" value="147">
+       <input type="radio" name="48" value="A">
+       <input type="checkbox" name="49" value="A" checked="checked">
+       <input type="checkbox" name="49" value="B" checked="checked">
+       <input type="checkbox" name="49" value="C" checked="checked">
        <input type="submit"  value="hfhh" >
    </form>
 </body>

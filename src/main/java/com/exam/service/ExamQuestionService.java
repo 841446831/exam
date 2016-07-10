@@ -65,11 +65,12 @@ public class ExamQuestionService {
 		    
 		    for(int i = 0 ; i < options.size();i++)
 		    {
-		    	
-		    	if(stringSelect == null){break;}
-		    	
 		    	JSONObject jsonObject  = JSONObject.parseObject(JSON.toJSONString(listQuestion.get(index).getOptions().get(i)));
 		    	jsonObject.put("isSelect", 0);
+		    	if(stringSelect == null){
+		    		listOption.add(jsonObject);
+		    		continue;
+		    	}
 		    	//[A,C,D]
 		    	for(int j = 0 ; j < stringSelect.length; j++)
 		    	{

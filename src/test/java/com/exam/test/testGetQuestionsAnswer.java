@@ -64,7 +64,7 @@ public class testGetQuestionsAnswer {
 		    for(int i = 0 ; i < options.size();i++)
 		    {
 		    	
-		    	if(stringSelect == null){break;}
+		    	//if(stringSelect == null){break;}
 		    	
 		    	JSONObject jsonObject  = JSONObject.parseObject(JSON.toJSONString(listQuestion.get(index).getOptions().get(i)));
 		    	jsonObject.put("isSelect", 0);
