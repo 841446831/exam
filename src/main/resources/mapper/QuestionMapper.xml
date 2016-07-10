@@ -1,5 +1,4 @@
 <?xml version="1.0" encoding="UTF-8"?>
-
 <!DOCTYPE mapper
  	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
@@ -44,7 +43,7 @@
 	  			  <foreach item="item" index="index" collection="arg0"
      				 open="(" separator="," close=")">
      				 #{item}
-  				</foreach>
+  				  </foreach>
 	  		 </if> 
 	  		 <if test="arg1 != null">
 	  			  AND level = #{arg1}
@@ -54,9 +53,9 @@
 	  		 </if> 
   		 </where>
 	</select>
-
-	<select id="typeOfQuestionCount" resultType="java.lang.Integer">
-	    select count(*) from question where tid = #{arg0}
+	
+	<select id="typeOfQuestionCount"  resultType="java.lang.Integer">
+	    SELECT count(*)  as questionNum FROM question where tid = #{tid};
 	</select>
 	
 	<select id="selectQuestionByEid" parameterType="int" resultMap="QuestionResult">
@@ -65,10 +64,8 @@
 		          o.isTrue,
 		          o.tutorial
 		           from question q,`option` o,examQuestion e where  
-		                 o.qid = q.id and e.qid = q.id AND e.eid = #{eid}
+		                 o.qid = q.id and e.qid = q.id AND e.eid = #{eid} order by q.id
 	</select>
+	
 
-	<select id="selectByTypeId" resultMap="QuestionResult">
-		select * from question where tid = #{arg0}
-	</select>
 </mapper>

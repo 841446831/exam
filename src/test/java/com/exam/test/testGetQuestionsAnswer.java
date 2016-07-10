@@ -1,51 +1,49 @@
-package com.exam.service;
+package com.exam.test;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import javax.annotation.Resource;
-
-import org.springframework.stereotype.Service;
+import org.apache.ibatis.annotations.Select;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
-import com.exam.dao.ExamQuestionDao;
 import com.exam.dao.OptionDao;
 import com.exam.dao.QuestionDao;
 import com.exam.entity.ExamPaper;
 import com.exam.entity.Option;
 import com.exam.entity.Question;
+import com.exam.service.ExamQuestionService;
+import com.exam.service.QuestionService;
 
-@Service
-public class ExamQuestionService {
-    
-	@Resource
-	private ExamQuestionDao examQuestionDao;
-
-	@Resource
-	private QuestionDao questionDao;
-	
-	@Resource
-	private OptionDao optionDao;
-	
-	public ExamPaper selectExamPaperByEid(int eid)
-	{
-		return examQuestionDao.selectExamPaperByEid(eid);
-	}
-	
-	public List<Integer> selectQidByEid(int eid)
-	{
-		return examQuestionDao.selectQidByEid(eid);
-	}
-	
-	public String getQuestionsAnswer(int eid,List<Map<Integer,Object>> listSelect)
-	{
-		
-		List<Question> listQuestion = questionDao.selectQuestionByEid(eid);
+public class testGetQuestionsAnswer {
+    public static void main(String[] args) {
+    	
+    	ApplicationContext applicationContext = new ClassPathXmlApplicationContext("spring/applicationContext.xml");
+		QuestionDao questionDao= (QuestionDao) applicationContext.getBean("questionDao");
+		ExamQuestionService examQuestionService =  (ExamQuestionService) applicationContext.getBean("examQuestionService");
+		OptionDao optionDao=  (OptionDao) applicationContext.getBean("optionDao");
+    	
+        List<Question> listQuestion = questionDao.selectQuestionByEid(134);
+        List<Integer> listQid = examQuestionService.selectQidByEid(134);
+       
+        Map<Integer, Object> map = null;
+        
+        List<Map<Integer, Object>> listSelect = new ArrayList<>();
 	    
-		Map<String,Object> mapListOption = new HashMap<>();
+        for(Integer qid : listQid)
+        {
+        	 map = new HashMap<>();
+        	 String[] s = new String[]{"A","C"};
+        	 map.put(qid, s);
+        	 listSelect.add(map);
+        }
+        
+        
+        Map<String,Object> mapListOption = new HashMap<>();
         //放添加isSelect属性之后的option
         List<Object> listOption = null;
         //放questions
@@ -91,7 +89,12 @@ public class ExamQuestionService {
 			questions.add(question);
             index++;
 		}
-		ExamPaper examPaper =  examQuestionDao.selectExamPaperByEid(134);
+		
+	
+		//mapListOption.put("options",listOption);
+		System.out.println(JSON.toJSONString(questions));
+		
+		ExamPaper examPaper =  examQuestionService.selectExamPaperByEid(134);
 		Map<String,Object> mapExamPaper = new HashMap<>();
 		mapExamPaper.put("endTime",examPaper.getEndTime());
 		mapExamPaper.put("examQuestions", examPaper.getExamQuestions());
@@ -101,9 +104,9 @@ public class ExamQuestionService {
 		mapExamPaper.put("title",examPaper.getTitle());
 		mapExamPaper.put("questions",questions);
 		
-	    //System.out.println(JSON.toJSONString(mapExamPaper));
+	    //JSONObject jsonObjectExamPaper = JSONObject.parseObject(JSON.toJSONString(examPaper));
+	    System.out.println(JSON.toJSONString(mapExamPaper));
 	    
-	    return JSON.toJSONString(mapExamPaper);
-	}
 	
+	}
 }

@@ -21,7 +21,6 @@ public class testSelectQuestionByEid {
 		
 		List<Question> questions = questionService.selectQuestionByEid(134);
 		
-		
 		Map<String, Object> map = new HashMap<String, Object>();
 		
 		map.put("questions",questions);
@@ -29,6 +28,6 @@ public class testSelectQuestionByEid {
 		String json = JSON.toJSONString(map);
 		
 		System.out.println(json);
-		
+		//System.out.println(questions);
 	}
 }

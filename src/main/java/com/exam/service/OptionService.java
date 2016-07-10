@@ -1,5 +1,7 @@
 package com.exam.service;
 
+import java.util.List;
+
 import javax.annotation.Resource;
 
 import org.springframework.stereotype.Service;
@@ -23,5 +25,9 @@ public class OptionService {
 		return optionDao.selectById(i);
 	}
 	
+	public List<Option> selectByQid(int qid)
+	{
+		return optionDao.selectByQid(qid);
+	}
 	
 }

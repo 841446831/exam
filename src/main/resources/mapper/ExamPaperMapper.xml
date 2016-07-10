@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+ 	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.exam.dao.ExamQuestionDao">
+	
+	<resultMap type="com.exam.entity.ExamPaper" id="ExamPaperResult">
+		<id column="id" property="id"/>
+		<result column="title" property="title"/>
+		<result column="startTime" property="startTime"/>
+		<result column="endTime" property="endTime"/>
+		<result column="password" property="password"/>
+		<result column="practice" property="practice"/>
+		
+		<collection property="examQuestions" ofType="com.exam.entity.ExamQuestion" >  
+            <id column="e_id" property="id"/>  
+            <result column="eid" property="eid"/>  
+            <result column="qid" property="qid"/>  
+            <result column="mark" property="mark"/>  
+        </collection>  
+		
+	</resultMap>
+	
+	<select id="selectExamPaperByEid" parameterType="int" resultMap="ExamPaperResult">
+	    SELECT DISTINCT ep.*,
+	                    e.id as e_id,
+	                    e.eid,
+	                    e.qid,
+	                    e.mark
+	                    FROM `examQuestion` e ,exampaper ep WHERE ep.id = e.eid AND e.eid = #{eid}
+	</select>
+
+</mapper>

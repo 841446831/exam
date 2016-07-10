@@ -31,5 +31,8 @@ public interface OptionDao {
 	@Select("select symbol,title from `option` where qid = #{i}")
 	public List<Option> selectByTidWithOutAnswer(Integer id);
 	
+	@Select("SELECT * FROM `option` where qid = #{qid}")
+	public List<Option> selectByQid(int qid);
+	
     
 }

@@ -12,10 +12,10 @@ public interface ExamQuestionDao {
 	@Insert("insert into  examQuestion (id,eid,qid,mark)values(#{id},#{eid},#{qid},#{mark})")
 	int insert(ExamQuestion examQuestion);
 	
-	@Select("SELECT DISTINCT ep.* FROM `examQuestion` e ,exampaper ep WHERE ep.id = e.eid AND e.eid = #{eid}")
-	ExamPaper selectExampPaperByEid(int eid);
+	//@Select("SELECT DISTINCT ep.* FROM `examQuestion` e ,exampaper ep WHERE ep.id = e.eid AND e.eid = #{eid}")
+	ExamPaper selectExamPaperByEid(int eid);
 
-	@Select("SELECT qid from examQuestion where eid = #{eid}")
+	@Select("SELECT qid from examQuestion where eid = #{eid} order by qid")
 	List<Integer> selectQidByEid(int eid);
 	
 }

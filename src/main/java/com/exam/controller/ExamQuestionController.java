@@ -1,6 +1,9 @@
 package com.exam.controller;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
@@ -27,23 +30,25 @@ public class ExamQuestionController {
 	@Resource
 	private OptionService optionService;
 	
-	@RequestMapping("getQuestionsAnswer")
+	@RequestMapping(value = "getQuestionsAnswer",produces="application/json;charset=utf-8")
 	@ResponseBody
 	public String getQuestionsAnswer(@RequestParam("eid") int eid,HttpServletRequest request)
 	{
-		List<Integer> listQid = examQuestionService.selectQidByEid(eid);
 		
+		List<Integer> listQid = examQuestionService.selectQidByEid(eid);
+		List<Map<Integer,Object>> listSelect = new ArrayList<>();
+		Map<Integer, Object> map = null;
+	 
 		for(Integer qid : listQid)
 		{
-			int trueAnswerConut = optionService.selectTrueAnswer(qid);
-			if(trueAnswerConut == 1)
-			{
-				String userSelect = request.getParameter(qid.toString());
-			}
-			
-			//request.getParameter(qid)
+			map = new HashMap<Integer,Object>();
+			String[] userSelect = request.getParameterValues(qid.toString());
+			map.put(qid, userSelect);
+		    listSelect.add(map);
 		}
 		
-		return "";
+		String json = examQuestionService.getQuestionsAnswer(eid, listSelect);
+		
+		return json;
 	}
 }
