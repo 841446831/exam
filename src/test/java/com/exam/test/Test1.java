@@ -173,5 +173,40 @@ public class Test1 {
 		System.out.println(radio + "," +checkbox);
     }
     
+    @Test
+    public void test11()
+    {
+    	Option option = new Option();
+    	option.setId(1);
+    	option.setIsTrue(1);
+    	option.setTitle("dfhfjfj");
+    	option.setTutorial("hfdhff");
+    	JSONObject jsonObject = JSONObject.parseObject(JSON.toJSONString(option));
+    	jsonObject.put("isSelect", 0);
+    	jsonObject.remove("isSelect");
+    	jsonObject.put("isSelect", 1);
+    	
+    	System.out.println(jsonObject);
+    	//System.out.println(JSON.toJSONString(option));
+    	
+    	//String[] s1 = new String[]{"A","B","C"};
+    	//String[] s2 ;
+    	//s2 = s1;
+    	//System.out.println(s2);
+//    	s[0]="A";
+//    	s[1]="B";
+    	
+    	//String str = "A";
+    	
+    	//System.out.println(s2[0].toString().equals(str));
+    	
+    	//Map<String, Object> map = new HashMap<>();
+    	//map.put("null", null);
+    	
+    	//System.out.println(map.get("null"));
+    	
+    	
+    	
+    }
     
 }

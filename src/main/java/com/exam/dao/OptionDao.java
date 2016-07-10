@@ -28,5 +28,8 @@ public interface OptionDao {
 	@Select("select * from `option` where id = #{i}")
 	public Option selectById(int i);
 	
+	@Select("SELECT * FROM `option` where qid = #{qid}")
+	public List<Option> selectByQid(int qid);
+	
     
 }

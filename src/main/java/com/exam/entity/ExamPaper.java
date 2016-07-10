@@ -83,14 +83,12 @@ public class ExamPaper {
 		this.practice = i;
 	}
 
-
-
 	@Override
 	public String toString() {
-		return "ExamPaper [id=" + id + ", title=" + title + ", startTime=" + startTime + ", endTime=" + endTime
-				+ ", password=" + password + ", practice=" + practice + ", questions=" + questions + "]";
+		return "ExamPaper [id=" + id + ", title=" + title + ", startTime="
+				+ startTime + ", endTime=" + endTime + ", password=" + password
+				+ ", practice=" + practice + ", examQuestions=" + examQuestions
+				+ ", questions=" + questions + "]";
 	}
-
-	
 	
 }
