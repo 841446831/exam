@@ -19,6 +19,11 @@ public class OptionService {
 	{
 		return optionDao.selectTrueAnswer(qid);
 	}
+
+	public Option selectById(int i) {
+		// TODO Auto-generated method stub
+		return optionDao.selectById(i);
+	}
 	
 	public List<Option> selectByQid(int qid)
 	{

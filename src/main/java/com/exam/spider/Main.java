@@ -32,6 +32,7 @@ import com.alibaba.fastjson.JSONObject;
 import com.exam.entity.Option;
 import com.exam.entity.Question;
 import com.exam.entity.Type;
+import com.exam.entity.User;
 import com.exam.service.QuestionService;
 import com.exam.service.TypeService;
 
@@ -53,8 +54,8 @@ public class Main {
 		httpClient=HttpClients.createDefault();
 		httpGet = new HttpGet();
 		httpPost =new HttpPost();
-		httpGet.setHeader("Cookie", cookie[1]);
-		httpPost.setHeader("Cookie",cookie[1]);
+		httpGet.setHeader("Cookie", cookie[2]);
+		httpPost.setHeader("Cookie",cookie[2]);
 		applicationContext = new ClassPathXmlApplicationContext("spring/applicationContext.xml");
 		questionService = (QuestionService) applicationContext.getBean("questionService");
 		typeService = (TypeService)applicationContext.getBean("typeService");
@@ -113,9 +114,6 @@ public class Main {
 	      nvps.add(new BasicNameValuePair("difficulty", ""+difficulty));
 	      nvps.add(new BasicNameValuePair("questionCount", "5"));
 	      httpPost.setEntity(new UrlEncodedFormEntity(nvps));
-	      String fakeIp = rndIp();  
-	      System.out.println(rndIp());
-	      httpPost.addHeader("X-Forwarded-For", fakeIp);  
 	      HttpResponse response = httpClient.execute(httpPost);
 	      if (response.getFirstHeader("Location")==null) {
 	    	  httpEntity = response.getEntity();
@@ -143,6 +141,7 @@ public class Main {
 	    	  httpEntity = response.getEntity();
 	    	  if (httpEntity!=null){
 	    		  String html = EntityUtils.toString(httpEntity);
+//	    		  System.out.println(html);
 	    		  if (html.indexOf("单选")<0 && html.indexOf("不定项选择题")<0 ){
 	    			  out.println("不是选择");
 	    			  continue;
@@ -166,7 +165,7 @@ public class Main {
 		        	   options = document.select("input[type=checkbox]");
 				        out.println("多选");
 		          }
-		        	char c = 'A';
+		          char c = 'A';
 		          for (Element option:options){
 		        	  JSONObject optionJsonObject = new JSONObject();
 		        	  optionJsonObject.put("option", option.nextElementSibling().html());
@@ -239,7 +238,8 @@ public class Main {
 	public static void main(String[] args) throws InterruptedException {
 		while(true){
 			insertQuestions();
-			Thread.sleep(1000*60);
+			break;
+			//Thread.sleep(1000*60);
 		}
 }
 
@@ -261,17 +261,28 @@ public class Main {
 					question.setFace(questionJsonObject.getString("face"));
 					question.setLevel(level);
 					question.setTid(tid);
+					question.setIsPublic(1);
+					User user = new User();
+					user.setId(1);
+					question.setUser(user);
+					
 					JSONArray optionsArray = questionJsonObject.getJSONArray("options");
+					int cnt = 0;
 					for (int j=0;j<optionsArray.size();++j){
 						JSONObject optionJsonObject = optionsArray.getJSONObject(j);
 						Option option = new Option();
 						option.setIsTrue(optionJsonObject.containsKey("isTrue")?1:0);
+						if (option.getIsTrue()==1){
+							cnt ++;
+						}
 						option.setTitle(optionJsonObject.getString("option"));
 						option.setTutorial(" ");
 						question.getOptions().add(option);
 					}
 					if (questionService.countQuestionByFace(question.getFace())==0){
+						if (cnt==1) question.setIsRadio(1);
 						questionService.insertQuestion(question);
+						System.out.println(question);
 					}
 				}	
 			}
@@ -281,17 +292,5 @@ public class Main {
 		}
 	}
 	
-	 /**  
-     * 伪造IP  
-     *   
-     * @return  
-     */  
-    private static String rndIp() {  
-        return rndInt(255) + "." + rndInt(255) + "." + rndInt(255) + "."  
-                + rndInt(255);  
-    }  
-    private static int rndInt(int max) {  
-        Random rnd = new Random();  
-        return rnd.nextInt(max);  
-    }  
+
 }

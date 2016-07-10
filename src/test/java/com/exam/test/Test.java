@@ -26,7 +26,7 @@ public class Test {
 		List<Question> questions = questionService.selectAll();
 		int radioCount = 0;
 		for (Question question:questions){
-			List<com.exam.entity.Option> options = optionDao.selectByTid(question.getId());
+			List<com.exam.entity.Option> options = optionDao.selectByQid(question.getId());
 			int cnt = 0;
 			for (Option option:options){
 				if (option.getIsTrue()==1){

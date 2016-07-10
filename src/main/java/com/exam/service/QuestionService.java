@@ -23,6 +23,7 @@ public class QuestionService {
     	questionDao.insertQuestion(question);
     	for (Option option:question.getOptions()){
     		option.setQid(question.getId());
+    		System.out.println(question.getId());
     		optionDao.insertOption(option);
     	}
         return 1;
@@ -53,18 +54,7 @@ public class QuestionService {
 		if (tags!=null && tags.size()==0) tags = null;
 		List<Question> questions = questionDao.selectQuestions(tags,diffculty,count);
 		for (Question question:questions){
-			question.setOptions(optionDao.selectByTid(question.getId()));
-			int cnt = 0;
-			for (Option option:question.getOptions()){
-				if (option.getIsTrue()==1){
-					cnt++;
-					option.setIsTrue(0);
-				}
-			}
-			if (cnt==1){
-				question.setIsRadio(1);
-			}
-//			question.setOptions(optionDao.selectByTid(question.getId())); 
+			question.setOptions(optionDao.selectByTidWithOutAnswer(question.getId()));
 		}
 		return questions;
 	}

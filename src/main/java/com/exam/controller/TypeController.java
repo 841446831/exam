@@ -26,7 +26,7 @@ public class TypeController {
 	@Resource
 	private QuestionService questionService;
  	
-	@RequestMapping(value="types", produces="application/json;charset=utf-8")
+	@RequestMapping(value="types")
 	@SuppressWarnings("unchecked")
 	@ResponseBody
 	public String types()
@@ -65,12 +65,8 @@ public class TypeController {
 	    	 list.add(map);
 	    }
 	    
-//	    System.out.println(list);
-	    
 	    String json = JSON.toJSONString(list);
 	    
-//	    System.out.println(json);
-		
 	    return "callback("+json+")";
 	}
 	

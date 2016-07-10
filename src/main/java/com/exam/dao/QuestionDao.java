@@ -11,7 +11,7 @@ import com.exam.entity.Question;
 
 public interface QuestionDao {
     
-	@Insert("insert into question(id,face,answer,tid,level) values(#{id},#{face},#{answer},#{tid},#{level})")
+	@Insert("insert into question(id,face,answer,tid,level,isRadio,isPublic) values(#{id},#{face},#{answer},#{tid},#{level},#{isRadio},#{isPublic})")
 	@Options(useGeneratedKeys=true, keyProperty="id")//添加该行，product中的id将被自动添加
 	public int insertQuestion(Question question);
 	
