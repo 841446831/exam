@@ -45,6 +45,7 @@ public class ExamPaperController {
 		examPaper.setTitle("练习");
 		examPaper.setQuestions(questions);
 		exampaperService.insert(examPaper);
+		logger.info(JSON.toJSONString(examPaper));
 		return  "callback("+JSON.toJSONString(examPaper) +");";
 	}
 	

@@ -5,6 +5,7 @@ import javax.annotation.Resource;
 import org.springframework.stereotype.Service;
 
 import com.exam.dao.OptionDao;
+import com.exam.entity.Option;
 
 @Service
 public class OptionService {
@@ -15,6 +16,11 @@ public class OptionService {
 	public int selectTrueAnswer(int qid)
 	{
 		return optionDao.selectTrueAnswer(qid);
+	}
+
+	public Option selectById(int i) {
+		// TODO Auto-generated method stub
+		return optionDao.selectById(i);
 	}
 	
 	

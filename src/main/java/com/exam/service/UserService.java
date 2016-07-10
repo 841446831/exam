@@ -17,4 +17,9 @@ public class UserService {
 		return userDao.selectByUsername(username);
 	}
 
+	public User selectByEmail(String email) {
+		// TODO Auto-generated method stub
+		return userDao.selectByEmail(email);
+	}
+
 }

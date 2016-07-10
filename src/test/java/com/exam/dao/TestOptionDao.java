@@ -53,4 +53,14 @@ public class TestOptionDao {
 		option.setSymbol("A");
 		optionDao.update(option);
 	}
+	
+	@Test
+	public void testInsertOption(){
+		Option option = new Option();
+		option.setSymbol("A");
+		option.setTitle("是");
+		option.setQid(346);
+//		optionDao.insertOption(option);
+		System.out.println(optionDao.selectByQid(346));
+	}
 }

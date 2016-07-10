@@ -11,7 +11,8 @@
 		<result column="answer" property="answer"/>
 		<result column="level" property="level"/>
 		<result column="tid" property="tid"/>
-		
+		<result column="isRadio" property="isRadio"/>
+		<result column="isPublic" property="isPublic"/>
 		
 		<collection property="options" ofType="com.exam.entity.Option" >  
             <id column="o_id" property="id"/>  

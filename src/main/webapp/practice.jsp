@@ -108,9 +108,9 @@
             
             <div  class="answer" v-for="option in question.options">
                <label>	
-	                <input v-if="question.isRadio" type="radio" name="{{question.id}}" class="answer-radio" value="{{opSymbol[$index]}}">
-	                <input v-else type="checkbox" name="{{question.id}}" class="answer-radio" value="{{opSymbol[$index]}}">
-	                <pre>{{ opSymbol[$index] }} {{option.title}}</pre>
+	                <input v-if="question.isRadio" type="radio" name="{{question.id}}" class="answer-radio" value="{{option.symbol }}">
+	                <input v-else type="checkbox" name="{{question.id}}" class="answer-radio" value="{{option.symbol }}">
+	                <pre>{{option.symbol  }} {{option.title}}</pre>
                 </label>
           </div>
        </div>
@@ -126,13 +126,13 @@
 <script src="js/jquery-3.0.0.min.js"></script>
 <script src="js/vue.js"></script>
 <script>
-//	var tag = ${tag};
-//	var diffculty = ${diffculty};
-//	var count = ${count};
+	var tag = '${tag}';
+	var diffculty = ${diffculty};
+	var count = ${count};
 	
-	var tag = '589,570';
-	var diffculty = 1;
-	var count = 5;
+//	var tag = '589,570';
+//	var diffculty = 1;
+//	var count = 5;
 	
 	//var url = "http://192.168.3.37:8080/exam/types";
 	var url = "http://localhost:8080/exam/makepaper";
@@ -140,16 +140,18 @@
 	var app = new Vue({
 	    el: '#app',
 	    data: {
-	   		examPaper:null,
-	   		opSymbol:['A','B','C','D','E','F','G','H','I','J','K']
+	   		examPaper:null
 	    }
 	})
 
 	function callback(data){
 		app.examPaper=data;
-		for (var i=0;i<examPaper.questions;++i){
-			question = examPaper.questions[i];
+		for (var i=0;i<app.examPaper.questions.length;++i){
+			question = app.examPaper.questions[i];
 			question.isRadio = question.isRadio==1?true:false;
+			question.options.sort(function(a,b){
+				return a.symbol-b.symbol;
+			});
 		}
 	}
 	

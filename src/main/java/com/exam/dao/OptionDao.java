@@ -10,11 +10,11 @@ import com.exam.entity.Option;
 
 public interface OptionDao {
     
-	@Insert("INSERT INTO `option` (`id`, `qid`, `title`, `isTrue`, `tutorial`) VALUES (#{id},#{qid}, #{title},#{isTrue},#{tutorial})")
+	@Insert("INSERT INTO `option` (`id`, `qid`, `title`, `isTrue`, `tutorial`,symbol) VALUES (#{id},#{qid}, #{title},#{isTrue},#{tutorial},#{symbol})")
 	public int insertOption(Option option);
 
-	@Select("select id,title,isTrue from `option` where qid = #{id}")
-	public List<Option> selectByTid(Integer id);
+	@Select("select id,title,isTrue,symbol from `option` where qid = #{id}")
+	public List<Option> selectByQid(Integer id);
 
 	@Select("select * from `option`")
 	public List<Option> selectAll();
@@ -27,6 +27,9 @@ public interface OptionDao {
 
 	@Select("select * from `option` where id = #{i}")
 	public Option selectById(int i);
+
+	@Select("select symbol,title from `option` where qid = #{i}")
+	public List<Option> selectByTidWithOutAnswer(Integer id);
 	
     
 }

@@ -10,4 +10,7 @@ public interface UserDao {
 
 	@Select("select * from user where username=#{username}")
 	User selectByUsername(String username);
+
+	@Select("select * from user where email=#{email}")
+	User selectByEmail(String email);
 }

@@ -4,9 +4,12 @@
        xmlns:context="http://www.springframework.org/schema/context"
        xmlns:jee="http://www.springframework.org/schema/jee"
        xmlns:util="http://www.springframework.org/schema/util"
+       xmlns:aop="http://www.springframework.org/schema/aop"  
        xsi:schemaLocation="
             http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.3.xsd
             http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd
+            http://www.springframework.org/schema/aop  
+            http://www.springframework.org/schema/aop/spring-aop-4.3.xsd 
             http://www.springframework.org/schema/jee http://www.springframework.org/schema/jee/spring-jee-4.3.xsd
             http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-4.3.xsd" >
 
@@ -67,5 +70,10 @@
         <constructor-arg index="0" ref="sqlSessionFactory" />
         <constructor-arg index="1" value="BATCH" />
     </bean>
+    
 	<context:component-scan base-package="com.exam.service"></context:component-scan>
+	<context:component-scan base-package="com.exam.aop"></context:component-scan>
+	
+	<aop:aspectj-autoproxy/>
+	<bean id="methodAspect" class="com.exam.aop.MethodMonitorAop"></bean>
 </beans>
