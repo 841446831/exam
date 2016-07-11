@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.exam.dao.ExamQuestionDao;
+import com.exam.service.ExamOptionService;
 import com.exam.service.ExamPaperService;
 import com.exam.service.ExamQuestionService;
 import com.exam.service.OptionService;
@@ -29,6 +30,9 @@ public class ExamQuestionController {
 	
 	@Resource
 	private OptionService optionService;
+	
+	@Resource
+	private ExamOptionService examOptionService;
 	
 	@RequestMapping(value = "getQuestionsAnswer",produces="application/json;charset=utf-8")
 	@ResponseBody
@@ -47,8 +51,12 @@ public class ExamQuestionController {
 		    listSelect.add(map);
 		}
 		
-		String json = examQuestionService.getQuestionsAnswer(eid, listSelect);
+		if(examOptionService.insertExamOption(eid, listSelect)>0)
+		{
+			System.out.println("插入成功");
+		}
 		
+		String json = examQuestionService.getQuestionsAnswer(eid, listSelect);
 		return json;
 	}
 }

@@ -25,7 +25,7 @@ public class OptionService {
 		return optionDao.selectById(i);
 	}
 	
-	public List<Option> selectByQid(int qid)
+	public List<Option> selectByQid(Integer qid)
 	{
 		return optionDao.selectByQid(qid);
 	}

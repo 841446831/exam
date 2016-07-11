@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.alibaba.fastjson.JSON;
 import com.exam.entity.User;
 import com.exam.service.UserService;
-import com.sun.javafx.collections.MappingChange.Map;
 
 @Controller
 public class UserController {

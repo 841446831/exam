@@ -74,7 +74,6 @@ public class ExamQuestionService {
 		    	//[A,C,D]
 		    	for(int j = 0 ; j < stringSelect.length; j++)
 		    	{
-		    		
 		    		if(options.get(i).getSymbol().equals(stringSelect[j].toString()))
 		    		{
 		    			jsonObject.remove("isSelect");

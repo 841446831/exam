@@ -11,6 +11,7 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
+import com.exam.dao.ExamOptionDao;
 import com.exam.dao.OptionDao;
 import com.exam.dao.QuestionDao;
 import com.exam.entity.ExamPaper;
@@ -26,6 +27,7 @@ public class testGetQuestionsAnswer {
 		QuestionDao questionDao= (QuestionDao) applicationContext.getBean("questionDao");
 		ExamQuestionService examQuestionService =  (ExamQuestionService) applicationContext.getBean("examQuestionService");
 		OptionDao optionDao=  (OptionDao) applicationContext.getBean("optionDao");
+	
     	
         List<Question> listQuestion = questionDao.selectQuestionByEid(134);
         List<Integer> listQid = examQuestionService.selectQidByEid(134);

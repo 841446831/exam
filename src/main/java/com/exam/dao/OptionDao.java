@@ -13,8 +13,6 @@ public interface OptionDao {
 	@Insert("INSERT INTO `option` (`id`, `qid`, `title`, `isTrue`, `tutorial`,symbol) VALUES (#{id},#{qid}, #{title},#{isTrue},#{tutorial},#{symbol})")
 	public int insertOption(Option option);
 
-	@Select("select id,title,isTrue,symbol from `option` where qid = #{id}")
-	public List<Option> selectByQid(Integer id);
 
 	@Select("select * from `option`")
 	public List<Option> selectAll();
@@ -31,6 +29,8 @@ public interface OptionDao {
 	@Select("select symbol,title from `option` where qid = #{i}")
 	public List<Option> selectByTidWithOutAnswer(Integer id);
 	
+	@Select("SELECT * FROM `option` where qid = #{qid}")
+	public List<Option> selectByQid(Integer qid);
 	
     
 }
