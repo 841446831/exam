@@ -15,9 +15,11 @@ public class FileUpload {
 //     }
 
 	 private String filePath;
+	 private String key;
 	
-	 public FileUpload(String filePath) {
+	 public FileUpload(String filePath,String key) {
          this.filePath = filePath;
+         this.key = key;
 	 }
 
 	
@@ -27,7 +29,7 @@ public class FileUpload {
 	  //要上传的空间
 	  String bucketname = "exam";
 	  //上传到七牛后保存的文件名
-	  String key = "kobe4.png";
+	 // String key = "kobe4.png";
 	  //上传文件的路径
 	 
 

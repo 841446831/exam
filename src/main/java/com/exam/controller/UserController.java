@@ -41,7 +41,7 @@ public class UserController {
 			    File file = new File(filePath);
 			    try {
 					ImageIO.write( identicon.genarate(user.getId()),"jpg",file);
-					FileUpload fileUpload = new FileUpload(filePath);
+					FileUpload fileUpload = new FileUpload(filePath,user.getId()+".jpg");
 					fileUpload.upload();
 					if(file.exists())
 					{
@@ -73,7 +73,7 @@ public class UserController {
 			if (temp.getPassword().equals(user.getPassword())){
 				map.put("msg", "登录成功");
 				//持久化session
-				session.setAttribute("username", user.getUsername());
+				session.setAttribute("user", user);
 			}else{
 				map.put("msg", "用户名密码不匹配");
 			}
