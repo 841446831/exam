@@ -51,8 +51,8 @@ public class UserController {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
-				//login(user);
-				
+				login(user,request.getSession());
+				map.put("code", 0);
 			}else{
 				map.put("msg", "邮箱被注册");
 			}
@@ -61,10 +61,20 @@ public class UserController {
 		}
 		return JSON.toJSONString(map);
 	}
+	
 	@RequestMapping(value="login", produces="application/json;charset=utf-8")
 	@ResponseBody
 	public String login(User user,HttpSession session){
+
 		HashMap<String, Object> map = new HashMap<>();
+		if (session.getAttribute("user") !=null){
+			User u = (User) session.getAttribute("user");
+			map.put("msg", "登录成功");
+			map.put("code",0);
+			map.put("user", u);
+			return JSON.toJSONString(map);
+		}
+		
 		User temp = userService.selectByEmail(user.getEmail());
 		if (temp==null){
 			temp = userService.selectByUsername(user.getUsername());
@@ -72,8 +82,11 @@ public class UserController {
 		if (temp!=null){
 			if (temp.getPassword().equals(user.getPassword())){
 				map.put("msg", "登录成功");
+				map.put("code",0);
+				map.put("user", temp);
 				//持久化session
-				session.setAttribute("user", user);
+				session.setAttribute("user", temp);
+				System.out.println("当前session为"+temp);
 			}else{
 				map.put("msg", "用户名密码不匹配");
 			}
@@ -81,5 +94,10 @@ public class UserController {
 			map.put("msg", "用户名不存在");
 		}
 		return JSON.toJSONString(map);
+	}
+	
+	@RequestMapping("user")
+	public String getUser(){
+		return "user";
 	}
 }

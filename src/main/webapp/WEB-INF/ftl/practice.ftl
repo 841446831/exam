@@ -1,4 +1,3 @@
-<%@ page pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -95,7 +94,7 @@
 </div>
 <!--秒表设计-->
 <!-- 题目-->
-<form action="" class="" method="post" id="app">
+<form action="getQuestionsAnswer" method="post" id="app">
     <div class="subject">
         <div class="subject-content" v-for="question in examPaper.questions">
           	

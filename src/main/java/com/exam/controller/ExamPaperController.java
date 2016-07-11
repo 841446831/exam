@@ -59,7 +59,7 @@ public class ExamPaperController {
 		model.addAttribute("tag", tag);
 		model.addAttribute("diffculty", diffculty);
 		model.addAttribute("count", count);
-		return "practice.jsp";
+		return "practice";
 	}
 	
 }

@@ -14,18 +14,19 @@
         <ul >
             <li> <a href="">首页</a> </li>
             <li> <a href="#">专项练习</a></li>
+            <li> <a href="#">考试系统</a></li>
         </ul>
     </div>
     <div class="nav-right"> 
 			
-           <div>
+           <div v-if="login">
             <a href="#" id="example">登陆</a>  <a href="regist.html">注册</a>  	
            </div>
-         	<!-- 
-          <div>
-           <img class="face" src="http://oa17fj4lp.bkt.clouddn.com/NBA.png"> 
-         </div>
-          -->
+         	 
+          <div v-else>
+          	<a href="user">	<img class="face" :src="face"> </a>
+           <!-- 	<a 	href="user">{{user.username}}</a> -->
+          </div>
     </div>
 </div>
 

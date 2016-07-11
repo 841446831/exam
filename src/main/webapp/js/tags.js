@@ -6,19 +6,16 @@ var loginUrl = "http://localhost:8080/exam/login";
 var app = new Vue({
     el: '#app',
     data: {
-        superTypeList:[]
-    }
+        superTypeList:[],
+        login:true,
+        user:null
+    },
+    computed: {
+    	face:function(){
+    		return 'http://oa17fj4lp.bkt.clouddn.com/'+this.user.id+'.jpg';
+    	}
+     }
 })
-
-// $.ajax({
-//     url:url,
-//     type:'GET',
-//     jsonp:'callback',
-//     dataType:'jsonp',
-//     success:function (data) {
-//         console.log(data);
-//     }
-// })
 
 function callback(data){
     app.superTypeList=data;
@@ -29,13 +26,32 @@ document.body.appendChild(srcipt);
 
 
 $(function ($) {
+	if (app.login==true)
+		$.ajax({
+			url:loginUrl,
+			type: 'POST',
+			success:function(data){
+				console.log(JSON.stringify(data));
+				if (data.code == 0){
+				      app.login = false;
+				      app.user = data.user;
+				}
+			}
+		});
+		
 	$('#loginbtn').click(function(){
 		$.ajax({
 			url:loginUrl,
 			type: 'POST',
 			data:$("#loginForm").serialize(),
 			success:function(data){
-				console.log(JSON.stringify(data));
+				alert(JSON.stringify(data));
+				if (data.code == 0){
+					  $("#LoginBox").fadeOut("fast");
+				      $("#mask").css({ display: 'none' });
+				      app.login = false;
+				      app.user = data.user;
+				}
 			}
 		});
 	});

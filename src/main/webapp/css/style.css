@@ -252,7 +252,8 @@ ul,li{
     display:none;}
 
 .face {
-	width:30px;
+	border-radius:50%;
+	width:60px;
 }
 input:focus {
 	outline:none;
