@@ -6,9 +6,27 @@
     <link  rel="stylesheet" href="css/style.css">
 </head>
 <body id="app">
-<!--头部-->
+
 <div  id="header">
-    <p class="practice">专项练习</p>
+    <!-- <p class="practice">专项练习</p>-->
+    <div class="nav-left logo">考试系统</div>
+    <div class="nav-center">
+        <ul >
+            <li> <a href="">首页</a> </li>
+            <li> <a href="#">专项练习</a></li>
+        </ul>
+    </div>
+    <div class="nav-right"> 
+			
+           <div>
+            <a href="#" id="example">登陆</a>  <a href="regist.html">注册</a>  	
+           </div>
+         	<!-- 
+          <div>
+           <img class="face" src="http://oa17fj4lp.bkt.clouddn.com/NBA.png"> 
+         </div>
+          -->
+    </div>
 </div>
 
 <form action="practice" method="POST">
@@ -18,7 +36,7 @@
 	            <h2>
 	                {{superType.title}}
 	            </h2>
-	            <label> <input type="checkbox" class="checkbox-all">全选</label>
+	          <!--   <label> <input type="checkbox" class="checkbox-all">全选</label> -->
 	        </div>
 	        <ul class="question-type">
 	            <li v-for="type in superType.list">
@@ -26,7 +44,7 @@
 	                    <p> {{type.type}}</p>
 	                </label>
 	                <div class="progress"></div>
-	                <span class="number-text">0/66</span>
+	                <span class="number-text">{{type.count}}</span>
 	            </li>
 	        </ul>
 	    </section>
@@ -80,6 +98,32 @@
 	</section>
 
 </form>
+
+
+ <!--登录部分-->
+	<form id="loginForm">
+    <div id="LoginBox">
+        <div class="row1">
+            登录永春考试系统窗口<a href="javascript:void(0)" title="关闭窗口" class="close_btn" id="closeBtn">×</a>
+        </div>
+        <div class="row">
+          用户名:  <span class="inputBox">
+                <input name="username" type="text" id="txtName" placeholder="账号/邮箱" />
+            </span><a href="javascript:void(0)" title="提示" class="warning" id="warn">*</a>
+        </div>
+        <div class="row">
+            密&nbsp;码: <span class="inputBox">
+                <input name="password" type="password" id="txtPwd" placeholder="密码" />
+            </span><a href="javascript:void(0)" title="提示" class="warning" id="warn2">*</a>
+        </div>
+        <div class="row">
+            <a href="#" id="loginbtn">登录</a>
+        </div>
+        <div class="row">
+            <span class="reg"><<未注册用户请>>>>>>>>>>>>>>>>><a href="register.html" >创建账号</a></span>
+        </div>
+    </div>
+	</form>
 <script src="js/jquery-3.0.0.min.js"></script>
 <script src="js/vue.js"></script>
 <script src="js/tags.js"></script>

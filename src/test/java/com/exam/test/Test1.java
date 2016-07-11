@@ -69,6 +69,7 @@ public class Test1 {
 
 	@Test
 	public void testSelectQuestionByFace(){
+		@SuppressWarnings("resource")
 		ApplicationContext applicationContext = new ClassPathXmlApplicationContext("spring/applicationContext.xml");
 		QuestionService questionService = (QuestionService) applicationContext.getBean("questionService");
 		Question question = questionService.selectById(18);

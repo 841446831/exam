@@ -236,8 +236,8 @@ public class Main {
 	public static void main(String[] args) throws InterruptedException {
 		while(true){
 			insertQuestions();
-			break;
-			//Thread.sleep(1000*60);
+		//	break;
+			Thread.sleep(1000*60);
 		}
 }
 
