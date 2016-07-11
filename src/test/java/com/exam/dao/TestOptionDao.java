@@ -9,7 +9,6 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import com.exam.entity.Option;
-import com.exam.service.QuestionService;
 
 public class TestOptionDao {
 	ApplicationContext applicationContext = new ClassPathXmlApplicationContext("spring/applicationContext.xml");

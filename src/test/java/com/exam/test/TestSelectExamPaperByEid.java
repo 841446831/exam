@@ -4,7 +4,6 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import com.exam.service.ExamQuestionService;
-import com.exam.service.QuestionService;
 
 public class TestSelectExamPaperByEid {
     public static void main(String[] args) {

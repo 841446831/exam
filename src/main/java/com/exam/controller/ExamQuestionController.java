@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.exam.dao.ExamQuestionDao;
 import com.exam.service.ExamOptionService;
 import com.exam.service.ExamPaperService;
 import com.exam.service.ExamQuestionService;

@@ -9,7 +9,6 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import com.alibaba.fastjson.JSON;
 import com.exam.entity.Question;
-import com.exam.service.ExamQuestionService;
 import com.exam.service.QuestionService;
 
 public class testSelectQuestionByEid {

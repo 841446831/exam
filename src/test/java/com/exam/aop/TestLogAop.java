@@ -7,7 +7,6 @@ import org.junit.runner.RunWith;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import com.exam.dao.OptionDao;
 import com.exam.entity.Option;
 import com.exam.service.OptionService;
 import com.exam.service.TypeService;

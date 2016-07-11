@@ -5,20 +5,17 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.apache.ibatis.annotations.Select;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
-import com.exam.dao.ExamOptionDao;
 import com.exam.dao.OptionDao;
 import com.exam.dao.QuestionDao;
 import com.exam.entity.ExamPaper;
 import com.exam.entity.Option;
 import com.exam.entity.Question;
 import com.exam.service.ExamQuestionService;
-import com.exam.service.QuestionService;
 
 public class testGetQuestionsAnswer {
     public static void main(String[] args) {
