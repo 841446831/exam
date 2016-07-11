@@ -23,7 +23,7 @@ import ch.qos.logback.classic.Logger;
 public class ExamPaperController {
 	 private Logger logger = (Logger) LoggerFactory.getLogger(this.getClass());
 	
-	@Resource
+	@Resource  
 	QuestionService questionService;
 	@Resource
 	ExamPaperService exampaperService;
