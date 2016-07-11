@@ -49,7 +49,7 @@ public class TestOptionDao {
 	public void testUpdateOption(){
 		Option option = optionDao.selectById(27);
 		option.setSymbol("A");
-		optionDao.update(option);
+//		optionDao.update(option);
 	}
 	
 	@Test
