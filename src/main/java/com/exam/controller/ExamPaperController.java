@@ -5,10 +5,12 @@ import java.util.List;
 
 import javax.annotation.Resource;
 
+import org.apache.ibatis.annotations.Param;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.alibaba.fastjson.JSON;
@@ -30,29 +32,30 @@ public class ExamPaperController {
 	
 	@RequestMapping(value="makepaper",produces="application/json;charset=utf-8")
 	@ResponseBody
-	public String getExamPaper(String tag,int diffculty,int count){
-		logger.info("makepaper,param="+tag+","+diffculty+","+count);
-		List<Integer> tags = null;
-		if (tag.indexOf(',')>=0){
-			tags = new ArrayList<>();
-			for (String t:tag.split(",")){
-				tags.add(Integer.valueOf(t));
+	public String getExamPaper(String tag,@RequestParam(defaultValue="1")int diffculty,@RequestParam(defaultValue="5")int count){
+		List<Integer> tags = new ArrayList<>();
+		if (tag!=null && !tag.equals(""))
+			if (tag.indexOf(',')>=0){
+				tags = new ArrayList<>();
+				for (String t:tag.split(",")){
+					tags.add(Integer.valueOf(t));
+				}
+			}else{
+				tags.add(Integer.valueOf(tag));
 			}
-		}
 		List<Question> questions = questionService.selectQuestions(tags, diffculty, count);
 		ExamPaper examPaper = new ExamPaper();
 		examPaper.setPractice(1);
 		examPaper.setTitle("练习");
 		examPaper.setQuestions(questions);
 		exampaperService.insert(examPaper);
-		logger.info(JSON.toJSONString(examPaper));
 		return  "callback("+JSON.toJSONString(examPaper) +");";
 	}
 	
 	
 	
 	@RequestMapping("practice")
-	public String getExamPaper(String tag,int diffculty,int count,Model model){
+	public String getExamPaperRedirect(String tag,int diffculty,int count,Model model){
 		model.addAttribute("tag", tag);
 		model.addAttribute("diffculty", diffculty);
 		model.addAttribute("count", count);

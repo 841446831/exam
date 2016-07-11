@@ -26,8 +26,8 @@ public class TestQuestionDao {
 	@Test
 	public void testSelectQuestion(){
 		List<Integer> tags = new ArrayList<Integer>();
-		tags.add(583);
-		List<Question> list = questionService.selectQuestions(tags, 2,3);
+		tags.add(570);
+		List<Question> list = questionService.selectQuestions(tags, 3,5);
 		System.out.println(list);
 	}
 	

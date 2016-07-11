@@ -6,6 +6,8 @@ import javax.annotation.Resource;
 
 import org.springframework.stereotype.Service;
 
+import ch.qos.logback.classic.Logger;
+
 import com.exam.dao.OptionDao;
 import com.exam.dao.QuestionDao;
 import com.exam.entity.Option;
@@ -50,7 +52,6 @@ public class QuestionService {
 
 	
 	public List<Question> selectQuestions(List<Integer> tags, int diffculty, int count) {
-		// TODO Auto-generated method stub
 		if (tags!=null && tags.size()==0) tags = null;
 		List<Question> questions = questionDao.selectQuestions(tags,diffculty,count);
 		for (Question question:questions){

@@ -34,7 +34,7 @@ public class TestOptionDao {
 			}else{
 				map.replace(option.getQid(), map.get(option.getQid())+1);
 			}
-			optionDao.update(option);
+//			optionDao.update(option);
 		}
 		int count = 0;
 		for (Entry<Integer, Integer> key:map.entrySet()){
