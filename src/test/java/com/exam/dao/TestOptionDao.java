@@ -10,7 +10,6 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import com.exam.entity.Option;
 import com.exam.service.QuestionService;
-import com.sun.javafx.collections.MappingChange.Map;
 
 public class TestOptionDao {
 	ApplicationContext applicationContext = new ClassPathXmlApplicationContext("spring/applicationContext.xml");

@@ -55,7 +55,7 @@ public class TestQuestionDao {
 		question.setOptions(options);
 		question.setLevel(1);
 		question.setTid(570);
-		questionService.insertQuestion(question);
-		System.out.println(question);
+//		questionService.insertQuestion(question);
+//		System.out.println(question);
 	}
 }
