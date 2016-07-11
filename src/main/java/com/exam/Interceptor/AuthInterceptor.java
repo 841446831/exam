@@ -23,7 +23,7 @@ public class AuthInterceptor extends HandlerInterceptorAdapter {
 		
 		if(user == null)
 		{
-			request.getRequestDispatcher("/login").forward(request,response);
+			request.getRequestDispatcher("/user").forward(request,response);
 			//System.out.println("拦截");
 			return false;
 		}
