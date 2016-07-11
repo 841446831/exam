@@ -21,5 +21,10 @@ public class UserService {
 		// TODO Auto-generated method stub
 		return userDao.selectByEmail(email);
 	}
+	
+	public int insertUser(User user)
+	{
+		return userDao.insertUser(user);
+	}
 
 }

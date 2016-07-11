@@ -13,8 +13,8 @@ import javax.imageio.ImageIO;
 
 public class Identicon {
 	public static void main(String[] args) throws IOException {
-		File file = new File("C:/Users/zmzmd/Desktop/2.jpg");
-		ImageIO.write(new Identicon().genarate(2), "jpg", file);
+		File file = new File("C:/Users/Administrator/Desktop/2.png");
+		ImageIO.write(new Identicon().genarate(2), "png", file);
 	}
 	
 	public BufferedImage genarate(int id) {

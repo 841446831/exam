@@ -1,17 +1,21 @@
 package com.exam.test;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import javax.servlet.Servlet;
+import javax.servlet.ServletContext;
+import javax.servlet.http.HttpServletRequest;
+
 import org.junit.Test;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import com.alibaba.fastjson.JSON;
-import com.alibaba.fastjson.JSONObject;
 import com.exam.dao.QuestionDao;
 import com.exam.entity.Option;
 import com.exam.entity.Question;
@@ -176,17 +180,17 @@ public class Test1 {
     @Test
     public void test11()
     {
-    	Option option = new Option();
-    	option.setId(1);
-    	option.setIsTrue(1);
-    	option.setTitle("dfhfjfj");
-    	option.setTutorial("hfdhff");
-    	JSONObject jsonObject = JSONObject.parseObject(JSON.toJSONString(option));
-    	jsonObject.put("isSelect", 0);
-    	jsonObject.remove("isSelect");
-    	jsonObject.put("isSelect", 1);
-    	
-    	System.out.println(jsonObject);
+//    	Option option = new Option();
+//    	option.setId(1);
+//    	option.setIsTrue(1);
+//    	option.setTitle("dfhfjfj");
+//    	option.setTutorial("hfdhff");
+//    	JSONObject jsonObject = JSONObject.parseObject(JSON.toJSONString(option));
+//    	jsonObject.put("isSelect", 0);
+//    	jsonObject.remove("isSelect");
+//    	jsonObject.put("isSelect", 1);
+//    	
+//    	System.out.println(jsonObject);
     	//System.out.println(JSON.toJSONString(option));
     	
     	//String[] s1 = new String[]{"A","B","C"};
@@ -205,6 +209,13 @@ public class Test1 {
     	
     	//System.out.println(map.get("null"));
     	
+         
+    	
+//    	 HttpServletRequest request = 
+//    	 
+//    	 String webRoot = request.getSession().getServletContext().getRealPath("/");
+//    	 File file = new File(webRoot + user.getId() + ".jpg");
+//    	 
     	
     	
     }
