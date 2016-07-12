@@ -13,6 +13,7 @@ public class ExamPaper {
 	private int practice;
 	private List<ExamQuestion> examQuestions;
 	private List<Question> questions;
+	private int uid;
 	
 	public ExamPaper() {
 		super();
@@ -83,12 +84,27 @@ public class ExamPaper {
 		this.practice = i;
 	}
 
+
+
+	public int getUid() {
+		return uid;
+	}
+
+
+
+	public void setUid(int uid) {
+		this.uid = uid;
+	}
+
 	@Override
 	public String toString() {
 		return "ExamPaper [id=" + id + ", title=" + title + ", startTime="
 				+ startTime + ", endTime=" + endTime + ", password=" + password
 				+ ", practice=" + practice + ", examQuestions=" + examQuestions
-				+ ", questions=" + questions + "]";
+				+ ", questions=" + questions + ", uid=" + uid + "]";
 	}
+	
+	
+
 	
 }

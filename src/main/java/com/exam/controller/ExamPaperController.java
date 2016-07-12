@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpSession;
 
 import org.apache.ibatis.annotations.Param;
 import org.slf4j.LoggerFactory;
@@ -16,6 +17,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.alibaba.fastjson.JSON;
 import com.exam.entity.ExamPaper;
 import com.exam.entity.Question;
+import com.exam.entity.User;
 import com.exam.service.ExamPaperService;
 import com.exam.service.QuestionService;
 
@@ -52,14 +54,29 @@ public class ExamPaperController {
 		return  "callback("+JSON.toJSONString(examPaper) +");";
 	}
 	
-	
-	
 	@RequestMapping("practice")
 	public String getExamPaperRedirect(String tag,int diffculty,int count,Model model){
 		model.addAttribute("tag", tag);
 		model.addAttribute("diffculty", diffculty);
 		model.addAttribute("count", count);
 		return "practice";
+	}
+	
+	@RequestMapping("insertPaper")
+	public String insertPaper(@RequestParam("qidString") String qidString,@RequestParam("mark") double mark,ExamPaper examPaper,HttpSession session)
+	{
+		examPaper.setUid(((User)session.getAttribute("user")).getId());
+		
+	    exampaperService.insert(qidString,mark,examPaper);
+		
+		return null;
+	}
+	
+	@RequestMapping("selectNowExam")
+	public String selectNowExam(){
+		
+		return JSON.toJSONString(exampaperService.selectByPractice(0));
+		
 	}
 	
 }
