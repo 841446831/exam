@@ -1,26 +1,25 @@
 package com.exam.test;
 
-import java.io.File;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
-
-import javax.servlet.Servlet;
-import javax.servlet.ServletContext;
-import javax.servlet.http.HttpServletRequest;
 
 import org.junit.Test;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import com.alibaba.fastjson.JSON;
-import com.exam.dao.OptionDao;
 import com.exam.dao.QuestionDao;
+import com.exam.entity.ExamPaper;
 import com.exam.entity.Option;
 import com.exam.entity.Question;
 import com.exam.entity.Type;
+import com.exam.service.ExamPaperService;
 import com.exam.service.ExamQuestionService;
 import com.exam.service.OptionService;
 import com.exam.service.QuestionService;
@@ -218,14 +217,82 @@ public class Test1 {
 //    	 String webRoot = request.getSession().getServletContext().getRealPath("/");
 //    	 File file = new File(webRoot + user.getId() + ".jpg");
 //    	 
-    	
+//    	
     	ApplicationContext applicationContext = new ClassPathXmlApplicationContext("spring/applicationContext.xml");
-		OptionDao optionDao = (OptionDao) applicationContext.getBean("optionDao");
+		QuestionService questionService = (QuestionService) applicationContext.getBean("questionService");
 		
-		List<Map<String, Object>>  list = optionDao.selectOpionAndSelectByQid(50);
-		
-		System.out.println(list);
+	    System.out.println(questionService.selectQuestionByType(""));
+    	
+    	//System.out.println(questionService.selectQuestionByFace("线程"));
      	
     }
+    @Test
+    public void testTime()
+    {
+    	long currentTime = System.currentTimeMillis();
+    	System.out.println(currentTime);
+    	
+    	Date date = new Date();
+    	System.out.println(date.toString());
+    	
+    	long time = date.getTime();
+    	System.out.println(time);
+    	
+    	String sDate = "2016-7-12 18:00:00";
+    	SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+    	Date date1 = null;
+    	try {
+			date1 = format.parse(sDate);
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+    	System.out.println(date1);
+    	
+    }
+    
+    @Test
+    public void testInsert()
+    {
+    	ApplicationContext applicationContext = new ClassPathXmlApplicationContext("spring/applicationContext.xml");
+		ExamPaperService  examPaperService = (ExamPaperService) applicationContext.getBean("examPaperService");
+		
+		String sDate1 = "2016-7-12 20:00:00";
+		String sDate2 = "2016-7-12 24:30:00";
+    	SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+    	Date date1 = null;
+    	Date date2 = null;
+    	try {
+			date1 = format.parse(sDate1);
+			date2 = format.parse(sDate2);
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		ExamPaper examPaper = new ExamPaper();
+		
+		examPaper.setPractice(0);
+		examPaper.setTitle("永春java考试5");
+	    examPaper.setUid(1);
+		examPaper.setStartTime(date1.getTime());
+		examPaper.setEndTime(date2.getTime());
+		
+		List<Question> questions = new ArrayList<>();
+		
+		int j=40;
+		for(int i = 0;i < 5;i++)
+		{
+			
+			Question question = new Question();
+			question.setId(j++);
+			questions.add(question);
+		}
+		examPaper.setQuestions(questions);
+		
+		//examPaperService.insert(examPaper);
+		
+    }
+
     
 }

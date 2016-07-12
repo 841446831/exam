@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import ch.qos.logback.classic.Logger;
 
+import com.alibaba.druid.sql.visitor.functions.Char;
 import com.exam.dao.OptionDao;
 import com.exam.dao.QuestionDao;
 import com.exam.entity.Option;
@@ -79,5 +80,51 @@ public class QuestionService {
 		return questionDao.selectQuestionByEid(eid);
 	}
 	
+	public List<Question> selectQuestionByType(String word)
+	{
+		StringBuilder wordSplit = null;
+		List<Question> questions = null;
+		
+		if(word != null && !word.equals(""))
+		{
+			wordSplit = new StringBuilder("%");
+			
+			String[] singlewords = word.trim().split("");
+			for(int i = 0; i < singlewords.length;i++)
+			{
+				if(singlewords[i].equals(" "))
+				{
+					continue;
+				}
+				wordSplit.append(singlewords[i]).append("%");
+			}
+			
+		    questions = questionDao.selectQuestionByType(wordSplit.toString());
+			
+		}
+		else
+		{
+		    questions = questionDao.selectAll();	
+		}
+		
+		return questions;
+  	}
+
+	public List<Question> selectQuestionByFace(String word)
+	{
+		StringBuilder wordSplit = new StringBuilder("%");
+		String[] singlewords = word.trim().split("");
+		for(int i = 0; i < singlewords.length;i++)
+		{
+			if(singlewords[i].equals(" "))
+			{
+				continue;
+			}
+			wordSplit.append(singlewords[i]).append("%");
+		}
+		//wordSplit.append("'");
+		List<Question> questions = questionDao.selectQuestionByFace(wordSplit.toString());
+		return questions;
+	}
 
 }

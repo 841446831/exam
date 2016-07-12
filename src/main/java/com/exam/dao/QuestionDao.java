@@ -42,4 +42,11 @@ public interface QuestionDao {
 	@Select("select id from question")
 	public List<Integer> selectQuesionId();
 	
+	@Select("SELECT q.* FROM question q ,type t where q.tid = t.id AND t.type LIKE #{wordSplit}")
+	public List<Question> selectQuestionByType(String wordSplit);
+	
+	@Select("select * from question where face like #{wordSplit}")
+	public List<Question> selectQuestionByFace(String wordSplit);
+	
+	
 }

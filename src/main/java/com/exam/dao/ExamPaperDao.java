@@ -13,7 +13,10 @@ public interface ExamPaperDao {
 	@Select("select * from exampaper")
 	List<ExamPaper> selectAll();
 	
-	@Insert("insert into exampaper (id,title,startTime,endTime,password,practice)values(#{id},#{title},#{startTime},#{endTime},#{password},#{practice}) ")
+	@Insert("insert into exampaper (id,title,startTime,endTime,password,practice,uid)values(#{id},#{title},#{startTime},#{endTime},#{password},#{practice},#{uid})")
 	@Options(useGeneratedKeys=true, keyProperty="id")
-	int insert(ExamPaper examPaper);
+	int insert(ExamPaper examPaper);	
+	
+	@Select("select * from exampaper where practice = #{practice}")
+    List<ExamPaper> selectByPractice(int practice);
 }
