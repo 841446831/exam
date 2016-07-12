@@ -1,0 +1,17 @@
+*{
+	box-sizing:border-box;
+/* 	outline:1px solid rgba(0,0,0,0.5);	 */
+	font-family: "微软雅黑";
+}
+nav {
+	height:90px;
+}
+.main {
+	display:flex;
+}
+aside {
+	width:20%;
+}
+.content {
+	width:80%;
+}

@@ -1,16 +1,5 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-	<meta charset="UTF-8">
-	<title>user</title>
-	<style>
-	body {
-		text-align: center;
-	}
-		*{
-			box-sizing: border-box;
-			font-family: "微软雅黑";
-		}
+
+<style>
 		.box {
 			padding: 40px;
 			display: inline-flex;
@@ -48,9 +37,8 @@
 		.info{
 			text-align: left;
 		}
-	</style>
-</head>
-<body>
+	</style> 
+
 	<section class="box">
 		<div class="face">
 			<img src="http://oa17fj4lp.bkt.clouddn.com/${user.id}.jpg" alt="">
@@ -73,6 +61,3 @@
 			<dd>fuck</dd>
 		</dl>
 	</section>
-
-</body>
-</html>

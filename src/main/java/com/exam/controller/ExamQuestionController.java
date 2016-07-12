@@ -71,11 +71,9 @@ public class ExamQuestionController {
 	@ResponseBody
 	public String selectAnswerQuestion(@RequestParam("eid") int eid)
 	{
-		
 		String json = examQuestionService.selectQuestionsAnswer(eid);
 		System.out.println(json);
 		return json;
-		
 	}
 	
 }

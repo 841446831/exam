@@ -1,5 +1,7 @@
 package com.exam.service;
 
+import java.util.List;
+
 import javax.annotation.Resource;
 
 import org.springframework.stereotype.Service;
@@ -25,6 +27,11 @@ public class UserService {
 	public int insertUser(User user)
 	{
 		return userDao.insertUser(user);
+	}
+
+	public List<User> selectAll() {
+		// TODO Auto-generated method stub
+		return userDao.selectAll();
 	}
 
 }
