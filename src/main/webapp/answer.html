@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link  rel="stylesheet" href="css/answer.css">
+</head>
+<body>
+
+<div id="container">
+    <div id="answer-head">
+        <ul>
+            <li><a>答案解析</a></li>
+        </ul>
+    </div>
+    
+   <div id="mudle-box clearfi">
+    <div id="result-subject-item">
+        <h1>题目列表</h1>
+        <ul id="subject-num-list">
+             <li v-for="i in questions.length" @click="changeTab($index)"><a href="javascript:;">{{i+1}}</a></li>
+        </ul>
+    </div>
+
+    <div id="result-question-box">
+        <div class="subject-question">
+             <span class="num">{{cur+1}}</span>
+              <div class="question">{{questions[cur].face}}</div>
+        </div>
+    </div>
+    
+     <div id="result-question-answer">
+          <h1>
+         	     正确答案 :D  你的答案 ：A   <span> （&times;）</span>
+          </h1>
+
+          <div v-for="ans in questions[cur].options" class="result-answer-item" 
+              :class="{'correct':ans.isTrue}">
+              <pre>{{ans.title}}</pre>
+          </div>
+      </div>
+      
+      <div id="analysist-mod">
+         <h1>答案讨论区</h1>
+          <ul class="discuss">
+              <li class="discuss-list-item">
+                  <div class="discuss-user">
+                      <a href="" class="head"></a>
+                      <a href="">秋天的枫叶</a>
+                  </div>
+                  <div class="user-answer">
+                      我觉得答案应该是A，根据计算机操作系统（第三版），4.3.7对换这节所述，由于对换分区的分配是采用连续分配方式，因此在请求段式时对换控件的分配和回收，与动态分区方式的内存分配与回收方法一样，其分配算法可以使首次适应算法、循环首次适应算法、最佳适应算法。
+                  </div>
+
+                  <div class="discuss-time">
+                      <span>发表于 2016-06-30 20:58:26 </span>
+                  </div>
+              </li>
+
+
+              <li class="discuss-list-item">
+                  <div class="discuss-user">
+                      <a href="" class="head"></a>
+                      <a href="">秋天的枫叶</a>
+                  </div>
+                  <div class="user-answer">
+                      我觉得答案应该是A，根据计算机操作系统（第三版），4.3.7对换这节所述，由于对换分区的分配是采用连续分配方式，因此在请求段式时对换控件的分配和回收，与动态分区方式的内存分配与回收方法一样，其分配算法可以使首次适应算法、循环首次适应算法、最佳适应算法。
+                  </div>
+
+                  <div class="discuss-time">
+                      <span>发表于 2016-06-30 20:58:26 </span>
+                  </div>
+              </li>
+          </ul>
+          <div class="add-discuss">
+         <textarea placeholder="根据你对题目的理解可以与其他学员进行讨论"></textarea>
+               <a href="" class="submit">提交</a>
+          </div>
+
+
+      </div>
+ </div>
+</div>
+	<script src="js/vue.js"></script>
+	<script>
+		var vm = new Vue({
+			el:'#container',
+			data:{
+				cur:0,
+				practice: 1,
+				examQuestions: [
+				{
+				eid: 134,
+				id: 4,
+				mark: 0,
+				qid: 75
+				},
+				{
+				eid: 134,
+				id: 5,
+				mark: 0,
+				qid: 76
+				},
+				{
+				eid: 134,
+				id: 6,
+				mark: 0,
+				qid: 77
+				},
+				{
+				eid: 134,
+				id: 7,
+				mark: 0,
+				qid: 78
+				},
+				{
+				eid: 134,
+				id: 8,
+				mark: 0,
+				qid: 79
+				}
+				],
+				questions: [
+				{
+				face: "原生类中的数据类型均可任意转换。 ",
+				level: 1,
+				options: [
+				{
+				isTrue: 0,
+				isSelect: 0,
+				id: 430,
+				tutorial: " ",
+				title: "对"
+				},
+				{
+				isTrue: 1,
+				isSelect: 0,
+				id: 431,
+				tutorial: " ",
+				title: "错"
+				}
+				],
+				id: 124,
+				isRadio: 1
+				},
+				{
+				face: "下列哪个选项是正确计算42度（角度）的余弦值？ <br> ",
+				level: 1,
+				options: [
+				{
+				isTrue: 1,
+				isSelect: 0,
+				id: 434,
+				tutorial: " ",
+				title: "double d=Math.cos（Math.toRadians（42））"
+				},
+				{
+				isTrue: 0,
+				isSelect: 0,
+				id: 435,
+				tutorial: " ",
+				title: "double d=Math.cos（Math.toDegrees（42））"
+				},
+				{
+				isTrue: 0,
+				isSelect: 0,
+				id: 432,
+				tutorial: " ",
+				title: "double d=Math.cos（42）"
+				},
+				{
+				isTrue: 0,
+				isSelect: 0,
+				id: 433,
+				tutorial: " ",
+				title: "double d=Math.cosine（42）"
+				}
+				],
+				id: 125,
+				isRadio: 1
+				},
+				{
+				face: "3213",
+				level: 1,
+				options: [
+				{
+				isTrue: 0,
+				isSelect: 0,
+				id: 436,
+				tutorial: " ",
+				title: "s.equals(t);"
+				},
+				{
+				isTrue: 1,
+				isSelect: 0,
+				id: 437,
+				tutorial: " ",
+				title: "t.equals(c);"
+				},
+				{
+				isTrue: 0,
+				isSelect: 0,
+				id: 438,
+				tutorial: " ",
+				title: "s==t;"
+				},
+				{
+				isTrue: 0,
+				isSelect: 0,
+				id: 439,
+				tutorial: " ",
+				title: "321;"
+				}
+				],
+				id: 126,
+				isRadio: 1
+				},
+				{
+				face: "java中，StringBuilder和StringBuffer的区别，下面说法错误的是？ ",
+				level: 1,
+				options: [
+				{
+				isTrue: 0,
+				isSelect: 0,
+				id: 441,
+				tutorial: " ",
+				title: "StringBuilder是非线程安全的"
+				},
+				{
+				isTrue: 1,
+				isSelect: 0,
+				id: 442,
+				tutorial: " ",
+				title: "StringBuffer对 String 类型进行改变的时候其实都等同于生成了一个新的 String 对象，然后将指针指向新的 String 对象。"
+				},
+				{
+				isTrue: 0,
+				isSelect: 0,
+				id: 443,
+				tutorial: " ",
+				title: "效率比较String&lt;StringBuffer&lt;StringBuilder，但是在 String S1 = “This is only a” + “ simple” + “ test”时，String效率最高。"
+				},
+				{
+				isTrue: 0,
+				isSelect: 0,
+				id: 440,
+				tutorial: " ",
+				title: "StringBuffer是线程安全的"
+				}
+				],
+				id: 127,
+				isRadio: 1
+				},
+				{
+				face: "String str = new String(“abc”)，“abc”在内存中是怎么分配的？ ",
+				level: 1,
+				options: [
+				{
+				isTrue: 0,
+				isSelect: 0,
+				id: 447,
+				tutorial: " ",
+				title: "寄存器"
+				},
+				{
+				isTrue: 1,
+				isSelect: 0,
+				id: 444,
+				tutorial: " ",
+				title: "堆"
+				},
+				{
+				isTrue: 0,
+				isSelect: 0,
+				id: 445,
+				tutorial: " ",
+				title: "栈"
+				},
+				{
+				isTrue: 1,
+				isSelect: 0,
+				id: 446,
+				tutorial: " ",
+				title: "字符串常量区"
+				}
+				],
+				id: 128,
+				isRadio: 0
+				}
+				],
+				startTime: 0,
+				endTime: 0,
+				id: 134,
+				title: "练习"
+				}
+			,methods:{
+				changeTab:function(index){
+					this.cur = index;
+				}
+			}
+		})
+	</script>
+</body>
+</html>

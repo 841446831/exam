@@ -1,0 +1,204 @@
+#container{
+    width: 1000px;
+    height: 1000px;
+    margin:0 auto;
+    background: white;
+    font: 12px/1.5 arial,STHeiti,'Microsoft YaHei',宋体;
+}
+h1{
+    color: #666666;
+    font-size: 14px;
+    margin-top: 30px;
+}
+#answer-head{
+    width: 100%;
+    height: 50px;
+    border-bottom: 2px solid orangered;
+}
+#answer-head li{
+   margin-left: 300px;
+   padding-top: 15px;
+    width: 90px;
+    height: 36px;
+    background: orangered;
+
+}
+
+#answer-head li a{
+
+    color: white;
+    font-size: 18px;
+    margin-left: 7px;
+
+}
+#mudle-box{
+
+    margin-bottom: 10px;
+
+}
+#result-subject-item{
+    background: #FFF;
+    padding: 20px 30px;
+    border-bottom: 1px solid #eeeeee;
+/*    display: flex;
+    flex-direction:column;
+    justify-content:center;*/
+    margin-left: 20px;
+}
+
+#result-subject-item h1{
+    color: #666666;
+    font-size: 14px;
+    margin-top: 30px;
+}
+
+#subject-num-list{
+    letter-spacing: 4px;
+
+
+}
+
+
+#subject-num-list li{
+    letter-spacing: 0;
+    display: inline-block;
+    *display: inline;
+    *zoom: 1;
+    margin-right: 5px;
+    margin-bottom: 20px;
+
+}
+#subject-num-list li a{
+    display: block;
+    color: #FFF;
+    background: red;
+    font-size: 14px;
+    padding: 7px 0;
+    width: 32px;
+    text-align: center;
+
+}
+#result-question-box{
+    padding: 50px;
+    border-bottom: 1px solid #ECECEC;
+
+}
+
+.subject-question .num{
+    padding: 3px 5px;
+    background: forestgreen;
+    border-radius: 12px;
+    color: white;
+    float: left;
+}
+.subject-question .question{
+    margin-left: 30px;
+    font-size: 16px;
+
+}
+#result-question-answer{
+    background: #f9f9f9;
+    padding: 20px 30px;
+}
+
+#result-question-answer h1{
+    color: #666666;
+    font-size: 14px;
+    margin-top: 20px;
+    margin-left: 50px;
+}
+
+#result-question-answer span{
+    color: red;
+}
+.result-answer-item{
+    border: 1px solid #eeeeee;
+    padding: 2px;
+    background: white;
+    font-size: 14px;
+    border-radius: 8px;
+    margin-top: 20px;
+    margin-left: 48px;
+    margin-right: 50px;
+    margin-bottom: 20px;
+}
+
+.result-answer-item pre{
+    margin-left: 20px;
+    white-space: pre-wrap;
+}
+
+#analysist-mod{
+    background: #fff;
+    padding: 20px 30px;
+}
+#analysist-mod h1{
+    color: darkgreen;
+    font-size: 18px;
+}
+
+#analysist-mod .discuss-list-item{
+    padding-top: 25px;
+    padding-bottom: 10px;
+    border-bottom: 1px dashed green;
+}
+
+.discuss-user{
+    height: 30px;
+    margin-bottom: 10px;
+    line-height: 30px;
+}
+.discuss-user .head{
+    width: 30px;
+    height: 30px;
+    background: #ff0000;
+    display: block;
+    float: left;
+    overflow: hidden;
+    margin-right: 10px;
+    border-radius: 5px;
+}
+.user-answer{
+    font-size: 14px;
+    color: #666666;
+    line-height: 23px;
+}
+
+.discuss-time{
+    color: #666666;
+    margin-top: 10px;
+
+}
+.add-discuss{
+
+
+    padding-top: 15px;
+    padding-bottom: 20px;
+    margin-top: 10px;
+
+}
+.add-discuss textarea{
+    width: 60%;
+    height: 100px;
+    border: 2px solid #c9e2b3;
+    margin-right: 10px;
+    padding-top: 10px;
+    vertical-align: center;
+}
+.add-discuss .submit{
+    border-radius: 10px;
+    background: #2fa8ec;
+    color: white;
+    font-size: 16px;
+    padding: 10px 40px;
+
+
+
+}
+ .correct{
+ 	border: 1px solid green;
+ }
+.add-discuss a{
+    margin-left: 30px;
+    margin-top: -20px;
+}
