@@ -1,6 +1,7 @@
 package com.exam.dao;
 
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Select;
@@ -32,5 +33,7 @@ public interface OptionDao {
 	@Select("SELECT * FROM `option` where qid = #{qid}")
 	public List<Option> selectByQid(Integer qid);
 	
+    public List<Map<String,Object>> selectOpionAndSelectByQid(int qid);
     
+	
 }

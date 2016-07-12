@@ -16,6 +16,7 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import com.alibaba.fastjson.JSON;
+import com.exam.dao.OptionDao;
 import com.exam.dao.QuestionDao;
 import com.exam.entity.Option;
 import com.exam.entity.Question;
@@ -218,7 +219,13 @@ public class Test1 {
 //    	 File file = new File(webRoot + user.getId() + ".jpg");
 //    	 
     	
-    	
+    	ApplicationContext applicationContext = new ClassPathXmlApplicationContext("spring/applicationContext.xml");
+		OptionDao optionDao = (OptionDao) applicationContext.getBean("optionDao");
+		
+		List<Map<String, Object>>  list = optionDao.selectOpionAndSelectByQid(50);
+		
+		System.out.println(list);
+     	
     }
     
 }

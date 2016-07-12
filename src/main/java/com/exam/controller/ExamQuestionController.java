@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.alibaba.fastjson.JSON;
 import com.exam.service.ExamOptionService;
 import com.exam.service.ExamPaperService;
 import com.exam.service.ExamQuestionService;
@@ -37,6 +38,7 @@ public class ExamQuestionController {
 	@ResponseBody
 	public String getQuestionsAnswer(@RequestParam("eid") int eid,HttpServletRequest request)
 	{
+		Map<String,Object> mapResult = new HashMap<>();
 		
 		List<Integer> listQid = examQuestionService.selectQidByEid(eid);
 		List<Map<Integer,Object>> listSelect = new ArrayList<>();
@@ -53,9 +55,27 @@ public class ExamQuestionController {
 		if(examOptionService.insertExamOption(eid, listSelect)>0)
 		{
 			System.out.println("插入成功");
+			mapResult.put("resultCode","1");
+		}
+		else
+		{
+			mapResult.put("resultCode","0");
 		}
 		
-		String json = examQuestionService.getQuestionsAnswer(eid, listSelect);
-		return json;
+		
+		
+		return JSON.toJSONString(mapResult);
 	}
+	
+	@RequestMapping(value = "selectAnswerQuestion",produces="application/json;charset=utf-8")
+	@ResponseBody
+	public String selectAnswerQuestion(@RequestParam("eid") int eid)
+	{
+		
+		String json = examQuestionService.selectQuestionsAnswer(eid);
+		System.out.println(json);
+		return json;
+		
+	}
+	
 }

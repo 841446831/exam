@@ -106,4 +106,52 @@ public class ExamQuestionService {
 	    return JSON.toJSONString(mapExamPaper);
 	}
 	
+	public String selectQuestionsAnswer(int eid)
+	{
+		List<Question> listQuestion = questionDao.selectQuestionByEid(eid);
+		
+		//存option
+		List<Object> listOption = null;
+	    //存question
+		List<Map<String,Object>> questions = new ArrayList<>();
+		//存question属性
+		Map<String,Object> question = null;
+		
+		Map<String, Object> mapQuestios = new HashMap<>();
+		
+		for(Question q : listQuestion)
+		{
+			List<Map<String,Object>> list = optionDao.selectOpionAndSelectByQid(q.getId());
+			question = new HashMap<>();
+			listOption = new ArrayList<>();
+			Option option = null;
+			
+			for(Map<String, Object> map : list)
+			{
+				option = new Option();
+				option.setId(Integer.valueOf(map.get("id").toString()));
+				option.setIsTrue(Integer.valueOf(map.get("isTrue").toString()));
+				option.setSymbol(map.get("symbol").toString());
+				option.setQid(Integer.valueOf(map.get("qid").toString()));
+				option.setTitle(map.get("title").toString());
+				option.setTutorial(map.get("tutorial").toString());
+				JSONObject jsonObject = JSONObject.parseObject(JSON.toJSONString(option));
+				jsonObject.put("isSelect", Integer.valueOf(map.get("isSelect").toString()));
+				listOption.add(jsonObject);
+			}
+			
+			question.put("face", q.getFace());
+		    question.put("id", q.getId());
+		    question.put("isRadio",q.getIsRadio());
+		    question.put("level",q.getLevel());
+		    question.put("options", listOption);
+		    questions.add(question);
+			
+		}
+		
+		mapQuestios.put("questions", questions);
+		return JSON.toJSONString(mapQuestios);
+	}
+	
+	
 }
