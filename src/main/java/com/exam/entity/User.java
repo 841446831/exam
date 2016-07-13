@@ -7,7 +7,14 @@ public class User extends PageHelper<User>{
 	private String username;
 	private String password;
 	private String email;
+	private int group;
 	
+	public int getGroup() {
+		return group;
+	}
+	public void setGroup(int group) {
+		this.group = group;
+	}
 	public int getId() {
 		return id;
 	}
@@ -16,7 +23,8 @@ public class User extends PageHelper<User>{
 	}
 	@Override
 	public String toString() {
-		return "User [id=" + id + ", username=" + username + ", password=" + password + ", email=" + email + "]";
+		return "User [id=" + id + ", username=" + username + ", password="
+				+ password + ", email=" + email + ", group=" + group + "]";
 	}
 	public String getUsername() {
 		return username;

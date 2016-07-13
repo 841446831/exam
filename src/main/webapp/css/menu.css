@@ -1,0 +1,18 @@
+#menu ul,#menu li{
+	text-decoration: none;
+	margin: 0;
+	padding: 0;
+	font-size: 16px;
+}
+#menu ul {
+	border-right: 2px solid #eee;
+}
+#menu li {
+	padding: 10px;
+	padding-left: 30px;
+}
+#menu li:hover {
+	background-color: #ddd;
+	cursor: pointer;
+	border-left: 7px solid lightblue;
+}

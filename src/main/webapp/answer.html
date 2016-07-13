@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link  rel="stylesheet" href="css/answer.css">
+</head>
+<body>
+
+<div id="container">
+    <div id="answer-head">
+        <ul>
+            <li><a>答案解析</a></li>
+        </ul>
+    </div>
+    
+   <div id="mudle-box clearfi">
+    <div id="result-subject-item">
+        <h1>题目列表</h1>
+        <ul id="subject-num-list">
+             <li v-for="i in questions.length" @click="changeTab($index)"><a href="javascript:;">{{i+1}}</a></li>
+        </ul>
+    </div>
+
+    <div id="result-question-box">
+        <div class="subject-question">
+             <span class="num">{{cur+1}}</span>
+              <div class="question">{{questions[cur].face}}</div>
+        </div>
+    </div>
+    
+     <div id="result-question-answer">
+          <h1>
+         	     正确答案 :{{correctAns(cur)}}  你的答案 ：{{myAns(cur)}}   <span> （&times;）</span>
+          </h1>
+
+          <div v-for="ans in questions[cur].options" class="result-answer-item" 
+              :class="{'correct':ans.isTrue}">
+              <pre>{{ans.title}}</pre>
+          </div>
+      </div>
+      
+      <div id="analysist-mod">
+         <h1>答案讨论区</h1>
+          <ul class="discuss">
+              <li class="discuss-list-item">
+                  <div class="discuss-user">
+                      <a href="" class="head"></a>
+                      <a href="">秋天的枫叶</a>
+                  </div>
+                  <div class="user-answer">
+                      我觉得答案应该是A，根据计算机操作系统（第三版），4.3.7对换这节所述，由于对换分区的分配是采用连续分配方式，因此在请求段式时对换控件的分配和回收，与动态分区方式的内存分配与回收方法一样，其分配算法可以使首次适应算法、循环首次适应算法、最佳适应算法。
+                  </div>
+
+                  <div class="discuss-time">
+                      <span>发表于 2016-06-30 20:58:26 </span>
+                  </div>
+              </li>
+
+
+              <li class="discuss-list-item">
+                  <div class="discuss-user">
+                      <a href="" class="head"></a>
+                      <a href="">秋天的枫叶</a>
+                  </div>
+                  <div class="user-answer">
+                      我觉得答案应该是A，根据计算机操作系统（第三版），4.3.7对换这节所述，由于对换分区的分配是采用连续分配方式，因此在请求段式时对换控件的分配和回收，与动态分区方式的内存分配与回收方法一样，其分配算法可以使首次适应算法、循环首次适应算法、最佳适应算法。
+                  </div>
+
+                  <div class="discuss-time">
+                      <span>发表于 2016-06-30 20:58:26 </span>
+                  </div>
+              </li>
+          </ul>
+          <div class="add-discuss">
+         <textarea placeholder="根据你对题目的理解可以与其他学员进行讨论"></textarea>
+               <a href="" class="submit">提交</a>
+          </div>
+
+
+      </div>
+ </div>
+</div>
+	<script src="js/jquery-3.0.0.min.js"></script>
+	<script src="js/vue.js"></script>
+	<script>
+
+	var Request = new Object();    
+	Request = GetRequest();  
+	function GetRequest() {        
+	     var url = location.search;   
+	     var theRequest = new Object();        
+	     if (url.indexOf("?") != -1) {         
+	        var str = url.substr(1);           
+	        strs = str.split("&");         
+	        for(var i = 0; i < strs.length; i++) {          
+	           theRequest[strs[i].split("=")[0]]=decodeURI(strs[i].split("=")[1]);         
+	        }          
+	     }         
+	     return theRequest;        
+	}  
+
+		var vm = new Vue({
+			el:'#container'
+			,data:{
+				questions:null,
+				cur:0
+			}
+			,methods:{
+				changeTab:function(index){
+					this.cur = index;
+				}
+				,myAns:function(index){
+					arr = [];
+					this.questions[index].options.forEach(function(op){
+						if (op.isSelect){
+							arr.push(op.symbol);
+						}
+					})
+					return arr;
+				}
+				,correctAns:function(index){
+					arr = [];
+					this.questions[index].options.forEach(function(op){
+						if (op.isTrue){
+							arr.push(op.symbol);
+						}
+					})
+					return arr;
+				}
+			}
+		})
+		$.ajax({
+			url:'selectAnswerQuestion',
+			type:'post',
+			data:{
+				eid:Request['eid']
+			},
+			success:function(data){
+				vm.questions = data.questions;
+				vm.cur = 0;
+			}
+		})
+		
+	</script>
+</body>
+</html>

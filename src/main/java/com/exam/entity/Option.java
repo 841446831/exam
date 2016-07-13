@@ -7,6 +7,7 @@ public class Option {
     private int isTrue;
     private String tutorial;
     private String symbol;
+    
     public String getSymbol() {
 		return symbol;
 	}

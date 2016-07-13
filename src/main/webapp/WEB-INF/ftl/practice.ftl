@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -94,7 +95,7 @@
 </div>
 <!--秒表设计-->
 <!-- 题目-->
-<form action="getQuestionsAnswer" method="post" id="app">
+<form action="getQuestionsAnswer" method="post" id="app" v-on:submit.prevent="onSubmit">
     <div class="subject">
         <div class="subject-content" v-for="question in examPaper.questions">
           	
@@ -116,8 +117,8 @@
 
         <div class="subject-submit">
             <input type="submit" class="submit" value="提交">
-
         </div>
+        
     </div>
     <input type="hidden" name="eid" value="{{examPaper.id}}">
 </form>
@@ -125,13 +126,10 @@
 <script src="js/jquery-3.0.0.min.js"></script>
 <script src="js/vue.js"></script>
 <script>
+	
 	var tag = '${tag}';
 	var diffculty = ${diffculty};
 	var count = ${count};
-	
-//	var tag = '589,570';
-//	var diffculty = 1;
-//	var count = 5;
 	
 	//var url = "http://192.168.3.37:8080/exam/types";
 	var url = "http://localhost:8080/exam/makepaper";
@@ -140,6 +138,14 @@
 	    el: '#app',
 	    data: {
 	   		examPaper:null
+	    },
+	    methods:{
+	    	onSubmit:function(){
+	    		$.post('getQuestionsAnswer',$('app').serialize(),function(result){
+	    			
+	    		});
+	    		
+	    	}
 	    }
 	})
 
@@ -154,9 +160,11 @@
 		}
 	}
 	
+	
 	var srcipt=document.createElement("script");
 	srcipt.src = url+'?tag='+tag+'&diffculty='+diffculty+'&count='+count;
 	document.body.appendChild(srcipt);
+	
 </script>
 </body>
 </html>

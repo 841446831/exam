@@ -1,0 +1,142 @@
+<style>
+	form {
+		width:70%;
+	}
+</style>
+<form class="form-horizontal" id="add-question">
+  
+  <div class="form-group">
+    <label for="face" class="col-sm-2 control-label">题面</label>
+    <div class="col-sm-10">
+    	<textarea class="form-control" id="face" name="face" id="" cols="30" rows="5">你是不是傻</textarea>
+    </div>
+  </div>
+  
+  <div class="form-group">
+    <label  class="col-sm-2 control-label">题目类型</label>
+	<div class="col-sm-10">
+	    <label class="radio-inline">
+	 		 <input type="radio" id="type" name="type" value="radio" v-model="type"> 单选
+		</label>	
+	    <label class="radio-inline">
+	 		 <input type="radio" id="type" name="type" value="checkbox" v-model="type"> 多选
+		</label>
+		<label class="checkbox-inline">
+	 		 <input type="radio" id="type" name="type" value="text" v-model="type"> 文本题
+		</label>
+	</div>	
+  </div>
+
+  <div class="form-group" v-show="textType">
+    <label for="face" class="col-sm-2 control-label">答案</label>
+    <div class="col-sm-10">
+    	<textarea class="form-control" id="face" name="face" id="" cols="30" rows="5" v-model="answer"></textarea>
+   </div>
+  </div>
+ 
+  <div class="form-group" v-show="radioType">
+    <label class="col-sm-2 control-label"></label>
+    <div class="col-sm-10">
+   		<a href="javascript:;"  class="btn btn-success"  @click="addOptionfun">添加一个单选选项</a>
+  	</div>
+  </div>
+  
+  <div class="form-group" v-show="checkboxType">
+    <label class="col-sm-2 control-label"></label>
+    <div class="col-sm-10">
+   		<a href="javascript:;" class="btn btn-success" @click="addOptionfun">添加一个多选选项</a>
+  	</div>
+  </div>
+  
+  <div class="form-group" v-show="addOption">
+    <label for="exampleInputName2" class="col-sm-2 control-label">选项内容</label>
+    <div class="col-sm-10">
+   		<input type="text" class="form-control" id="exampleInputName2" placeholder="填写选项内容" v-model="title">
+  	</div>
+  </div>
+
+  <div class="form-group" v-show="addOption">
+    <label class="col-sm-2 control-label">选项是否正确</label>
+    <div class="col-sm-10">
+   		<label class="radio-inline">
+	 		 <input type="radio"  name="isTrue" value="1" v-model="isTrue"> 是
+		</label>
+  		<label class="radio-inline">
+	 		 <input type="radio"  name="isTrue" value="0" v-model="isTrue"> 否
+		</label>
+  	</div>
+  </div>
+  
+  <div class="form-group" v-show="addOption">
+    <label class="col-sm-2 control-label"></label>
+    <div class="col-sm-10">
+   		<a href="javascript:;" class="btn" @click="toAdd">确定</a>
+   	</div>
+  </div>
+  
+
+  <div class="form-group" v-show="checkboxType || radioType">
+    <label for="face" class="col-sm-2 control-label"></label>
+    <div class="col-sm-10">
+   		<table class="table">
+   			<tr>
+   				<th>#</th><th>选项内容</th><th>是否正确</th><th>删除</th>
+   			</tr>
+   			<tr v-for="op in options">
+   				<td>{{$index}}</td><td>{{op.title}}</td><td>{{op.isTrue}}</td>
+   				<td><button class="btn btn-danger" @click.prevent="del($index)">删除</button></td>
+   			</tr>
+   		</table>
+  	</div>
+  </div>
+	<div style="text-align:center;">
+		<button style="width:40%;" class="btn btn-lg btn-primary" @click.prevent="onSubmit"> 提交问题 </button>
+	</div>
+</form>
+<script src="js/vue.js"></script>
+<script>
+	var add_q = new Vue({
+		el:'#add-question',
+		data:{
+			type:"text",
+			answer:"是",
+			options:[],
+			title:null,
+			isTrue:false,
+			addOption:false
+		},
+		computed:{
+			radioType:function(){
+				return this.type == "radio";
+			},checkboxType:function(){
+				return this.type == "checkbox";
+			},textType:function(){
+				return this.type == "text";
+			}
+		}
+		,methods:{
+			addOptionfun:function(){
+				this.addOption = true;
+			}
+			,toAdd:function(){
+				var option = {
+					title:this.title,
+					isTrue:this.isTrue
+				}
+				this.options.push(option);
+				this.addOption = false;
+			}
+			,del:function(index){
+				console.log(index);
+				this.options.$remove(this.options[index]);
+			}
+			,onSubmit:function(){
+				xhr = new XmlHttpRequset;
+			}
+		}
+	})
+	add_q.$watch('type', function(newVal,oldVal){
+		if (newVal == "text");
+		this.addOption = false;
+	})
+</script>

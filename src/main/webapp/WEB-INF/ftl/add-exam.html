@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" type="text/css" href="css/add-exam.css">
+</head>
+<body>
+<div id="manage-content" class="content">
+    <div class="left">
+    <div class="manage-head">
+     	<p>题库查找</p>
+    </div>
+    
+    <div class="find-method">
+        <label>
+            <input type="radio" class="radio" name="radio" value="按类型查找">按类型查找</label>
+
+        <label>
+            <input type="radio" class="radio" name="radio" 按题目查找>按题目查找</label>
+        <label>
+            <input type="text" class="text" placeholder="请输入查找内容"></label>
+        </label>
+        <label class="find"><a href="">查找</a></label>
+    </div>
+    
+    <div class="question-list">
+        <ul class="question">
+            <li v-for="q in questions">
+                <label>
+                	<input type="checkbox"  :value="$index" v-model="checkList">
+      				<span v-if="q.isRadio">[单选题]</span>
+      				<span v-else>[多选题]</span>
+                	{{q.face}}
+                </label> 
+                <input type="text" class="score" placeholder="输入该题分值">
+            </li>        
+        </ul>
+        
+       <div id="laypage1"></div>
+   
+       <div class="addBtn">
+           <a @click="addQuestions">添加</a>
+       </div>
+	
+   	 </div>
+
+	 </div>
+
+    <!--已选择的题模块-->
+
+    <div class="right">
+        <div class="selected-title">
+            已选择题目
+        </div>
+        
+        <div class="selected-question">
+             <ul class="question-face">
+                 <li v-for="sq in selectedQuestions"> {{sq.face}}
+                 	<a class="delete" @click="deleteQ($index)">删除</a>
+                 </li>
+             </ul>
+             
+            <div class="generateBtn">
+                <a class="submit"> 生成试卷</a>
+            </div>
+        </div>
+    </div>
+</div>
+    <script src="js/jquery-3.0.0.min.js"></script>
+    <script src="js/laypage.js"></script>
+    <script src="js/vue.js"></script>
+    <script>	
+       
+    var app = new Vue({
+   		el:'#manage-content',
+   		data:{
+   			questions:[{"face":"线程调用了sleep（）方法后，该线程将进入（ ）状态。 \n","id":38,"isPublic":1,"isRadio":1,"level":2,"limit":0,"options":[],"pageIndex":0,"start":0,"tid":607},{"face":"下述是Linux下多线程编程常用的pthread库提供的函数名和意义，说法正确的有？ \n","id":79,"isPublic":1,"isRadio":0,"level":1,"limit":0,"options":[],"pageIndex":0,"start":0,"tid":618},{"face":"运行在多核处理器上的Linux环境中,若临界区非常短,且不允许线程上下文切换的情况下,使用下列哪种机制满足上述需求并且性能最好? \n","id":89,"isPublic":1,"isRadio":1,"level":4,"limit":0,"options":[],"pageIndex":0,"start":0,"tid":618}]
+			,selectedQuestions:[]
+   			,checkList:[]
+   		},
+   		methods:{
+   			addQuestions:function(){
+   				this.selectedQuestions = [];
+   				for (var i=0;i<this.checkList.length;++i){
+   					this.selectedQuestions.push(this.questions[this.checkList[i]]);
+   				}
+   				console.log(this.selectedQuestions.length)
+   			}
+   			,deleteQ:function(index){
+   				this.selectedQuestions.$remove(this.selectedQuestions[index]);
+   			}
+   		}
+   	});
+    
+   function demo(curr){
+            laypage({
+                cont: 'laypage1', //容器。值支持id名、原生dom对象，jquery对象。【如该容器为】：<div id="page1"></div>
+                pages: 18, //通过后台拿到的总页数
+                curr: curr || 1, //当前页
+                jump: function(obj, first){ //触发分页后的回调
+                    if(!first){ //点击跳页触发函数自身，并传递当前页：obj.curr
+                        demo(obj.curr);
+                    }
+                }
+            });
+    };
+    
+    //运行
+    demo();
+   	
+   </script>
+</body>
+</html>

@@ -37,4 +37,9 @@ public class UserService {
 		return new ResultHelper(users, users.size(),Constant.SUCCESS_CODE,Constant.SUCCESS_MSG);
 	}
 
+	public List<User> selectAll() {
+		// TODO Auto-generated method stub
+		return userDao.selectAll();
+	}
+
 }

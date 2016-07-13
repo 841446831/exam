@@ -1,0 +1,207 @@
+
+#manage-content{
+
+     padding: 15px 15px 15px 15px;
+     background: #f9f9f9;
+     float: left;
+
+
+}
+.left{
+     width: 52% ;
+     float: left;
+
+}
+.manage-head{
+     border-bottom: 2px solid #666666;
+     background: #2fa8ec;
+     font-size: 20px;
+     padding: 20px 30px;
+     font-weight: bold;
+}
+.find-method{
+     color: #666666;
+     font-size: 18px;
+     border-bottom: 2px dashed #2fa8ec;
+     display: flex;
+
+}
+.find-method label{
+    display: flex;
+    padding-top: 30px;
+    padding-bottom: 30px;
+
+}
+.find-method .radio{
+
+     margin-left: 20px;
+     display: inline-block;
+     margin-right: 5px;
+
+
+
+}
+.find-method .text{
+     margin-left: 20px;
+     margin-top:-5px;
+     padding-top: 4px;
+    padding-bottom: 4px;
+    padding-left: 5px;
+    padding-right: 5px;
+    border: 1px solid #2fa8ec;
+
+}
+a{
+     text-decoration: none;
+     cursor: pointer;
+
+}
+.find-method a{
+     background: #2fa8ec;
+     border-radius: 5px;
+     color: white;
+     padding: 5px 5px;
+     margin-left: 100px;
+     margin-top: 0px;
+    display: flex;
+
+}
+.question-list{
+     padding: 20px 60px 40px 20px;
+
+     background: #EEEEEE;
+}
+.question-list .question li{
+     border: 1px solid white;
+     border-radius: 5px;
+     padding: 10px 20px 10px 20px;
+     background: white;
+     margin-bottom: 30px;
+     line-height: 25px;
+}
+.question-list .question li .score{
+     margin-left: 30px;
+     padding-left: 8px;
+     width: 100px;
+     border: 2px solid #2a6496;
+
+}
+.checkall{
+
+     padding: 10px 20px 10px 20px;
+     color: #2a6496;
+     font-size: 20px;
+     font-weight: bold;
+
+}
+.page{
+     padding: 20px 40px;
+
+
+}
+.page li{
+     padding: 8px 10px;
+     border: 1px solid #85c5e5;
+     float: left;
+     margin-left: 8px;
+     background: white;
+
+
+}
+
+.addBtn .submit{
+    background: #2fa8ec;
+    color: white;
+    font-size: 18px;
+    padding: 10px 90px;
+    letter-spacing:20PX;
+    border-radius: 5px;
+    margin-left: 100px;
+    margin-top:50px;
+
+    display: inline-flex;
+}
+.addBtn .submit:hover{
+     color: #0070a3;
+     background: #85c5e5;
+     font-weight: bold;
+}
+ul,li{
+     list-style: none;
+}
+
+/****************************已选择题目模块*********************************/
+
+.right{
+     float: right;
+     width: 42%;
+
+
+}
+.selected-title{
+     padding: 20px 30px;
+     font-size: 18px;
+     font-weight: bold;
+     text-align:center;
+     background: #85c5e5;
+
+}
+.selected-question{
+     padding: 40px 20px 10px 10px;
+    background: white;
+
+
+}
+.selected-question .question-face li{
+     padding: 10px 10px 20px 20px;
+     border: 1px solid #f9f9f9;
+     margin-right: 20px;
+     margin-left: 20px;
+     border-radius: 10px;
+     line-height: 30px;;
+     margin-bottom: 30px;
+     background: #f9f9f9;
+}
+.selected-question .question-face li .delete{
+
+     padding: 3px 10px;
+     display: inline-flex;
+     background: #2aabd2;
+    color: white;
+     border-radius: 3px;
+     letter-spacing: 4px;
+}
+.selected-question li .delete:hover{
+     color: red;
+
+}
+
+.generateBtn .submit{
+    display: inline-flex;
+    background: #2fa8ec;
+    color: white;
+    font-size: 18px;
+
+    letter-spacing:20PX;
+    border-radius: 5px;
+    margin-left: 100px;
+    margin-top: 50px;
+    text-align: center;
+    padding: 10px;
+
+
+
+
+}
+
+.generateBtn .submit:hover{
+     color:#0070a3;
+     background: #85c5e5;
+     font-weight: bold;
+}
+
+
+
+
+
+
