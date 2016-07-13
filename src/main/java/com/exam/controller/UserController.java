@@ -104,7 +104,7 @@ public class UserController {
 	}
 	
 	@RequestMapping("user")
-	public String getUser(){
+	public String getUser(Model model){
 		return "user";
 	}
 }

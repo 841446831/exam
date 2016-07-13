@@ -8,14 +8,14 @@
 </head>
 <body>
  	<nav>
- 		${user}
+ 		<#include "nav.ftl">
  	</nav>
  	<section class="main">
 	 	<aside>
 	 		<#include "menu.ftl">  
 	 	</aside>
 	 	<section class="content">
-	 		<#include "add-question.html">  
+	 		<#include "add-exam.html">  
 	 	</section>
  	</section>
  	<script src="js/jquery-3.0.0.min.js"></script>

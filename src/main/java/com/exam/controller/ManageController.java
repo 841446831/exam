@@ -16,7 +16,7 @@ public class ManageController {
 	@RequestMapping("manage")
 	public String manage(HttpServletRequest request){
 		//管理员用户
-		request.setAttribute("user", userService.selectByUsername("cai"));
+		request.getSession().setAttribute("user", userService.selectByUsername("cai"));
 		return "manage";
 	}
 }
