@@ -157,6 +157,13 @@
     <artifactId>spring-context-support</artifactId>
     <version>4.3.1.RELEASE</version>
 </dependency>
+
+<!-- 添加分布插件的包pagehelper -->
+<dependency>
+    <groupId>com.github.pagehelper</groupId>
+    <artifactId>pagehelper</artifactId>
+    <version>4.0.0</version>
+</dependency>
     
   </dependencies>
   <build>

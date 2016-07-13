@@ -100,4 +100,12 @@ public class UserController {
 	public String getUser(){
 		return "user";
 	}
+	
+	@RequestMapping(value="selctUserPager", produces="application/json;charset=utf-8")
+	@ResponseBody
+	public String selectUserPager(User user)
+	{
+		return JSON.toJSONString(userService.selectUserPager(user));
+	}
+	
 }

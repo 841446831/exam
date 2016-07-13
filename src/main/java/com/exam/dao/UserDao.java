@@ -1,5 +1,7 @@
 package com.exam.dao;
 
+import java.util.List;
+
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Options;
 import org.apache.ibatis.annotations.Select;
@@ -19,4 +21,8 @@ public interface UserDao {
 	@Insert("INSERT into user(username,password,email) values(#{username},#{password},#{email})")
 	@Options(useGeneratedKeys=true, keyProperty="id")//添加该行，product中的id将被自动添加
 	int insertUser(User user);
+	
+	@Select("select * from user limit #{start},#{limit}")
+	List<User> selectUserPager(User user);
+	
 }

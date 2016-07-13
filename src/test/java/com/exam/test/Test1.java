@@ -221,9 +221,13 @@ public class Test1 {
     	ApplicationContext applicationContext = new ClassPathXmlApplicationContext("spring/applicationContext.xml");
 		QuestionService questionService = (QuestionService) applicationContext.getBean("questionService");
 		
-	    System.out.println(questionService.selectQuestionByType(""));
+		Question question = new Question();
+		question.setLimit(3);
+		question.setStart(0);
+		
+	    //System.out.println(questionService.selectQuestionByType("",question));
     	
-    	//System.out.println(questionService.selectQuestionByFace("线程"));
+    	System.out.println(questionService.selectQuestionByFace("",question));
      	
     }
     @Test

@@ -6,13 +6,12 @@ import javax.annotation.Resource;
 
 import org.springframework.stereotype.Service;
 
-import ch.qos.logback.classic.Logger;
-
-import com.alibaba.druid.sql.visitor.functions.Char;
 import com.exam.dao.OptionDao;
 import com.exam.dao.QuestionDao;
 import com.exam.entity.Option;
 import com.exam.entity.Question;
+import com.exam.util.Constant;
+import com.exam.util.ResultHelper;
 
 @Service
 public class QuestionService {
@@ -80,7 +79,7 @@ public class QuestionService {
 		return questionDao.selectQuestionByEid(eid);
 	}
 	
-	public List<Question> selectQuestionByType(String word)
+	public ResultHelper selectQuestionByType(String word,Question question)
 	{
 		StringBuilder wordSplit = null;
 		List<Question> questions = null;
@@ -99,18 +98,18 @@ public class QuestionService {
 				wordSplit.append(singlewords[i]).append("%");
 			}
 			
-		    questions = questionDao.selectQuestionByType(wordSplit.toString());
+		    questions = questionDao.selectQuestionByType(wordSplit.toString(),question);
 			
 		}
 		else
 		{
-		    questions = questionDao.selectAll();	
+		    questions = questionDao.selectQuestionPager(question);	
 		}
 		
-		return questions;
+		return new ResultHelper(questions, selectQuestionCountByType(word),Constant.SUCCESS_CODE,Constant.SUCCESS_MSG);
   	}
 
-	public List<Question> selectQuestionByFace(String word)
+	public ResultHelper selectQuestionByFace(String word,Question question)
 	{
 		StringBuilder wordSplit = new StringBuilder("%");
 		String[] singlewords = word.trim().split("");
@@ -123,8 +122,52 @@ public class QuestionService {
 			wordSplit.append(singlewords[i]).append("%");
 		}
 		//wordSplit.append("'");
-		List<Question> questions = questionDao.selectQuestionByFace(wordSplit.toString());
-		return questions;
+		List<Question> questions = questionDao.selectQuestionByFace(wordSplit.toString(),question);
+		return new ResultHelper(questions, selectQuestionCountByFace(word), Constant.SUCCESS_CODE,Constant.SUCCESS_MSG);
+	}
+	
+	public int selectQuestionCountByFace(String word)
+	{
+		StringBuilder wordSplit = new StringBuilder("%");
+		String[] singlewords = word.trim().split("");
+		for(int i = 0; i < singlewords.length;i++)
+		{
+			if(singlewords[i].equals(" "))
+			{
+				continue;
+			}
+			wordSplit.append(singlewords[i]).append("%");
+		}
+		//wordSplit.append("'");
+		return  questionDao.selectQuestionCountByFace(wordSplit.toString());
+	
+	}
+	
+	public int selectQuestionCountByType(String word)
+	{
+		StringBuilder wordSplit = null;
+		
+		if(word != null && !word.equals(""))
+		{
+			wordSplit = new StringBuilder("%");
+			
+			String[] singlewords = word.trim().split("");
+			for(int i = 0; i < singlewords.length;i++)
+			{
+				if(singlewords[i].equals(" "))
+				{
+					continue;
+				}
+				wordSplit.append(singlewords[i]).append("%");
+			}
+			
+		    return questionDao.selectQuestionCountByType(wordSplit.toString());
+			
+		}
+		else
+		{
+		    return  questionDao.selectQuestionCount();
+		}
 	}
 
 }

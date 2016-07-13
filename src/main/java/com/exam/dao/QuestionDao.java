@@ -42,11 +42,21 @@ public interface QuestionDao {
 	@Select("select id from question")
 	public List<Integer> selectQuesionId();
 	
-	@Select("SELECT q.* FROM question q ,type t where q.tid = t.id AND t.type LIKE #{wordSplit}")
-	public List<Question> selectQuestionByType(String wordSplit);
+	@Select("SELECT q.* FROM question q ,type t where q.tid = t.id AND t.type LIKE #{arg0} limit #{arg1.start},#{arg1.limit}")
+	public List<Question> selectQuestionByType(String wordSplit,Question question);
 	
-	@Select("select * from question where face like #{wordSplit}")
-	public List<Question> selectQuestionByFace(String wordSplit);
+	@Select("select * from question where face like #{arg0} limit #{arg1.start},#{arg1.limit}")
+	public List<Question> selectQuestionByFace(String wordSplit,Question question);
 	
+	@Select("select * from question limit #{start},#{limit}")
+	public List<Question> selectQuestionPager(Question question);
 	
+	@Select("select count(*) from question where face like #{wordSplit}")
+	public int selectQuestionCountByFace(String wordSplit);
+	
+	@Select("SELECT count(*) FROM question q ,type t where q.tid = t.id AND t.type LIKE #{wordSplit}")
+	public int selectQuestionCountByType(String wordSplit);
+	
+	@Select("select count(*) from question")
+	public int selectQuestionCount();
 }

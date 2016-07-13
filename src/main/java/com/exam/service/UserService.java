@@ -1,11 +1,15 @@
 package com.exam.service;
 
+import java.util.List;
+
 import javax.annotation.Resource;
 
 import org.springframework.stereotype.Service;
 
 import com.exam.dao.UserDao;
 import com.exam.entity.User;
+import com.exam.util.Constant;
+import com.exam.util.ResultHelper;
 
 @Service
 public class UserService {
@@ -25,6 +29,12 @@ public class UserService {
 	public int insertUser(User user)
 	{
 		return userDao.insertUser(user);
+	}
+	
+	public ResultHelper selectUserPager(User user)
+	{
+	    List<User> users = userDao.selectUserPager(user);
+		return new ResultHelper(users, users.size(),Constant.SUCCESS_CODE,Constant.SUCCESS_MSG);
 	}
 
 }

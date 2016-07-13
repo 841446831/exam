@@ -18,4 +18,7 @@ public interface ExamQuestionDao {
 	@Select("SELECT qid from examQuestion where eid = #{eid} order by qid")
 	List<Integer> selectQidByEid(int eid);
 	
+	@Select("select * from examQuestion where eid =#{eid}")
+	List<ExamQuestion> selectByEid(int eid);
+	
 }

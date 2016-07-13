@@ -15,6 +15,7 @@ import com.exam.dao.ExamQuestionDao;
 import com.exam.dao.OptionDao;
 import com.exam.dao.QuestionDao;
 import com.exam.entity.ExamPaper;
+import com.exam.entity.ExamQuestion;
 import com.exam.entity.Option;
 import com.exam.entity.Question;
 
@@ -153,6 +154,9 @@ public class ExamQuestionService {
 		return JSON.toJSONString(mapQuestios);
 	}
 	
-	
+	public List<ExamQuestion> selectByEid(int eid)
+	{
+	    return examQuestionDao.selectByEid(eid);
+	}
 	
 }

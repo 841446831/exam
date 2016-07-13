@@ -1,6 +1,8 @@
 package com.exam.entity;
 
-public class User {
+import com.exam.util.PageHelper;
+
+public class User extends PageHelper<User>{
 	private int id;
 	private String username;
 	private String password;

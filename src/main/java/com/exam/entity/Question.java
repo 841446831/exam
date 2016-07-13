@@ -3,7 +3,9 @@ package com.exam.entity;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Question {
+import com.exam.util.PageHelper;
+
+public class Question extends PageHelper<Question>{
     private Integer id;
     private String face;
     private String answer;
