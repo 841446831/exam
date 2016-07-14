@@ -3,8 +3,10 @@ package com.exam.entity;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.exam.util.PageHelper;
 
-public class ExamPaper {
+
+public class ExamPaper extends PageHelper<ExamPaper>{
 	private int id;
 	private String title;
 	private long startTime;

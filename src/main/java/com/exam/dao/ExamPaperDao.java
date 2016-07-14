@@ -17,6 +17,6 @@ public interface ExamPaperDao {
 	@Options(useGeneratedKeys=true, keyProperty="id")
 	int insert(ExamPaper examPaper);	
 	
-	@Select("select * from exampaper where practice = #{practice}")
-    List<ExamPaper> selectByPractice(int practice);
+	@Select("select * from exampaper where practice = 0 limit #{start},#{limit}")
+    List<ExamPaper> selectByPractice(ExamPaper examPaper);
 }

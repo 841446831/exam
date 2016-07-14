@@ -30,7 +30,7 @@ public class QuestionController {
 	{
 		String json = JSON.toJSONString(questionService.selectQuestionByType(word,question));		
 		return json;
-	}
+	}	
 	
 	public String selectQuestionByFace(@RequestParam("word") String word,Question question)
 	{

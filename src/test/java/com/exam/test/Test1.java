@@ -261,8 +261,8 @@ public class Test1 {
     	ApplicationContext applicationContext = new ClassPathXmlApplicationContext("spring/applicationContext.xml");
 		ExamPaperService  examPaperService = (ExamPaperService) applicationContext.getBean("examPaperService");
 		
-		String sDate1 = "2016-7-12 20:00:00";
-		String sDate2 = "2016-7-12 24:30:00";
+		String sDate1 = "2016-7-18 15:00:00";
+		String sDate2 = "2016-7-18 17:00:00";
     	SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
     	Date date1 = null;
     	Date date2 = null;
@@ -277,14 +277,14 @@ public class Test1 {
 		ExamPaper examPaper = new ExamPaper();
 		
 		examPaper.setPractice(0);
-		examPaper.setTitle("永春java考试5");
+		examPaper.setTitle("永春java考试6");
 	    examPaper.setUid(1);
 		examPaper.setStartTime(date1.getTime());
 		examPaper.setEndTime(date2.getTime());
 		
 		List<Question> questions = new ArrayList<>();
 		
-		int j=40;
+		int j=45;
 		for(int i = 0;i < 5;i++)
 		{
 			

@@ -34,12 +34,13 @@ public class UserService {
 	public ResultHelper selectUserPager(User user)
 	{
 	    List<User> users = userDao.selectUserPager(user);
-		return new ResultHelper(users, users.size(),Constant.SUCCESS_CODE,Constant.SUCCESS_MSG);
+		return new ResultHelper(users,selectAll().size(),Constant.SUCCESS_CODE,Constant.SUCCESS_MSG);
 	}
 
 	public List<User> selectAll() {
 		// TODO Auto-generated method stub
 		return userDao.selectAll();
 	}
+	
 
 }
