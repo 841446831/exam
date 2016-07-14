@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>正在进行的考试</title>
+    <link rel="stylesheet" href="css/exams.css">
+    <style type="text/css">
+        .datatable tr:hover
+        {
+            font-size: 20px;
+            background: #2aabd2;
+            color:#0000CC;
+        }
+    </style>
+</head>
+<body>
+   <div id="fluid-nowTestcontainer">
+         <div class="nowTestcontainer">
+               <div class="nowTestcontainerHead">
+                  <h1>正在进行的考试</h1>
+               </div>
+             <div class="search-face">
+                 <label>
+             <input type="text" placeholder="请输入考试编号">
+                     <a>搜索</a>
+                 </label>
+             </div>
+             <div class="nowTestcontainerTable">
+
+
+                 <table width="200" class="datatable">
+
+                     <tr>
+                         <th>编号</th>
+                         <th>标题</th>
+
+                         <th>开始时间</th>
+                         <th>结束时间</th>
+                         <th>出题者</th>
+                         <th>是否公开</th>
+                     </tr>
+
+                     <tr v-for="exam in exams">
+
+                         <td>{{exam.id}}</td>
+                         <td> {{exam.title}}</td>
+                         <td>{{exam.startTime}}</td>
+                         <td> {{exam.endTime}}</td>
+                         <td> {{exam.uid}}</td>
+                         <td> {{exam.pwd}}</td>
+                     </tr>
+
+                  </table>
+             </div>
+             
+             <div class="nowTestcontainerPage">
+                 <div id="laypage"></div>
+             </div>
+
+         </div>
+   </div>
+   <script type="text/javascript" src="js/jquery-3.0.0.min.js"></script>
+   <script src="js/vue.js"></script>
+   <script src="js/laypage.js"></script>
+   <script>
+   		var app = new Vue({
+   			el:'#fluid-nowTestcontainer'
+   			,data:{
+   				exams:[]
+   				,limit:10
+   			}
+   		})
+   		
+   		function fetch(curr){
+   		    $.ajax('test/demo1.json', {
+   		        page: curr || 1
+   		    }, function(res){
+   		        //此处仅仅是为了演示变化的内容
+   		        var demoContent = (new Date().getTime()/Math.random()/1000)|0;
+   		        document.getElementById('view1').innerHTML = res.content + demoContent;
+   		        //显示分页
+   		        laypage({
+   		            cont: 'page1', //容器。值支持id名、原生dom对象，jquery对象。【如该容器为】：<div id="page1"></div>
+   		            pages: res.pages, //通过后台拿到的总页数
+   		            curr: curr || 1, //当前页
+   		            jump: function(obj, first){ //触发分页后的回调
+   		                if(!first){ //点击跳页触发函数自身，并传递当前页：obj.curr
+   		                	fetch(obj.curr);
+   		                }
+   		            }
+   		        });
+   		    });
+   		};
+   		//运行
+   		fetch();
+   </script>
+</body>
+</html>

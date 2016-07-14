@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.alibaba.fastjson.JSON;
+import com.exam.entity.ExamOption;
 import com.exam.service.ExamOptionService;
 import com.exam.service.ExamPaperService;
 import com.exam.service.ExamQuestionService;
@@ -54,7 +55,6 @@ public class ExamQuestionController {
 		
 		if(examOptionService.insertExamOption(eid, listSelect)>0)
 		{
-			System.out.println("插入成功");
 			mapResult.put("resultCode","1");
 		}
 		else

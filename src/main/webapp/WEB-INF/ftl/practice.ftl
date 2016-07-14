@@ -81,9 +81,72 @@
             outline: 0;
             background: green;
         }
+        
+                .mask{margin:0;
+            padding:0;
+            border:none;
+            width:100%;
+            height:100%;
+            background: #e0e0e0;
+            opacity: 0.5;
+            z-index:9999;
+            position:fixed;
+            top:0;left:0;
+            display:none;}
+         #box{
+            position: relative;
+            z-index:10000;
+            display: none;
+            width: 500px;
+            padding: 15px;
+            margin: 0 auto;
+            top: -1000px;;
+
+        }
+        .box-title{
+
+            padding-left: 200px;
+            padding-top: 10px;
+            padding-bottom: 10px;
+            color: white;
+            font-size: 24px;
+            border-bottom: 1px dashed #2a6496;
+            background: #2aabd2;
+
+        }
+        .box-list{
+            background: white;
+            border: 1px solid #e0e0e0;
+            padding-top: 60px;
+            padding-bottom: 20px;
+
+        }
+        .close_btn{
+            margin-left: 160px;
+            width: 30px;height: 30px;
+            border-radius: 10px;
+            background: #2b669a;
+
+            color:white;
+        ;
+        }
+        .box-list a{
+            margin-left: 130px;
+            font-size: 20px;
+            color: blue;
+
+        }
+         .box-list a:hover{
+             background-color: #2aabd2;
+             color: white;
+         }
+        .box-list .text{
+              margin-left: 50px;
+        }
     </style>
 </head>
 <body>
+
 <!--头部-->
 <div  id="header">
     <p class="practice">练习试卷</p>
@@ -116,11 +179,24 @@
        </div>
 
         <div class="subject-submit">
-            <input type="submit" class="submit" value="提交">
+            <input type="button" id="submit" class="submit" value="提交" @click.prevent="onSubmit">
         </div>
         
     </div>
     <input type="hidden" name="eid" value="{{examPaper.id}}">
+
+ <div id="box">
+       <div class="head">
+       <div class="box-title">
+            完成练习<a href="javascript:void(0)" title="关闭窗口" class="close_btn" id="closeBtn">×</a>
+       </div>
+       <div class="box-list">
+           <a href="tags.html">再做一套</a>
+           <a class="text" :href="answerUrl">查看正确答案</a>
+       </div>
+       </div>
+  </div>
+  
 </form>
 
 <script src="js/jquery-3.0.0.min.js"></script>
@@ -141,10 +217,19 @@
 	    },
 	    methods:{
 	    	onSubmit:function(){
-	    		$.post('getQuestionsAnswer',$('app').serialize(),function(result){
-	    			
+	    	
+	    		$.post('getQuestionsAnswer',$('#app').serialize(),function(result){
+           		   	 	$("body").append("<div id='mask'></div>");
+            		    $("#mask").addClass("mask").fadeIn("slow");
+              		    $("#box").fadeIn("slow");	
+              		  
 	    		});
 	    		
+	    	}
+	    }
+	    ,computed:{
+	    	answerUrl :function(){
+	    		return "answer.html?eid="+this.examPaper.id
 	    	}
 	    }
 	})
@@ -164,6 +249,35 @@
 	var srcipt=document.createElement("script");
 	srcipt.src = url+'?tag='+tag+'&diffculty='+diffculty+'&count='+count;
 	document.body.appendChild(srcipt);
+	
+	 //弹出登录
+           $("#submit").hover(function () {
+               $(this).stop().animate({
+                   opacity: '1'
+               }, 600);
+           }, function () {
+               $(this).stop().animate({
+                   opacity: '0.6'
+               }, 1000);
+           })
+           //
+           //按钮的透明度
+           $("#loginbtn").hover(function () {
+               $(this).stop().animate({
+                   opacity: '1'
+               }, 600);
+           }, function () {
+               $(this).stop().animate({
+                   opacity: '0.8'
+               }, 1000);
+           });
+           //关闭
+           $(".close_btn").hover(function () { $(this).css({ color: 'black' }) }, function () { $(this).css({ color: '#999' }) }).on('click', function () {
+               $("#box").fadeOut("fast");
+               $("#mask").css({ display: 'none' });
+           });
+   
+	
 	
 </script>
 </body>

@@ -201,6 +201,27 @@ ul,li{
 }
 
 
+.paperSet{
+     padding: 10px;
+     display: block;
+}
+.paperTitle{
+     padding: 10px;
+     margin-left: 50px;
+}
+.paperTitle input{
+     margin-left: 10px;
+     padding: 8px;
+     border: 1px solid #2aabd2;
+     border-radius: 5px;
+
+}
+
+.paperTitle .pwd{
+     padding: 4px;
+     border: 1px solid red;
+     display: none;
+}
 
 
 

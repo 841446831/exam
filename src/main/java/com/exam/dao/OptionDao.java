@@ -34,6 +34,8 @@ public interface OptionDao {
 	public List<Option> selectByQid(Integer qid);
 	
     public List<Map<String,Object>> selectOpionAndSelectByQid(int qid);
+
+
     
 	
 }
