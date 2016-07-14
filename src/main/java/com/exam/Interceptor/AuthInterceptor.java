@@ -12,13 +12,13 @@ public class AuthInterceptor extends HandlerInterceptorAdapter {
 	@Override
 	public boolean preHandle(HttpServletRequest request,
 			HttpServletResponse response, Object handler) throws Exception {
-		System.out.println("进入拦截器");
+		System.out.println("进入拦截器...");
 		// TODO Auto-generated method stub
 		
 		//String requestUri = request.getRequestURI();
 		//String contextPath = request.getContextPath();
 		//String url = requestUri.substring(contextPath.length());
-//		
+		
 //		User user = (User) request.getSession().getAttribute("user");
 //		
 //		if(user == null)
