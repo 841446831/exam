@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <title>Title</title>
     <link rel="stylesheet" type="text/css" href="css/add-exam.css">
+    <script src="laydate/laydate.js"></script>
 </head>
 <body>
 <div id="manage-content" class="content">
@@ -14,14 +15,14 @@
     
     <div class="find-method">
         <label>
-            <input type="radio" class="radio" name="radio" value="按类型查找">按类型查找</label>
+            <input type="radio" class="radio" name="radio" value="Type" v-model="searchType">按类型查找</label>
 
         <label>
-            <input type="radio" class="radio" name="radio" 按题目查找>按题目查找</label>
+            <input type="radio" class="radio" name="radio" value="Face" v-model="searchType">按题目查找</label>
         <label>
-            <input type="text" class="text" placeholder="请输入查找内容"></label>
+            <input type="text" class="text" placeholder="请输入查找内容" v-model="keyword"></label>
         </label>
-        <label class="find"><a href="">查找</a></label>
+        <label class="find"><a href="javascript:;" @click="toFind">查找</a></label>
     </div>
     
     <div class="question-list">
@@ -31,7 +32,7 @@
                 	<input type="checkbox"  :value="$index" v-model="checkList">
       				<span v-if="q.isRadio">[单选题]</span>
       				<span v-else>[多选题]</span>
-                	{{q.face}}
+                	{{{q.face}}}
                 </label> 
                 <input type="text" class="score" placeholder="输入该题分值">
             </li>        
@@ -56,13 +57,34 @@
         
         <div class="selected-question">
              <ul class="question-face">
-                 <li v-for="sq in selectedQuestions"> {{sq.face}}
+                 <li v-for="sq in selectedQuestions"> {{{sq.face}}}
                  	<a class="delete" @click="deleteQ($index)">删除</a>
                  </li>
              </ul>
+                <div class="paperSet">
+                 <div class="paperTitle">
+                	     试卷标题:<input type="text" placeholder="title" v-model="title">
+                 </div>
+
+                <div class="paperTitle">
+                    开始时间:<input onclick="laydate()" id="startTime">
+
+                </div>
+                <div class="paperTitle">
+
+                      结束时间:<input onclick="laydate()"  id="endTime">
+           
+                </div>
+                <div class="paperTitle">
+		                    是否公开:<input type="radio"  name="radio" id="hide">
+		                    是<input type="radio"  name="radio" id="showtext">
+		                    否  <input type="password" placeholder="请输入密码" id="text" class="pwd" v-model="password">
+                </div>
+
+            </div>
              
             <div class="generateBtn">
-                <a class="submit"> 生成试卷</a>
+                <a class="submit" @click="generate"> 生成试卷</a>
             </div>
         </div>
     </div>
@@ -75,40 +97,105 @@
     var app = new Vue({
    		el:'#manage-content',
    		data:{
-   			questions:[{"face":"线程调用了sleep（）方法后，该线程将进入（ ）状态。 \n","id":38,"isPublic":1,"isRadio":1,"level":2,"limit":0,"options":[],"pageIndex":0,"start":0,"tid":607},{"face":"下述是Linux下多线程编程常用的pthread库提供的函数名和意义，说法正确的有？ \n","id":79,"isPublic":1,"isRadio":0,"level":1,"limit":0,"options":[],"pageIndex":0,"start":0,"tid":618},{"face":"运行在多核处理器上的Linux环境中,若临界区非常短,且不允许线程上下文切换的情况下,使用下列哪种机制满足上述需求并且性能最好? \n","id":89,"isPublic":1,"isRadio":1,"level":4,"limit":0,"options":[],"pageIndex":0,"start":0,"tid":618}]
+   			questions:[]
 			,selectedQuestions:[]
    			,checkList:[]
+    		,searchType:'Type'
+    		,keyword:''
+    		,limit:6
+    		,password:null
+    		,title:null
    		},
    		methods:{
    			addQuestions:function(){
-   				this.selectedQuestions = [];
    				for (var i=0;i<this.checkList.length;++i){
    					this.selectedQuestions.push(this.questions[this.checkList[i]]);
    				}
-   				console.log(this.selectedQuestions.length)
    			}
    			,deleteQ:function(index){
    				this.selectedQuestions.$remove(this.selectedQuestions[index]);
    			}
+   			,toFind:function(){
+   				demo();
+   			}
+   			,generate:function(){
+   				var qidString = ''
+   				for (var i=0;i<this.selectedQuestions.length;++i){
+   					if (i!=0) qidString += ',';
+   					qidString += this.selectedQuestions[i].id;
+   				}
+   				
+   				console.log(qidString);
+   				var startTime = new Date($('#startTime').val()).getMilliseconds();
+   				var endTime = new Date($('#endTime').val()).getMilliseconds();
+   				$.ajax({
+   					url:'insertPaper'
+   					,type:'post'
+   					,data:{
+   						title:this.title
+   						,password:this.password
+   						,startTime:(new Date($('#startTime').val())).getTime()
+   						,endTime : (new Date($('#endTime').val())).getTime()
+   						,qidString:qidString
+   					},success(data){
+   						if (data.code==0){
+   							alert('试卷插入成功');
+   						}
+   					}
+   				})
+   			}
    		}
    	});
     
-   function demo(curr){
-            laypage({
-                cont: 'laypage1', //容器。值支持id名、原生dom对象，jquery对象。【如该容器为】：<div id="page1"></div>
-                pages: 18, //通过后台拿到的总页数
-                curr: curr || 1, //当前页
-                jump: function(obj, first){ //触发分页后的回调
-                    if(!first){ //点击跳页触发函数自身，并传递当前页：obj.curr
-                        demo(obj.curr);
-                    }
-                }
-            });
-    };
+    function getTimeLong(date){
+    	  var yy=date.getYear(); 
+    	var MM=date.getMonth() + 1; 
+    	var dd=date.getDay(); 
+    	var hh=date.getHours(); 
+    	var mm=date.getMinutes(); 
+    	var ss=date.getSeconds(); 
+    	var sss=date.getMilliseconds();
+    	return Date.UTC(yy,MM,dd,hh,mm,ss,sss); 
+    }
     
+    function demo(curr){
+        $.ajax({
+        	url:'selectQuestionBy'+app.searchType
+      		,type:"post"
+      		,data:{
+				word:app.keyword
+				,start:(curr||1)*app.limit-app.limit
+				,limit:app.limit	
+			}
+       		 ,success:function(data){
+       				app.questions = data.rows;
+       	            laypage({
+       	            cont: 'laypage1', //容器。值支持id名、原生dom对象，jquery对象。【如该容器为】：<div id="page1"></div>
+       	            pages: (data.results-1)/app.limit+1, //通过后台拿到的总页数
+       	            curr: curr || 1, //当前页
+       	            jump: function(obj, first){ //触发分页后的回调
+       	                if(!first){ //点击跳页触发函数自身，并传递当前页：obj.curr
+       	                    demo(obj.curr);
+       	                }
+       	            	app.checkList = [];
+       	            }
+       	        });
+			}
+        });
+    };
     //运行
     demo();
-   	
+
+    var show=document.getElementById("showtext");
+    var text=document.getElementById("text");
+    var hide=document.getElementById("hide");
+    show.onclick=function () {
+        text.style.display="inline-block";
+    }
+    hide.onclick=function () {
+        text.style.display="none";
+    }
+
    </script>
 </body>
 </html>

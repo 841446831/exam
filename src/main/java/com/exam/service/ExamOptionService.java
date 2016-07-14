@@ -28,6 +28,12 @@ public class ExamOptionService {
 	
 	public int insertExamOption(int eid,List<Map<Integer, Object>> listSelect)
 	{
+		int count = examOptionDao.countByEid(eid);
+		if (count>0){
+			System.out.println("一份试卷的答案不能重复插入");
+			return 0;
+		}
+		
 		List<Question> listQuestion = questionDao.selectQuestionByEid(eid);
 		
 		ExamOption examOption = null;

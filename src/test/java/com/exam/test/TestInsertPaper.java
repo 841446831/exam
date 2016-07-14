@@ -11,15 +11,13 @@ public class TestInsertPaper {
     	ApplicationContext applicationContext = new ClassPathXmlApplicationContext("spring/applicationContext.xml");
     	ExamPaperService examPaperService= (ExamPaperService) applicationContext.getBean("examPaperService");
     	
-    	String qidString = "22";
+    	String qidString = "22,24";
     	
     	ExamPaper examPaper = new ExamPaper();
     	examPaper.setPractice(0);
     	examPaper.setTitle("考试");
     	examPaper.setUid(1);
     	
-    	double mark = 1;
-    	
-    	examPaperService.insert(qidString, mark, examPaper);
+    	examPaperService.insert(qidString, examPaper);
 	}
 }

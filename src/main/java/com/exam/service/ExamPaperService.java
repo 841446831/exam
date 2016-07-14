@@ -39,7 +39,7 @@ public class ExamPaperService {
 		return 0;
 	}
 	
-	public int insert(String qidString,double mark,ExamPaper examPaper)
+	public int insert(String qidString,ExamPaper examPaper)
 	{
         
 		if(qidString != null && !qidString.equals(""))
@@ -53,7 +53,6 @@ public class ExamPaperService {
 					ExamQuestion examQuestion = new ExamQuestion();
 					examQuestion.setEid(examPaper.getId());
 					examQuestion.setQid(Integer.valueOf(qids[i]));
-					examQuestion.setMark(mark);
 					examQuestionDao.insert(examQuestion);
 				}
 			}
@@ -63,7 +62,6 @@ public class ExamPaperService {
 				ExamQuestion examQuestion = new ExamQuestion();
 				examQuestion.setEid(examPaper.getId());
 				examQuestion.setQid(Integer.valueOf(qid));
-				examQuestion.setMark(mark);
 				examQuestionDao.insert(examQuestion);
 			}
 			

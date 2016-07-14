@@ -1,6 +1,7 @@
 //var url = "http://192.168.3.37:8080/exam/types";
 var url = "http://localhost:8080/exam/types";
 var loginUrl = "http://localhost:8080/exam/login";
+var logoutUrl = "http://localhost:8080/exam/logout";
 
 
 var app = new Vue({
@@ -15,6 +16,14 @@ var app = new Vue({
     		return 'http://oa17fj4lp.bkt.clouddn.com/'+this.user.id+'.jpg';
     	}
      }
+    ,methods:{
+    	logout:function(){
+    		 this.login = true;
+    		 $.ajax({
+    			 url:logoutUrl
+    		 })
+    	}
+    }
 })
 
 function callback(data){

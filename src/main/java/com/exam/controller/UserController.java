@@ -3,6 +3,7 @@ package com.exam.controller;
 import java.io.File;
 import java.io.IOException;
 import java.util.HashMap;
+import java.util.Map;
 
 import javax.annotation.Resource;
 import javax.imageio.ImageIO;
@@ -97,6 +98,17 @@ public class UserController {
 		return JSON.toJSONString(map);
 	}
 	
+	@RequestMapping("logout")
+	@ResponseBody
+	public String logout(HttpServletRequest request){
+		Map<String, Object> map = new HashMap<String, Object>();
+		if (request.getSession().getAttribute("user")!=null){
+			request.getSession().removeAttribute("user");
+		}
+		map.put("code", 0);
+		return JSON.toJSONString(map);
+	}
+	
 	@RequestMapping("users")
 	public String getAllUsers(Model model){
 		model.addAttribute("users",userService.selectAll());
@@ -114,7 +126,5 @@ public class UserController {
 	{
 		return JSON.toJSONString(userService.selectUserPager(user));
 	}
-	
-	
 	
 }

@@ -14,7 +14,8 @@ public class selectQuestionsAnswer {
     	QuestionDao questionDao= (QuestionDao) applicationContext.getBean("questionDao");
     	ExamQuestionService examQuestionService =  (ExamQuestionService) applicationContext.getBean("examQuestionService");
     	
-    	System.out.println(examQuestionService.selectQuestionsAnswer(147));
+//    	System.out.println(examQuestionService.selectQuestionsAnswer(147));
+    	System.out.println(System.currentTimeMillis());
     	
 	}
 

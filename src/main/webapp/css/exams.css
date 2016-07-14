@@ -1,0 +1,99 @@
+#fluid-nowTestcontainer{
+  /*  width: 50%;*/
+    width: 1000px;
+    padding: 30px;
+    margin: 0 auto;
+    background:#f7f7f7;
+}
+.nowTestcontainer{
+    /*width: 97%;*/
+    width: 900px;
+    margin: 0 auto;
+}
+.nowTestcontainerHead{
+
+    border-bottom: 2px dashed  #EEEEEE;
+    background: white;
+}
+.nowTestcontainerHead h1{
+  /*  width: 30%;
+    height: 5%;*/
+    width: 250px;
+    height: 60px;
+
+    margin-bottom: 0px;
+    font-weight: 400;
+    border-radius: 5px;
+    padding-top: 7px;
+    text-align: center;
+
+}
+
+.search-face{
+    padding: 10px;
+    margin-top: 30px;
+}
+
+.search-face input{
+    padding: 10px;
+
+}
+.search-face a{
+     padding: 8px 10px;
+    display: inline-block;
+    background: #85c5e5;
+    color: #fefffd;
+    border-radius: 5px;
+
+}
+.nowTestcontainerTable{
+    margin-top: 30px;
+    padding: 10px;
+}
+.nowTestcontainerTable th{
+    border: none;
+    padding: 20px;
+    background: #EEEEEE;
+}
+.nowTestcontainerTable table{
+    font-family:"Trebuchet MS", Arial, Helvetica, sans-serif;
+     width:100%;
+    border-collapse:collapse;
+}
+
+.nowTestcontainerTable td{
+    border:none;
+    padding: 15px;
+    text-align: center;
+    background: white;
+}
+.nowTestcontainerPage {
+    padding: 20px;
+    margin-top: 30px;
+}
+.nowTestcontainerPage li{
+
+    float: left;
+
+}
+.nowTestcontainerPage li a{
+    padding: 10px;
+    margin-right: 10px;
+    background: white;
+    border: 1px solid #aaaaaa;
+}
+.nowTestcontainerPage li a:hover{
+    color: red;
+    background: #aaaaaa;
+
+}
+
+a{
+    text-decoration: none;
+
+}
+ul,li{
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}

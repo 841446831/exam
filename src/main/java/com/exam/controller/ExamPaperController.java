@@ -1,9 +1,12 @@
 package com.exam.controller;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.apache.ibatis.annotations.Param;
@@ -34,7 +37,7 @@ public class ExamPaperController {
 	
 	@RequestMapping(value="makepaper",produces="application/json;charset=utf-8")
 	@ResponseBody
-	public String getExamPaper(String tag,@RequestParam(defaultValue="1")int diffculty,@RequestParam(defaultValue="5")int count){
+	public String getExamPaper(String tag,@RequestParam(defaultValue="1")int diffculty,@RequestParam(defaultValue="5")int count,HttpServletRequest request){
 		List<Integer> tags = new ArrayList<>();
 		if (tag!=null && !tag.equals(""))
 			if (tag.indexOf(',')>=0){
@@ -50,9 +53,17 @@ public class ExamPaperController {
 		examPaper.setPractice(1);
 		examPaper.setTitle("练习");
 		examPaper.setQuestions(questions);
+		if (request.getSession().getAttribute("user")!=null){
+			User  user = (User) request.getSession().getAttribute("user");
+			examPaper.setUid(user.getId());
+		}else{
+			examPaper.setUid(2);
+		}
 		exampaperService.insert(examPaper);
 		return  "callback("+JSON.toJSONString(examPaper) +");";
 	}
+	
+	
 	
 	@RequestMapping("practice")
 	public String getExamPaperRedirect(String tag,int diffculty,int count,Model model){
@@ -62,17 +73,30 @@ public class ExamPaperController {
 		return "practice";
 	}
 	
+	@RequestMapping("exam")
+	public String checkInExam(String eid,HttpServletRequest request){
+		if (request.getSession().getAttribute("user")==null){
+			logger.info("进入exam，没有登陆");
+		}else{
+			//验证密码
+		}
+		return "exampaper";
+	}
+	
 	@RequestMapping("insertPaper")
-	public String insertPaper(@RequestParam("qidString") String qidString,@RequestParam("mark") double mark,ExamPaper examPaper,HttpSession session)
+	@ResponseBody
+	public String insertPaper(@RequestParam("qidString") String qidString,ExamPaper examPaper,HttpSession session)
 	{
 		examPaper.setUid(((User)session.getAttribute("user")).getId());
 		
-	    exampaperService.insert(qidString,mark,examPaper);
-		
-		return null;
+	    exampaperService.insert(qidString,examPaper);
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("code",0);
+		return JSON.toJSONString(map);
 	}
 	
 	@RequestMapping("selectNowExam")
+	@ResponseBody
 	public String selectNowExam(ExamPaper examPaper){
 		return JSON.toJSONString(exampaperService.selectByCurrentTime(examPaper));
 	}
