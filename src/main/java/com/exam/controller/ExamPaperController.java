@@ -63,12 +63,24 @@ public class ExamPaperController {
 		return  "callback("+JSON.toJSONString(examPaper) +");";
 	}
 	
+	
+	
 	@RequestMapping("practice")
 	public String getExamPaperRedirect(String tag,int diffculty,int count,Model model){
 		model.addAttribute("tag", tag);
 		model.addAttribute("diffculty", diffculty);
 		model.addAttribute("count", count);
 		return "practice";
+	}
+	
+	@RequestMapping("exam")
+	public String checkInExam(String eid,HttpServletRequest request){
+		if (request.getSession().getAttribute("user")==null){
+			logger.info("进入exam，没有登陆");
+		}else{
+			//验证密码
+		}
+		return "exampaper";
 	}
 	
 	@RequestMapping("insertPaper")
@@ -84,6 +96,7 @@ public class ExamPaperController {
 	}
 	
 	@RequestMapping("selectNowExam")
+	@ResponseBody
 	public String selectNowExam(ExamPaper examPaper){
 		
 		return JSON.toJSONString(exampaperService.selectByPractice(examPaper));

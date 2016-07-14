@@ -7,9 +7,9 @@
     <style type="text/css">
         .datatable tr:hover
         {
-            font-size: 20px;
             background: #2aabd2;
             color:#0000CC;
+           	cursor: pointer;
         }
     </style>
 </head>
@@ -46,8 +46,11 @@
                          <td> {{exam.title}}</td>
                          <td>{{exam.startTime}}</td>
                          <td> {{exam.endTime}}</td>
-                         <td> {{exam.uid}}</td>
-                         <td> {{exam.pwd}}</td>
+                         <td> {{exam.username}}</td>
+                         <td> 
+                         	<span v-if="exam.password">私有</span>
+                         	<span v-else>公开</span>
+                         </td>
                      </tr>
 
                   </table>
@@ -63,33 +66,75 @@
    <script src="js/vue.js"></script>
    <script src="js/laypage.js"></script>
    <script>
+   Date.prototype.pattern=function(fmt) {         
+	    var o = {         
+	    "M+" : this.getMonth()+1, //月份         
+	    "d+" : this.getDate(), //日         
+	    "h+" : this.getHours()%12 == 0 ? 12 : this.getHours()%12, //小时         
+	    "H+" : this.getHours(), //小时         
+	    "m+" : this.getMinutes(), //分         
+	    "s+" : this.getSeconds(), //秒         
+	    "q+" : Math.floor((this.getMonth()+3)/3), //季度         
+	    "S" : this.getMilliseconds() //毫秒         
+	    };         
+	    var week = {         
+	    "0" : "/u65e5",         
+	    "1" : "/u4e00",         
+	    "2" : "/u4e8c",         
+	    "3" : "/u4e09",         
+	    "4" : "/u56db",         
+	    "5" : "/u4e94",         
+	    "6" : "/u516d"        
+	    };         
+	    if(/(y+)/.test(fmt)){         
+	        fmt=fmt.replace(RegExp.$1, (this.getFullYear()+"").substr(4 - RegExp.$1.length));         
+	    }         
+	    if(/(E+)/.test(fmt)){         
+	        fmt=fmt.replace(RegExp.$1, ((RegExp.$1.length>1) ? (RegExp.$1.length>2 ? "/u661f/u671f" : "/u5468") : "")+week[this.getDay()+""]);         
+	    }         
+	    for(var k in o){         
+	        if(new RegExp("("+ k +")").test(fmt)){         
+	            fmt = fmt.replace(RegExp.$1, (RegExp.$1.length==1) ? (o[k]) : (("00"+ o[k]).substr((""+ o[k]).length)));         
+	        }         
+	    }         
+	    return fmt;         
+	}       
+	     
    		var app = new Vue({
    			el:'#fluid-nowTestcontainer'
    			,data:{
    				exams:[]
-   				,limit:10
+   				,limit:6
    			}
    		})
    		
    		function fetch(curr){
-   		    $.ajax('test/demo1.json', {
-   		        page: curr || 1
-   		    }, function(res){
-   		        //此处仅仅是为了演示变化的内容
-   		        var demoContent = (new Date().getTime()/Math.random()/1000)|0;
-   		        document.getElementById('view1').innerHTML = res.content + demoContent;
-   		        //显示分页
-   		        laypage({
-   		            cont: 'page1', //容器。值支持id名、原生dom对象，jquery对象。【如该容器为】：<div id="page1"></div>
-   		            pages: res.pages, //通过后台拿到的总页数
-   		            curr: curr || 1, //当前页
-   		            jump: function(obj, first){ //触发分页后的回调
-   		                if(!first){ //点击跳页触发函数自身，并传递当前页：obj.curr
-   		                	fetch(obj.curr);
-   		                }
-   		            }
-   		        });
-   		    });
+   		    $.ajax({
+   		    	url:'selectNowExam'
+   		    	,type:'post'
+   		    	,data:{
+   		    		start:(curr||1)*app.limit-app.limit
+   		    		,limit:app.limit
+   		    	}
+   		    	,success:function(data){
+   		    		app.exams = data.rows;
+   		    		for (var i=0;i<app.exams.length;++i){
+   		    			app.exams[i].startTime = new Date(app.exams[i].startTime).pattern("yyyy-MM-dd HH:mm:ss");
+   		    			app.exams[i].endTime = new Date(app.exams[i].endTime).pattern("yyyy-MM-dd HH:mm:ss");
+   		    		}
+   		    		laypage({
+   	   		            cont: 'laypage', //容器。值支持id名、原生dom对象，jquery对象。【如该容器为】：<div id="page1"></div>
+   	   		            pages: (data.results-1)/app.limit+1, //通过后台拿到的总页数
+   	   		            curr: curr || 1, //当前页
+   	   		            jump: function(obj, first){ //触发分页后的回调
+   	   		                if(!first){ //点击跳页触发函数自身，并传递当前页：obj.curr
+   	   		                	fetch(obj.curr);
+   	   		                }
+   	   		            }
+   	   		        });
+   		    	}
+   		    })
+   		    
    		};
    		//运行
    		fetch();

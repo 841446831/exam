@@ -24,7 +24,7 @@ public class TestExamPaperService {
 		for (int i=0;i<20;++i){
 			ExamPaper examPaper = new ExamPaper();
 			examPaper.setStartTime(startTime);
-			examPaper.setEndTime(System.currentTimeMillis());
+			examPaper.setEndTime(System.currentTimeMillis()+100000000);
 			examPaper.setTitle("wfc 的考试之路 "+i);
 			examPaper.setPassword(""+i);
 			examPaper.setPractice(i%2);
