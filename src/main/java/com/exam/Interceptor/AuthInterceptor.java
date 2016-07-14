@@ -23,7 +23,7 @@ public class AuthInterceptor extends HandlerInterceptorAdapter {
 //		
 //		if(user == null)
 //		{
-//			//request.getRequestDispatcher("login").forward(request,response);
+//			request.getRequestDispatcher("tags.html").forward(request,response);
 //			System.out.println("拦截");
 //			return false;
 //		}
@@ -32,8 +32,8 @@ public class AuthInterceptor extends HandlerInterceptorAdapter {
 //			System.out.println("没有拦截");
 //			return true;
 //		}
+//		
 		return true;
-		
 	}
 	
 }
