@@ -71,9 +71,10 @@
         <constructor-arg index="1" value="BATCH" />
     </bean>
     
+    <context:component-scan base-package="com.exam.controller"></context:component-scan>
 	<context:component-scan base-package="com.exam.service"></context:component-scan>
+	<!--  
 	<context:component-scan base-package="com.exam.aop"></context:component-scan>
-	
-	<aop:aspectj-autoproxy/>
-	<bean id="methodAspect" class="com.exam.aop.MethodMonitorAop"></bean>
+    <bean id="methodAspect" class="Open Declaration com.exam.aop.MethodMonitorAop"></bean>
+	-->
 </beans>

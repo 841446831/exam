@@ -7,11 +7,16 @@ import javax.annotation.Resource;
 
 import org.springframework.stereotype.Service;
 
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONObject;
 import com.exam.dao.ExamPaperDao;
 import com.exam.dao.ExamQuestionDao;
+import com.exam.dao.UserDao;
 import com.exam.entity.ExamPaper;
 import com.exam.entity.ExamQuestion;
 import com.exam.entity.Question;
+import com.exam.util.Constant;
+import com.exam.util.ResultHelper;
 
 @Service
 public class ExamPaperService {
@@ -19,6 +24,9 @@ public class ExamPaperService {
 	private ExamPaperDao examPaperDao;
 	@Resource
 	private ExamQuestionDao examQuestionDao;
+	
+	@Resource
+	private UserDao userDao;
 	
 	public int insert(ExamPaper examPaper){
 		examPaperDao.insert(examPaper);
@@ -62,27 +70,32 @@ public class ExamPaperService {
 		return 0;
 	}
 	
-	public List<ExamPaper> selectByPractice(int practice)
+	public ResultHelper selectByPractice(ExamPaper examPaper)
 	{
-		List<ExamPaper> examPapers = examPaperDao.selectByPractice(practice);
-		List<ExamPaper> list = new ArrayList<ExamPaper>();
+		List<ExamPaper> examPapers = examPaperDao.selectByPractice(examPaper);
+		//List<ExamPaper> list = new ArrayList<ExamPaper>();
+		List<Object> list = new ArrayList<>();
 		
-		for(ExamPaper examPaper: examPapers)
+		for(ExamPaper e: examPapers)
 		{
-		    long startTime =  examPaper.getStartTime();
-		    long endTime = examPaper.getEndTime();
+		    long startTime =  e.getStartTime();
+		    long endTime = e.getEndTime();
 		    long currentTime = System.currentTimeMillis();
 		    
 		    if(currentTime >= startTime && currentTime <= endTime)
 		    {
-		    	list.add(examPaper);
+		    	JSONObject jsonObject = JSONObject.parseObject(JSON.toJSONString(e));
+		    
+		    	String username = userDao.selectUserNameByUid(e.getUid());
+		    	
+		    	jsonObject.put("username",username);
+		    	
+		    	list.add(jsonObject);
 		    }
 		  
 		}
-		
-		return list;
+		return new ResultHelper(list,examPaperDao.selectAll().size(),Constant.SUCCESS_CODE,Constant.SUCCESS_MSG);
 	}
-	
 	
 	
 }

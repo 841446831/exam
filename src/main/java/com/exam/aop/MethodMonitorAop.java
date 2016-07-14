@@ -7,6 +7,7 @@ import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Pointcut;
 import org.slf4j.LoggerFactory;
+
 import ch.qos.logback.classic.Logger;
 
 @Aspect
@@ -14,8 +15,7 @@ public class MethodMonitorAop {
 	Logger logger = (Logger) LoggerFactory.getLogger(this.getClass());
 	
 	@Pointcut("execution(* com.exam.controller.*.*(..))")
-	 public void allMethods() {}  
-	
+	 public void allMethods() {}     
 	
 	@Around(value="allMethods()")
 	 public Object beforeAdvice(ProceedingJoinPoint point) throws Throwable {
@@ -26,4 +26,6 @@ public class MethodMonitorAop {
 		logger.info("返回值为:"+returnValue.toString());
 		return  returnValue;
 	}
+	
+	
 }

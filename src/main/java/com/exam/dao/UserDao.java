@@ -24,8 +24,10 @@ public interface UserDao {
 	
 	@Select("select * from user limit #{start},#{limit}")
 	List<User> selectUserPager(User user);
-	
 
 	@Select("select * from user")
 	List<User> selectAll();
+	
+	@Select("select username from user where id = #{uid}")
+	String selectUserNameByUid(int uid);
 }

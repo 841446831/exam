@@ -122,6 +122,7 @@ public class QuestionService {
 			wordSplit.append(singlewords[i]).append("%");
 		}
 		//wordSplit.append("'");
+		System.out.println(wordSplit);
 		List<Question> questions = questionDao.selectQuestionByFace(wordSplit.toString(),question);
 		return new ResultHelper(questions, selectQuestionCountByFace(word), Constant.SUCCESS_CODE,Constant.SUCCESS_MSG);
 	}

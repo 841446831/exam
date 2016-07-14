@@ -84,9 +84,9 @@ public class ExamPaperController {
 	}
 	
 	@RequestMapping("selectNowExam")
-	public String selectNowExam(){
+	public String selectNowExam(ExamPaper examPaper){
 		
-		return JSON.toJSONString(exampaperService.selectByPractice(0));
+		return JSON.toJSONString(exampaperService.selectByPractice(examPaper));
 		
 	}
 	

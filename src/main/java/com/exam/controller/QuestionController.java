@@ -33,7 +33,7 @@ public class QuestionController {
 	{
 		String json = JSON.toJSONString(questionService.selectQuestionByType(word,question));		
 		return json;
-	}
+	}	
 	
 	@RequestMapping(value="selectQuestionByFace",produces="application/json;charset=utf-8")
 	@ResponseBody
