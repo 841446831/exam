@@ -77,13 +77,12 @@ public class ExamPaperService {
 		List<ExamPaper> examPapers = examPaperDao.selectByPractice(examPaper);
 		//List<ExamPaper> list = new ArrayList<ExamPaper>();
 		List<Object> list = new ArrayList<>();
-		
+		long currentTime = System.currentTimeMillis();
 		for(ExamPaper e: examPapers)
 		{
 		    long startTime =  e.getStartTime();
 		    long endTime = e.getEndTime();
-		    long currentTime = System.currentTimeMillis();
-		    
+	    
 		    if(currentTime >= startTime && currentTime <= endTime)
 		    {
 		    	JSONObject jsonObject = JSONObject.parseObject(JSON.toJSONString(e));
@@ -96,9 +95,29 @@ public class ExamPaperService {
 		    }
 		  
 		}
-		return new ResultHelper(list,examPaperDao.selectAll().size(),Constant.SUCCESS_CODE,Constant.SUCCESS_MSG);
+		return new ResultHelper(list,examPaperDao.selectCountByCurrentTime(currentTime),Constant.SUCCESS_CODE,Constant.SUCCESS_MSG);
 	}
 	
+
+	public ResultHelper selectByCurrentTime(ExamPaper examPaper)
+	{
+		long currentTime = System.currentTimeMillis();
+		List<ExamPaper> examPapers = examPaperDao.selectByCurrentTime(currentTime, examPaper);
+		List<Object> list = new ArrayList<>();
+		for(ExamPaper e: examPapers)
+		{
+		    
+	        JSONObject jsonObject = JSONObject.parseObject(JSON.toJSONString(e));
+		    
+		    String username = userDao.selectUserNameByUid(e.getUid());
+		    	
+		    jsonObject.put("username",username);
+		    	
+		    list.add(jsonObject); 
+		   
+		}
+		return new ResultHelper(list,examPaperDao.selectCountByCurrentTime(currentTime),Constant.SUCCESS_CODE,Constant.SUCCESS_MSG);
+	}
 	
 }
 

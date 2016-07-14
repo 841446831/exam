@@ -19,4 +19,11 @@ public interface ExamPaperDao {
 	
 	@Select("select * from exampaper where practice = 0 limit #{start},#{limit}")
     List<ExamPaper> selectByPractice(ExamPaper examPaper);
+	
+	@Select("select count(*) from exampaper where starttime < #{currentTime} and endtime > #{currentTime} and practice = 0")
+	int selectCountByCurrentTime(long currentTime);
+	
+	@Select("select * from exampaper where starttime < #{arg0} and endtime > #{arg0} and practice = 0 limit #{arg1.start},#{arg1.limit}")
+	List<ExamPaper> selectByCurrentTime(long currentTime,ExamPaper examPaper);
+	
 }

@@ -14,11 +14,10 @@ public class TestSelectNowExamPaper {
 	    
 		ExamPaper examPaper = new ExamPaper();
 		
-		
-		examPaper.setLimit(3);
+		examPaper.setLimit(5);
 		examPaper.setStart(0);
 		
-		System.out.println(examPaperService.selectByPractice(examPaper));
+		System.out.println(examPaperService.selectByCurrentTime(examPaper));
 		
 	}
 }
