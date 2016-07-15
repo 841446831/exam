@@ -25,5 +25,8 @@ public interface ExamPaperDao {
 	
 	@Select("select * from exampaper where starttime < #{arg0} and endtime > #{arg0} and practice = 0 limit #{arg1.start},#{arg1.limit}")
 	List<ExamPaper> selectByCurrentTime(long currentTime,ExamPaper examPaper);
+
+	@Select("select * from exampaper where id=#{id}")
+	ExamPaper selectById(int id);
 	
 }

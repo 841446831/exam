@@ -50,9 +50,9 @@
     <div class="nav-left logo">考试系统</div>
     <div class="nav-center">
         <ul >
-            <li> <a href="">首页</a> </li>
-            <li> <a href="#">专项练习</a></li>
-            <li> <a href="#">考试系统</a></li>
+            <li> <a href="tags.html">首页</a> </li>
+            <li> <a href="tags.html">专项练习</a></li>
+            <li> <a href="exams.html">考试系统</a></li>
         </ul>
     </div>
     

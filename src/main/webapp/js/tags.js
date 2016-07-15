@@ -1,7 +1,7 @@
 //var url = "http://192.168.3.37:8080/exam/types";
-var url = "http://localhost:8080/exam/types";
-var loginUrl = "http://localhost:8080/exam/login";
-var logoutUrl = "http://localhost:8080/exam/logout";
+var url = "types";
+var loginUrl = "login";
+var logoutUrl = "logout";
 
 
 var app = new Vue({
