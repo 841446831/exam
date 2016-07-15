@@ -4,9 +4,10 @@
     <meta charset="UTF-8">
     <title>Title</title>
     <link rel="stylesheet" type="text/css" href="css/add-exam.css">
-    <script src="laydate/laydate.js"></script>
+    <script src="js/laydate/laydate.js"></script>
 </head>
 <body>
+<form action="" autocomplete="off">
 <div id="manage-content" class="content">
     <div class="left">
     <div class="manage-head">
@@ -15,12 +16,12 @@
     
     <div class="find-method">
         <label>
-            <input type="radio" class="radio" name="radio" value="Type" v-model="searchType">按类型查找</label>
+            <input   autocomplete="off" type="radio" class="radio" name="radio" value="Type" v-model="searchType" >按类型查找</label>
 
         <label>
-            <input type="radio" class="radio" name="radio" value="Face" v-model="searchType">按题目查找</label>
+            <input  autocomplete="off" type="radio" class="radio" name="radio" value="Face" v-model="searchType">按题目查找</label>
         <label>
-            <input type="text" class="text" placeholder="请输入查找内容" v-model="keyword"></label>
+            <input  autocomplete="off" type="text" class="text" placeholder="请输入查找内容" v-model="keyword"></label>
         </label>
         <label class="find"><a href="javascript:;" @click="toFind">查找</a></label>
     </div>
@@ -29,12 +30,11 @@
         <ul class="question">
             <li v-for="q in questions">
                 <label>
-                	<input type="checkbox"  :value="$index" v-model="checkList">
-      				<span v-if="q.isRadio">[单选题]</span>
-      				<span v-else>[多选题]</span>
+                	<input  autocomplete="off" type="checkbox"  :value="$index" v-model="checkList">
+      				<span>[ {{ type($index) }} ]</span>
                 	{{{q.face}}}
                 </label> 
-                <input type="text" class="score" placeholder="输入该题分值">
+                <input  autocomplete="off" type="text" class="score" placeholder="输入该题分值">
             </li>        
         </ul>
         
@@ -67,18 +67,18 @@
                  </div>
 
                 <div class="paperTitle">
-                    开始时间:<input onclick="laydate()" id="startTime">
+                    开始时间:<input  autocomplete="off"  onclick="laydate()" name="12" id="startTime">
 
                 </div>
                 <div class="paperTitle">
 
-                      结束时间:<input onclick="laydate()"  id="endTime">
+                      结束时间:<input  autocomplete="off"  onclick="laydate()" name="fd" id="endTime">
            
                 </div>
                 <div class="paperTitle">
 		                    是否公开:<input type="radio"  name="radio" id="hide">
 		                    是<input type="radio"  name="radio" id="showtext">
-		                    否  <input type="password" placeholder="请输入密码" id="text" class="pwd" v-model="password">
+		                    否  <input   autocomplete="off"  type="password" placeholder="请输入密码" id="text" class="pwd" v-model="password">
                 </div>
 
             </div>
@@ -89,6 +89,7 @@
         </div>
     </div>
 </div>
+</form>
     <script src="js/jquery-3.0.0.min.js"></script>
     <script src="js/laypage.js"></script>
     <script src="js/vue.js"></script>
@@ -107,7 +108,12 @@
     		,title:null
    		},
    		methods:{
-   			addQuestions:function(){
+   			type:function(index){
+   				if (app.questions[index].answer) return '文本题';
+   				else if(app.questions[index].isRadio) return '单选题';
+   				return '多选题';
+   			}
+   			,addQuestions:function(){
    				for (var i=0;i<this.checkList.length;++i){
    					this.selectedQuestions.push(this.questions[this.checkList[i]]);
    				}

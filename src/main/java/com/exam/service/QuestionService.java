@@ -60,6 +60,7 @@ public class QuestionService {
 		return questions;
 	}
 	
+	
 	public int typeOfQuestionCount(int tid)
 	{
 		return questionDao.typeOfQuestionCount(tid);

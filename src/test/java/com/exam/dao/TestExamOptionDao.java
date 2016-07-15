@@ -14,6 +14,6 @@ public class TestExamOptionDao {
 	private ExamOptionDao examOptionDao;
 	@Test
 	public void testCountByEid(){
-		System.out.println(examOptionDao.countByEid(313));
+		System.out.println(examOptionDao.selectCountByEidAndUid(358, 2));
 	}
 }
