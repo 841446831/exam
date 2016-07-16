@@ -11,6 +11,7 @@ import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.exam.dao.ExamPaperDao;
 import com.exam.dao.ExamQuestionDao;
+import com.exam.dao.OptionDao;
 import com.exam.dao.UserDao;
 import com.exam.entity.ExamPaper;
 import com.exam.entity.ExamQuestion;
@@ -22,9 +23,12 @@ import com.exam.util.ResultHelper;
 public class ExamPaperService {
 	@Resource
 	private ExamPaperDao examPaperDao;
+	@Resource 
+	QuestionService questionService;
 	@Resource
 	private ExamQuestionDao examQuestionDao;
-	
+	@Resource
+	private OptionDao optionDao;
 	@Resource
 	private UserDao userDao;
 	
@@ -70,33 +74,6 @@ public class ExamPaperService {
 		return 0;
 	}
 	
-	public ResultHelper selectByPractice(ExamPaper examPaper)
-	{
-		List<ExamPaper> examPapers = examPaperDao.selectByPractice(examPaper);
-		//List<ExamPaper> list = new ArrayList<ExamPaper>();
-		List<Object> list = new ArrayList<>();
-		long currentTime = System.currentTimeMillis();
-		for(ExamPaper e: examPapers)
-		{
-		    long startTime =  e.getStartTime();
-		    long endTime = e.getEndTime();
-	    
-		    if(currentTime >= startTime && currentTime <= endTime)
-		    {
-		    	JSONObject jsonObject = JSONObject.parseObject(JSON.toJSONString(e));
-		    
-		    	String username = userDao.selectUserNameByUid(e.getUid());
-		    	
-		    	jsonObject.put("username",username);
-		    	
-		    	list.add(jsonObject);
-		    }
-		  
-		}
-		return new ResultHelper(list,examPaperDao.selectCountByCurrentTime(currentTime),Constant.SUCCESS_CODE,Constant.SUCCESS_MSG);
-	}
-	
-
 	public ResultHelper selectByCurrentTime(ExamPaper examPaper)
 	{
 		long currentTime = System.currentTimeMillis();
@@ -115,6 +92,19 @@ public class ExamPaperService {
 		   
 		}
 		return new ResultHelper(list,examPaperDao.selectCountByCurrentTime(currentTime),Constant.SUCCESS_CODE,Constant.SUCCESS_MSG);
+	}
+
+	public ExamPaper selectById(int id) {
+		ExamPaper examPaper = examPaperDao.selectById(id);
+		List<ExamQuestion> examQuestions = examQuestionDao.selectByEid(id);
+		List<Question> questions = new ArrayList<>();
+		for (ExamQuestion examQuestion:examQuestions){
+			Question question = questionService.selectById(examQuestion.getQid());
+			question.setOptions(optionDao.selectByTidWithOutAnswer(question.getId()));
+			questions.add(question);
+		}
+		examPaper.setQuestions(questions);
+		return examPaper;
 	}
 	
 }

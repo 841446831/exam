@@ -118,7 +118,7 @@ public class UserController {
 	@RequestMapping("user")
 	public String getUser(Model model){
 		return "user";
-	}
+	}		
 	
 	@RequestMapping(value="selctUserPager", produces="application/json;charset=utf-8")
 	@ResponseBody

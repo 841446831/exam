@@ -148,7 +148,7 @@
 
 <!--头部-->
 <div  id="header">
-    <p class="practice">练习试卷</p>
+    <p class="practice">${examPaper.title}</p>
 </div>
 <!--头部-->
 <!--秒表设计-->
@@ -157,127 +157,46 @@
 </div>
 <!--秒表设计-->
 <!-- 题目-->
-<form action="getQuestionsAnswer" method="post" id="app" v-on:submit.prevent="onSubmit">
+<form action="submitExampaper" method="post" id="app" >
     <div class="subject">
-        <div class="subject-content" v-for="question in examPaper.questions">
-          	
-          	<div v-if="question.isRadio" class="subject-title">[单选题]</div>
-          	<div v-else class="subject-title">[多选题]</div>
-          	
+    	<#list examPaper.questions as question>
+   
+        <div class="subject-content">
+          	<#if (question.isRadio==1)>
+          	<div  class="subject-title">[单选题]</div>
+          	<#else>
+          	<div  class="subject-title">[多选题]</div>
+          	</#if>
             <div class="subject-question">
-            	{{{question.face}}}
+            	${question.face}
             </div>
-            
-            <div  class="answer" v-for="option in question.options">
+            <#list question.options as option>
+            <div  class="answer">
                <label>	
-	                <input v-if="question.isRadio" type="radio" name="{{question.id}}" class="answer-radio" value="{{option.symbol }}">
-	                <input v-else type="checkbox" name="{{question.id}}" class="answer-radio" value="{{option.symbol }}">
-	                <pre>{{option.symbol  }} {{option.title}}</pre>
+	              	<#if (question.isRadio==1)>
+	                <input  type="radio" name="${question.id}" class="answer-radio" value="${option.symbol }">
+	              	<#else>
+	                <input  type="checkbox" name="${question.id}" class="answer-radio" value="${option.symbol }">
+	              	</#if>
+	                <pre>${option.symbol  } ${option.title}</pre>
                 </label>
-          </div>
-       </div>
+            </div>
+            </#list>
+       </div>	
 
+    	</#list>
         <div class="subject-submit">
-            <input type="button" id="submit" class="submit" value="提交" @click.prevent="onSubmit">
+            <input type="submit" id="submit" class="submit" value="提交" >
         </div>
         
     </div>
-    <input type="hidden" name="eid" value="{{examPaper.id}}">
-
- <div id="box">
-       <div class="head">
-       <div class="box-title">
-            完成练习<a href="javascript:void(0)" title="关闭窗口" class="close_btn" id="closeBtn">×</a>
-       </div>
-       <div class="box-list">
-           <a href="tags.html">再做一套</a>
-           <a class="text" :href="answerUrl">查看正确答案</a>
-       </div>
-       </div>
-  </div>
+    <input type="hidden" name="id" value="${examPaper.id}">
+	
   
 </form>
 
 <script src="js/jquery-3.0.0.min.js"></script>
 <script src="js/vue.js"></script>
-<script>
-	
-	var tag = '${tag}';
-	var diffculty = ${diffculty};
-	var count = ${count};
-	
-	//var url = "http://192.168.3.37:8080/exam/types";
-	var url = "http://localhost:8080/exam/makepaper";
-	
-	var app = new Vue({
-	    el: '#app',
-	    data: {
-	   		examPaper:null
-	    },
-	    methods:{
-	    	onSubmit:function(){
-	    	
-	    		$.post('getQuestionsAnswer',$('#app').serialize(),function(result){
-           		   	 	$("body").append("<div id='mask'></div>");
-            		    $("#mask").addClass("mask").fadeIn("slow");
-              		    $("#box").fadeIn("slow");	
-              		  
-	    		});
-	    		
-	    	}
-	    }
-	    ,computed:{
-	    	answerUrl :function(){
-	    		return "answer.html?eid="+this.examPaper.id
-	    	}
-	    }
-	})
 
-	function callback(data){
-		app.examPaper=data;
-		for (var i=0;i<app.examPaper.questions.length;++i){
-			question = app.examPaper.questions[i];
-			question.isRadio = question.isRadio==1?true:false;
-			question.options.sort(function(a,b){
-				return a.symbol-b.symbol;
-			});
-		}
-	}
-	
-	
-	var srcipt=document.createElement("script");
-	srcipt.src = url+'?tag='+tag+'&diffculty='+diffculty+'&count='+count;
-	document.body.appendChild(srcipt);
-	
-	 //弹出登录
-           $("#submit").hover(function () {
-               $(this).stop().animate({
-                   opacity: '1'
-               }, 600);
-           }, function () {
-               $(this).stop().animate({
-                   opacity: '0.6'
-               }, 1000);
-           })
-           //
-           //按钮的透明度
-           $("#loginbtn").hover(function () {
-               $(this).stop().animate({
-                   opacity: '1'
-               }, 600);
-           }, function () {
-               $(this).stop().animate({
-                   opacity: '0.8'
-               }, 1000);
-           });
-           //关闭
-           $(".close_btn").hover(function () { $(this).css({ color: 'black' }) }, function () { $(this).css({ color: '#999' }) }).on('click', function () {
-               $("#box").fadeOut("fast");
-               $("#mask").css({ display: 'none' });
-           });
-   
-	
-	
-</script>
 </body>
 </html>

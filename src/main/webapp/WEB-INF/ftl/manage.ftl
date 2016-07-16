@@ -15,7 +15,7 @@
 	 		<#include "menu.ftl">  
 	 	</aside>
 	 	<section class="content">
-	 		<#include "add-exam.html">  
+	 		<#include "add-question.html">  
 	 	</section>
  	</section>
  	<script src="js/jquery-3.0.0.min.js"></script>

@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <title>正在进行的考试</title>
     <link rel="stylesheet" href="css/exams.css">
+    <link rel="stylesheet" href="css/bootstrap.css">
     <style type="text/css">
         .datatable tr:hover
         {
@@ -14,6 +15,9 @@
     </style>
 </head>
 <body>
+
+	
+	
    <div id="fluid-nowTestcontainer">
          <div class="nowTestcontainer">
                <div class="nowTestcontainerHead">
@@ -40,8 +44,7 @@
                          <th>是否公开</th>
                      </tr>
 
-                     <tr v-for="exam in exams">
-
+                     <tr v-for="exam in exams" @click="clickExam($index)">
                          <td>{{exam.id}}</td>
                          <td> {{exam.title}}</td>
                          <td>{{exam.startTime}}</td>
@@ -61,10 +64,31 @@
              </div>
 
          </div>
+         
+         <div class="modal fade" id="inputPassword">
+		  <div class="modal-dialog">
+		    <div class="modal-content">
+		      <div class="modal-header">
+		        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+		        <h4 class="modal-title">请输入密码进入考试</h4>
+		      </div>
+		      <div class="modal-body">
+		        <input type="text" v-model="password"/>
+		      </div>
+		      <div class="modal-footer">
+		        <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+		        <button type="button" class="btn btn-primary" @click.prevent="submit">确定</button>
+		      </div>
+		    </div><!-- /.modal-content -->
+		  </div><!-- /.modal-dialog -->
+		</div><!-- /.modal -->
+   	
    </div>
+   
    <script type="text/javascript" src="js/jquery-3.0.0.min.js"></script>
    <script src="js/vue.js"></script>
    <script src="js/laypage.js"></script>
+   <script src="js/bootstrap.min.js"></script>
    <script>
    Date.prototype.pattern=function(fmt) {         
 	    var o = {         
@@ -105,6 +129,52 @@
    			,data:{
    				exams:[]
    				,limit:6
+   				,password:null
+   				,index:null
+   			},
+   			methods:{
+   				submit:function(){
+   					$.ajax({
+   						url:'checkInExam'
+   						,type:'post'
+   						,data:{
+   							id:this.exams[this.index].id
+   							,password:this.password
+   						}
+   						,success:function(data){
+   							if (data.code != 0){
+   								alert(data);
+   							}else{
+   								window.location.assign("exampaper?id="+app.exams[app.index].id);
+   							}
+   						}
+   					})	
+   				}
+   				
+   				,clickExam:function(index){
+   					this.password = null;
+  					this.index = index;
+   					if (this.exams[index].password){
+   						$('#inputPassword').modal();
+   					}else{
+   						$.ajax({
+   	   						url:'checkInExam'
+   	   						,type:'post'
+   	   						,data:{
+   	   							id:this.exams[this.index].id
+   	   							,password:this.password
+   	   						}
+   	   						,success:function(data){
+   	   							if (data.code != 0){
+   	   								alert(data);
+   	   							}else{
+   	   								window.location.assign("exampaper?id="+app.exams[app.index].id);
+   	   							}
+   	   						}
+   	   					})	
+   					}
+   				}
+   				
    			}
    		})
    		

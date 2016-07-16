@@ -114,9 +114,9 @@
 			answer:"是",
 			options:[],
 			title:null,
-			isTrue:false,
+			isTrue:0,
 			addOption:false,
-			isPublic:true
+			isPublic:0
 		},
 		computed:{
 			radioType:function(){
@@ -151,8 +151,8 @@
 				var data = {
 					face:this.face
 					,isPublic:this.isPublic
-					,isRadio: this.type == "radio"
-					,answer: this.answer
+					,isRadio: this.type == "radio"?1:0
+					,answer:  this.type == "text"?this.answer:''
 					,options:this.options
 				};
 				$.ajax({
@@ -161,7 +161,11 @@
 					,data:{
 						questionJson:JSON.stringify(data)
 					}
-					
+					,success:function(data){
+						if (data.code==0){
+							alert('添加成功');
+						}
+					}
 				})
 			}
 		}

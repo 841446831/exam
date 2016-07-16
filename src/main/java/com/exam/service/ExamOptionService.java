@@ -29,6 +29,8 @@ public class ExamOptionService {
 	public int insertExamOption(int eid,List<Map<Integer, Object>> listSelect)
 	{
 		int count = examOptionDao.countByEid(eid);
+		System.out.println(count);
+		
 		if (count>0){
 			System.out.println("一份试卷的答案不能重复插入");
 			return 0;
@@ -79,6 +81,16 @@ public class ExamOptionService {
 		}
 		
 		return 1;
+	}
+
+	public int selectCountByEidAndUid(int eid, int uid) {
+		// TODO Auto-generated method stub
+		return examOptionDao.selectCountByEidAndUid(eid,uid);
+	}
+
+	public int insert(ExamOption examOption) {
+		// TODO Auto-generated method stub
+		return examOptionDao.insert(examOption);
 	}
 	
 }

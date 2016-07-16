@@ -15,23 +15,41 @@ public class AuthInterceptor extends HandlerInterceptorAdapter {
 		System.out.println("进入拦截器...");
 		// TODO Auto-generated method stub
 		
-		//String requestUri = request.getRequestURI();
-		//String contextPath = request.getContextPath();
-		//String url = requestUri.substring(contextPath.length());
+		final String[] ignoreUri = {"/login"};
+		boolean flag = false;
+		
+		String requestUri = request.getRequestURI();
+		String contextPath = request.getContextPath();
+		String url = requestUri.substring(contextPath.length());
+		String requestUrl = request.getRequestURL().toString();
+		
+		for(String s : ignoreUri)
+		{
+			if(s.equals(url))
+			{
+				flag = true;
+				System.out.println(flag);
+				break;
+			}
+			
+		}
+		
+		System.out.println(requestUri);
+		System.out.println(contextPath);
+		System.out.println(url);
+		System.out.println(requestUrl);
 		
 		User user = (User) request.getSession().getAttribute("user");
 		
-		if(user == null)
+		if(user != null)
 		{
-			request.getRequestDispatcher("tags.html").forward(request,response);
-			System.out.println("拦截");
-			return false;
+			//request.getRequestDispatcher("tags.html").forward(request,response);
+			//System.out.println("拦截");
+			//return false;
+			flag = true;
 		}
-		else
-		{
-			System.out.println("没有拦截");
-			return true;
-		}
+	
+		return true;
 		
 	}
 	
