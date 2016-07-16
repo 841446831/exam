@@ -19,21 +19,20 @@ public class AuthInterceptor extends HandlerInterceptorAdapter {
 		//String contextPath = request.getContextPath();
 		//String url = requestUri.substring(contextPath.length());
 		
-//		User user = (User) request.getSession().getAttribute("user");
-//		
-//		if(user == null)
-//		{
-//			request.getRequestDispatcher("tags.html").forward(request,response);
-//			System.out.println("拦截");
-//			return false;
-//		}
-//		else
-//		{
-//			System.out.println("没有拦截");
-//			return true;
-//		}
-//		
-		return true;
+		User user = (User) request.getSession().getAttribute("user");
+		
+		if(user == null)
+		{
+			request.getRequestDispatcher("tags.html").forward(request,response);
+			System.out.println("拦截");
+			return false;
+		}
+		else
+		{
+			System.out.println("没有拦截");
+			return true;
+		}
+		
 	}
 	
 }
