@@ -1,0 +1,26 @@
+body.error_page
+{
+    background-color: #00629f;
+    background-image: url(../image/error.png);
+    background-position: center top;
+    background-repeat: no-repeat;
+}
+body.error_power_page
+{
+    background-color: #00629f;
+    background-image: url(../image/error_power.png);
+    background-position: center 40%;
+    background-repeat: no-repeat;
+}
+#error
+{
+    color: #FFF;
+}
+#error span,#error a
+{
+    color:Yellow;
+}
+#error a:hover
+{
+    color:#FFF;
+}

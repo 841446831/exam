@@ -1,0 +1,11 @@
+#error
+{
+    width: 960px;
+    text-align: center;
+    margin-top: 400px;
+}
+#error a:hover
+{
+    text-decoration: underline;
+    cursor: pointer;
+}

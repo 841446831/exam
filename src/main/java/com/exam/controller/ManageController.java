@@ -15,7 +15,7 @@ public class ManageController {
 	private UserService userService;
 	@RequestMapping("manage")
 	public String manage(HttpServletRequest request){
-		request.getSession().setAttribute("user", userService.selectByUsername("admin"));
+		//request.getSession().setAttribute("user", userService.selectByUsername("admin"));
 		return "manage";
 	}
 }
