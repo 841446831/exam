@@ -1,3 +1,6 @@
+li{
+	list-style:none;
+}
 #container{
     width: 1000px;
     height: 1000px;
@@ -16,6 +19,7 @@ h1{
     border-bottom: 2px solid orangered;
 }
 #answer-head li{
+	list-style:none;
    margin-left: 300px;
    padding-top: 15px;
     width: 90px;
