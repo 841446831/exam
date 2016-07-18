@@ -21,6 +21,7 @@ public class ExamPaper extends PageHelper<ExamPaper>{
 		super();
 		examQuestions = new ArrayList<ExamQuestion>();
 		questions = new ArrayList<>();
+		uid = 2;
 	}
 	
 	

@@ -13,7 +13,7 @@
     
     <div class="nav-center">
         <ul >
-            <li> <a href="tags.html">首页</a> </li>
+            <li> <a href="index.html">首页</a> </li>
             <li> <a href="tags.html">专项练习</a></li>
             <li> <a href="exams.html">考试系统</a></li>
         </ul>
@@ -32,9 +32,14 @@
     </div>
 </div>
 
-<form action="practice" method="POST">
-	<section class="flex-wrap">
-	    <section class="super-type"  v-for="superType in superTypeList">
+<div class="spinner" v-if="notReady">
+  <div class="dot1"></div>
+  <div class="dot2"></div>
+</div>
+
+<form action="practice" method="POST" v-else>
+	<section class="flex-wrap">    
+	     <section class="super-type"  v-for="superType in superTypeList">
 	        <div class="tag-top">
 	            <h2>
 	                {{superType.title}}

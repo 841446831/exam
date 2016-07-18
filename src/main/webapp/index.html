@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>在线考试系统</title>
+   <style>
+       body{
+           padding-top: 50px;
+           padding-bottom: 50px;
+       }
+
+      .navbar-header  .navbar-brand{
+           font-size: 25px;
+          color: #c9302c;
+       }
+       .carousel{
+           height: 500px;
+           background-color: #000;
+           margin-bottom: 60px;
+       }
+       .carousel .item{
+
+           height: 500px;
+           background-color: #000;
+       }
+       .carousel img{
+           width: 100%;
+       }
+       .carousel-caption p{
+           margin-bottom: 20px;
+           font-size: 20px;
+           line-height: 1.8;
+       }
+       #sumary-container .col-md-4{
+            text-align: center;
+       }
+       .divider{
+           margin: 40px 0;/*设置间距*/
+       }
+       .feature
+       {
+           padding: 50px 0;
+       }
+       .feature .feature-heading
+       {
+           font-size: 30px;
+           color:#269abc ;
+           margin-top: 50px;
+       }
+
+
+       .feature .feature-heading .text-muted
+       {
+           font-size:20px;
+           color:#4cae4c ;
+       }
+
+
+        .container .col-md-6 h2{
+            color: #269abc;
+            font-size: 28px;
+            font-weight: bold;
+            text-align: center;
+            margin-bottom: 10px;
+            font-style:italic;
+        }
+       .container .col-md-6 h2.name{
+           color: #000000;
+           letter-spacing: 5px;
+       }
+       .container .col-md-6 p{
+           line-height: 25px;
+           padding: 10px;
+           font-size: 18px;
+       }
+
+   </style>
+    <!-- Bootstrap -->
+    <link href="css/bootstrap.css" rel="stylesheet">
+</head>
+<body id="app">
+
+	
+	
+	
+	
+<style>
+
+*{
+    box-sizing: border-box;
+    font-family:'微软雅黑';
+}
+html,body{
+	margin:0;
+	padding:0;
+}
+body{
+    background: #eee;
+}
+ul,li{
+    list-style: none;
+    padding: 0;
+}
+/*导航栏*/
+#header{
+    width: 100%;
+    background:rgb(73,165,222);
+    margin-bottom: 3px;
+    opacity: 0.9;
+    display:flex;
+    font-size:20px;
+    height: 90px;
+	align-items:center;
+	color:#fff;
+}
+#header a{
+	color:white;
+	
+}
+.nav-left{
+	width:15%;
+	text-align:center;
+}
+.nav-center{
+	width:70%;
+}
+.nav-right{
+	width:15%;
+}
+#header  ul,#header li{
+	display:inline-block;
+	margin:0;
+	padding: 0;
+	align-items:center;
+	display:flex;
+}
+
+#header li{
+	padding:0 15px;
+	height:90px;
+}
+
+#header li:hover{
+	 background:rgb(80,172,229);
+	 cursor:pointer; 
+}
+
+/*登陆*/
+
+@charset "utf-8";
+.mask{margin:0;
+    padding:0;
+    border:none;
+    width:100%;
+    height:100%;
+    background:gray;opacity:0.6;
+    filter:alpha(opacity=60);
+    z-index:9999;
+    position:fixed;
+    top:0;left:0;
+    display:none;}
+
+#LoginBox{
+    position:absolute;
+    left:700px;
+    top:150px;
+    margin: 0 auto;
+    background:#ffffff;
+    width:600px;
+    height:400px;
+    border:3px solid rgba(80,172,229,0.7);
+    border-radius:7px;
+    z-index:10000;
+    display:none;}
+.row1{
+    background:#f7f7f7;
+    padding:0px 20px;
+    line-height:50px;
+    height:50px;
+    font-weight:bold;
+    color:#666;
+    font-size:20px;}
+
+.row{height:77px;
+    line-height:77px;
+    padding:0px 80px;
+    font-family:华文楷体;
+    font-size:x-large;
+}
+.row .reg{
+    font-size: 14px;
+    margin-left: 70px;
+    color: royalblue;
+
+}
+.row .reg a{
+    margin-left: 20px;
+    font-weight: bolder;
+
+}
+.close_btn{font-family:arial;
+    font-size:30px;
+    font-weight:700;color:#999;
+    text-decoration:none;
+    float:right;
+    padding-right:4px;}
+.inputBox{border:1px solid rgba(80,172,229,0.7);
+    padding:1px 3px 4px 2px;
+    border-radius:5px;
+    margin-left:4px;}
+#txtName{height:27px;
+    padding-left: 0.18cm;
+    width:230px;
+    border:none;}
+#txtPwd{height:27px;
+    width:230px;
+    border:none;
+    padding-left: 0.18cm;}
+#loginbtn{
+    color:White;
+    background:#4490f7;
+    text-decoration:none;
+    padding:10px 95px;
+    margin-left:87px;
+    margin-top:40px;border-radius:5px;
+    opacity:0.8;filter:alpha(opacity=80);}
+.warning{
+    float:right;
+    color:Red;
+    text-decoration:none;
+    font-size:20px;
+    font-weight:bold;
+    margin-right:20px;
+    display:none;}
+
+.face {
+	border-radius:50%;
+	width:60px;
+}
+input:focus {
+	outline:none;
+}
+
+</style>	
+<div  id="header">
+    <div class="nav-left logo">考试系统</div>
+    
+    <div class="nav-center">
+        <ul >
+            <li> <a href="index.html">首页</a> </li>
+            <li> <a href="tags.html">专项练习</a></li>
+            <li> <a href="exams.html">考试系统</a></li>
+        </ul>
+    </div>
+    
+    <div class="nav-right"> 
+			
+           <div v-show="login">
+            	<a href="#" id="example">登陆</a>  <a href="regist.html">注册</a>  	
+           </div>
+         	 
+          <div v-else>
+          	<a href="manage">	<img class="face" :src="face"> </a>
+          	<a @click="logout"> 登出 </a>
+          </div>
+    </div>
+</div>
+
+ <!--登录部分-->
+	<form id="loginForm">
+    <div id="LoginBox">
+        <div class="row1">
+            登录窗口<a href="javascript:void(0)" title="关闭窗口" class="close_btn" id="closeBtn">×</a>
+        </div>
+        <div class="row">
+          用户名:  <span class="inputBox">
+                <input name="username" type="text" id="txtName" placeholder="账号/邮箱" />
+            </span><a href="javascript:void(0)" title="提示" class="warning" id="warn">*</a>
+        </div>
+        <div class="row">
+            密&nbsp;码: <span class="inputBox">
+                <input name="password" type="password" id="txtPwd" placeholder="密码" />
+            </span><a href="javascript:void(0)" title="提示" class="warning" id="warn2">*</a>
+        </div>
+        <div class="row">
+            <a href="#" id="loginbtn">登陆</a>
+        </div>
+        <div class="row">
+            <span class="reg">未注册用户请>>>>>>>>>>>>>>>>>><a href="register.html" >创建账号</a></span>
+        </div>
+    </div>
+	</form>	
+	
+	
+	
+	
+	<!--滚动内容-->
+	<div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
+    <!-- Indicators -->
+    <ol class="carousel-indicators">
+        <li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
+        <li data-target="#carousel-example-generic" data-slide-to="1"></li>
+        <li data-target="#carousel-example-generic" data-slide-to="2"></li>
+    </ol>
+
+    <!-- Wrapper for slides -->
+    <div class="carousel-inner" role="listbox">
+        <div class="item active">
+            <img src="images/bgg_2.jpg" alt="1 slide">
+            <div class="carousel-caption">
+                <h1>在线考试</h1>
+
+                <p>学员登录后可进行在线测试，测试能了解自己对这知识点的掌握程度</p>
+            </div>
+        </div>
+        <div class="item">
+            <img src="images/bg7_1.jpg" alt="2 slide">
+            <div class="carousel-caption">
+              <h1>在线练习</h1>
+                <p>学员和游客都可以进行练习，通过练习巩固基础</p>
+
+            </div>
+        </div>
+        <div class="item">
+            <img src="images/bgg_1.jpg" alt="3 slide">
+            <div class="carousel-caption">
+                <h1>查看解析</h1>
+
+                <p>通过查看解析，让做题的人更清晰自己做题的思路</p>
+
+            </div>
+        </div>
+    </div>
+
+    <!-- Controls -->
+    <a class="left carousel-control" href="#carousel-example-generic" role="button" data-slide="prev">
+        <span class="glyphicon glyphicon-chevron-left"></span>
+        <span class="sr-only">上一页</span>
+    </a>
+    <a class="right carousel-control" href="#carousel-example-generic" role="button" data-slide="next">
+        <span class="glyphicon glyphicon-chevron-right"></span>
+        <span class="sr-only">下一页</span>
+    </a>
+</div>
+
+<!--三列样式-->
+<div class="container" id="sumary-container">
+<div class="row" >
+<div class="col-md-6"> <img class="img" src="images/bg_2_2.png" alt="chrome">
+    <h2 class="name">永春</h2>
+    <p>永春非咏春，但它有着咏春的精粹，强调使用正确的观念、意识及思维方式，来导出肢体的灵活应用</p>
+</div>
+<div class="col-md-6"> <img class="img" src="images/bg_5.jpg" alt="firefox">
+
+    <h2>在线考试系统</h2>
+
+    <p>在线考试系统是一种现代地，前后台统一管理，操作更加人性化，全新的考试模型。它使用户可根据自身特点快速构建考试、测评、练习、竞赛、调查、分析及管理于一体的网络化考试平台，</p>
+</div>
+    <hr class="divider">
+
+
+    <!--可切换标签-->
+    <!-- Nav tabs -->
+    <ul class="nav nav-tabs" role="tablist" id="tab-list">
+        <li role="presentation"  class="active"><a href="#tab-chrome" aria-controls="home" role="tab" data-toggle="tab">在线考试</a></li>
+        <li role="presentation"><a href="#tab-firefox" aria-controls="profile" role="tab" data-toggle="tab">在线练习</a></li>
+       <li role="presentation"><a href="#tab-safari" aria-controls="settings" role="tab" data-toggle="tab">查看解析</a></li>
+    </ul>
+
+    <!-- Tab panes -->
+    <div class="tab-content">
+        <div role="tabpanel" class="tab-pane active" id="tab-chrome">
+            <div class="row feature">
+                <div class="col-md-7">
+
+                    <h2 class="feature-heading">在线考试
+                        <span  class="text-muted">脱离纸质的考试</span></h2>
+
+                    <p class="lead">在线考试是指通过操作计算机在网络上进行考试整个过程的一种考试形式，脱离了纸质媒体，也可以说成是通过网络媒体进行的考试。</p>
+                </div>
+                <div class="col-md-5">
+                    <img class="feature-image img-responsive" src="images/test.jpg"
+                        >
+                </div>
+            </div>
+        </div>
+        <div role="tabpanel" class="tab-pane" id="tab-firefox">
+            <div class="row feature">
+                <div class="col-md-5">
+                    <img class="feature-image img-responsive" src="images/write.png"
+                         >
+                </div>
+                <div class="col-md-7">
+
+                    <h2 class="feature-heading">在线练习<span class="text-muted">巩固基础的好平台</span>
+                    </h2>
+
+                    <p class="lead">在线练习是一种房顶上辅导费 卡是否第九个开始电饭锅吉林省的罚款不方便</p>
+                </div>
+            </div>
+        </div>
+        <div role="tabpanel" class="tab-pane" id="tab-safari">
+            <div class="row feature">
+                <div class="col-md-7">
+                    <h2 class="feature-heading">查看解析<span class="text-muted">探讨问题</span>
+                    </h2>
+
+                    <p class="lead">Opera浏览器，是一款挪威Opera Software ASA公司制作的支持多页面标签式浏览的网络浏览器。
+                        是跨平台浏览器可以在Windows、Mac和Linux三个操作系统平台上运行。.</p>
+
+                </div>
+                <div class="col-md-5">
+                     <img class="feature-image img-responsive" src="images/check.jpg" >
+                </div>
+            </div>
+        </div>
+    </div>
+   </div>
+    <hr class="divider">
+    <footer id="footer">
+        <p class="pull-right"><a href="#top">回到顶部</a></p>
+        <p>@ 2016 版权归永春所有</p>
+    </footer>
+</div>
+<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+<script src="js/jquery-3.0.0.min.js"></script>
+<!-- Include all compiled plugins (below), or include individual files as needed -->
+<script src="js/bootstrap.min.js"></script>
+<script src="js/vue.js"></script>
+<script src="js/login.js"></script>
+
+<script>
+    $(document).ready(function(){
+        /*为以下的a标签添加点击事件*/
+        $("#demo-navbar .dropdown-menu a").click(function(){
+            var href=$(this).attr("href");/*查找href的值*/
+            $("#tab-list a[href='"+href+"']").tab("show");/*在tab-list列表中查找与href相等的值并将它显示出来*/
+        })
+    })
+</script>
+</body>
+</html>

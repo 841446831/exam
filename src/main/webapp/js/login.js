@@ -1,16 +1,13 @@
-//var url = "http://192.168.3.37:8080/exam/types";
-var url = "types";
+
 var loginUrl = "login";
 var logoutUrl = "logout";
 
 
 var app = new Vue({
-    el: '#app',
+    el: '#header',
     data: {
-        superTypeList:null,
         login:true,
         user:null
-        ,notReady:true
     },
     computed: {
     	face:function(){
@@ -26,14 +23,6 @@ var app = new Vue({
     	}
     }
 })
-
-function callback(data){
-    app.superTypeList=data;
-    app.notReady=false;
-}
-var srcipt=document.createElement("script");
-srcipt.src = url;
-document.body.appendChild(srcipt);
 
 
 $(function ($) {

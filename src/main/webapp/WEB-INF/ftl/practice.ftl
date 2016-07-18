@@ -151,11 +151,18 @@
     <p class="practice">练习试卷</p>
 </div>
 <!--头部-->
+
+<div class="spinner" v-if="notReady">
+  <div class="dot1"></div>
+  <div class="dot2"></div>
+</div>
+
 <!--秒表设计-->
 <div id="time">
     <span class="time-icon"></span>
 </div>
 <!--秒表设计-->
+
 <!-- 题目-->
 <form action="getQuestionsAnswer" method="post" id="app" v-on:submit.prevent="onSubmit">
     <div class="subject">
@@ -213,6 +220,7 @@
 	    el: '#app',
 	    data: {
 	   		examPaper:null
+	   		,notReady:true
 	    },
 	    methods:{
 	    	onSubmit:function(){
@@ -235,6 +243,7 @@
 
 	function callback(data){
 		app.examPaper=data;
+		app.notReady = false;
 		for (var i=0;i<app.examPaper.questions.length;++i){
 			question = app.examPaper.questions[i];
 			question.isRadio = question.isRadio==1?true:false;
