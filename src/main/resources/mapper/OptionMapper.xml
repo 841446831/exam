@@ -5,7 +5,7 @@
 <mapper namespace="com.exam.dao.OptionDao">
 	
 	<select id="selectOpionAndSelectByQid" parameterType="int" resultType="map">
-	    SELECT eo.isSelect,o.* FROM  examoption eo,`option` o where eo.oid = o.id AND eo.qid = #{qid}    
+	    SELECT eo.isSelect,o.* FROM  examoption eo,`option` o where eo.oid = o.id AND eo.qid = #{arg0} AND eo.eid=#{arg1}    
 	</select>
 
 </mapper>

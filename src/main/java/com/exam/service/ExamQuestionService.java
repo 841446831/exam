@@ -122,7 +122,8 @@ public class ExamQuestionService {
 		
 		for(Question q : listQuestion)
 		{
-			List<Map<String,Object>> list = optionDao.selectOpionAndSelectByQid(q.getId());
+			List<Map<String,Object>> list = optionDao.selectOpionAndSelectByQid(q.getId(),eid);
+			
 			question = new HashMap<>();
 			listOption = new ArrayList<>();
 			Option option = null;

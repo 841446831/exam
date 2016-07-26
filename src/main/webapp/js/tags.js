@@ -29,7 +29,9 @@ var app = new Vue({
 
 function callback(data){
     app.superTypeList=data;
-    app.notReady=false;
+    setTimeout(function(){
+        app.notReady=false;    	
+    },1000)
 }
 var srcipt=document.createElement("script");
 srcipt.src = url;
