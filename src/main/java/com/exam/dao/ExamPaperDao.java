@@ -29,4 +29,8 @@ public interface ExamPaperDao {
 	@Select("select * from exampaper where id=#{id}")
 	ExamPaper selectById(int id);
 	
+	@Select("select * from exampaper where practice = 0 limit 0,5")
+    List<ExamPaper> selectPaper();
+
+	
 }

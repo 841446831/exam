@@ -107,5 +107,11 @@ public class ExamPaperService {
 		return examPaper;
 	}
 	
+	public List<ExamPaper> selectPaper()
+	{
+		return examPaperDao.selectPaper();
+	}
+
+	
 }
 

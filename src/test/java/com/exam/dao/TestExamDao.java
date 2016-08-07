@@ -12,6 +12,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 import com.exam.entity.ExamPaper;
 import com.exam.entity.ExamQuestion;
+import com.exam.service.ExamQuestionService;
 
 @RunWith(SpringRunner.class)
 @ContextConfiguration("classpath:spring/applicationContext.xml") 
@@ -23,15 +24,7 @@ public class TestExamDao {
 	public void testInsert(){
 		@SuppressWarnings("resource")
 		ApplicationContext applicationContext = new ClassPathXmlApplicationContext("spring/applicationContext.xml");
-		ExamPaperDao examPaperDao = (ExamPaperDao) applicationContext.getBean("examPaperDao");
-		
-		ExamPaper examPaper = new ExamPaper();
-		examPaper.setTitle("练习系统");
-		examPaper.setStartTime(System.currentTimeMillis());
-		examPaper.setEndTime(System.currentTimeMillis());
-		examPaper.setPassword("12");
-		examPaper.setPractice(1);
-		examPaper.setUid(1);
-		examPaperDao.insert(examPaper);
+		ExamQuestionService examQuestionService = (ExamQuestionService) applicationContext.getBean("examQuestionService");
+		System.out.println(examQuestionService.selectQuestionsAnswer(448));
 	}
 }

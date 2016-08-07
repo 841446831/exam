@@ -1,10 +1,14 @@
-
+﻿
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <title>test paper</title>
     <style>
+
+     #header p{
+             text-align:center;
+       }
         #time{
             display: block;
             width: 200px;
@@ -142,6 +146,48 @@
         .box-list .text{
               margin-left: 50px;
         }
+
+
+
+.time_circles {
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+
+/**
+ *	This is all the elements used to house all text used
+ * in time circles
+ **/
+.time_circles > div {
+    position: absolute;
+    text-align: center;
+}
+
+/**
+ *	Titles (Days, Hours, etc)
+ **/
+.time_circles > div > h4 {
+    margin: 0px;
+    padding: 0px;
+    text-align: center;
+    text-transform: uppercase;
+    font-family: 'Century Gothic';
+}
+
+/**
+ *	Time numbers, ie: 12
+ **/
+.time_circles > div > span {
+    display: block;
+    width: 100%;
+    text-align: center;
+    font-family: 'Century Gothic';
+    font-size: 300%;
+    margin-top: 0.4em;
+    font-weight: bold;
+}
+
     </style>
 </head>
 <body>
@@ -151,10 +197,10 @@
     <p class="practice">${examPaper.title}</p>
 </div>
 <!--头部-->
-<!--秒表设计-->
-<div id="time">
+<!--秒表设计<div id="time">
     <span class="time-icon"></span>
-</div>
+</div>-->
+<div id="someTimer3" class="someTimer" style="width:500px; margin: 0 auto;"></div>
 <!--秒表设计-->
 <!-- 题目-->
 <form action="submitExampaper" method="post" id="app" >
@@ -197,6 +243,44 @@
 
 <script src="js/jquery-3.0.0.min.js"></script>
 <script src="js/vue.js"></script>
+<script src="js/TimeCircles.js"></script>
+<script>
+
+$(function(){
+
+	$('#someTimer3').TimeCircles({
+		time : {
+			Days: {
+				show: false,
+				text: "天",
+				color: "#FC6"
+			},
+			Hours: {
+				show: false,
+				text: "时",
+				color: "#9CF"
+			},
+			Minutes: {
+				show: false,
+				text: "分",
+				color: "#BFB"
+			},
+			Seconds: {
+				show: false,
+				text: "秒",
+				color: "#F99"
+			}
+		},
+		refresh_interval: 0.1,
+		count_past_zero: true,
+		circle_bg_color: "#eee",
+		fg_width: 0.05,
+		bg_width: 1
+	});
+});
+
+
+</script>
 
 </body>
 </html>

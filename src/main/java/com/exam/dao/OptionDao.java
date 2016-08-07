@@ -33,9 +33,7 @@ public interface OptionDao {
 	@Select("SELECT * FROM `option` where qid = #{qid}")
 	public List<Option> selectByQid(Integer qid);
 	
-    public List<Map<String,Object>> selectOpionAndSelectByQid(int qid);
+    public List<Map<String,Object>> selectOpionAndSelectByQid(int qid,int eid);
 
-
-    
 	
 }

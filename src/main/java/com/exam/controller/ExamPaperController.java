@@ -185,4 +185,12 @@ public class ExamPaperController {
 		}
 		
 	}
+	
+	@RequestMapping("examPapers")
+	public String selectPaper(Model model)
+	{
+		model.addAttribute("examPapers",exampaperService.selectPaper());
+		return "exampaper";
+	}
+	
 }

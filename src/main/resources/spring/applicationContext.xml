@@ -19,7 +19,7 @@
         <!--&lt;!&ndash; 基本属性 url、user、password &ndash;&gt;-->
         <property name="url" value="${url}" />
         <property name="username" value="root" />
-        <property name="password" value="root" />
+        <property name="password" value="2307" />
 
         <!--&lt;!&ndash; 配置初始化大小、最小、最大 &ndash;&gt;-->
         <property name="initialSize" value="1" />
